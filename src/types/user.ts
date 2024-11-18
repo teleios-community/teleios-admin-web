@@ -25,6 +25,3 @@ export type UserType = {
   ];
 };
 
-export type UncertainObjectType = {
-  [key: string]: any;
-};

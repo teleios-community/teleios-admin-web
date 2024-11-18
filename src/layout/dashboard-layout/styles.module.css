@@ -1,0 +1,41 @@
+.navLink {
+  font-weight: 400;
+  font-size: 16px;
+  color: #475569;
+  padding-block: 8px;
+  padding-inline: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s, color 0.3s;
+  gap: 10px;
+  border-radius: 8px;
+}
+
+.navLink:hover {
+  background-color: #f9f8ff;
+}
+
+.activeNavLink {
+  font-weight: 400;
+  font-size: 16px;
+  color: #31005c;
+  padding-block: 8px;
+  padding-inline: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background-color: #f0edff;
+  gap: 10px;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.activeNavLink .navIcon path {
+  transition: stroke 0.3s;
+  fill: #31005C !important;
+}
+.activeNavLink .altNavIcon path {
+  transition: stroke 0.3s;
+  stroke: #31005C !important;
+}
