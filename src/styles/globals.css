@@ -1,21 +1,21 @@
 :root {
-  --primary: #1d4ed8;
-  --success: #25ad25;
-  --secondary-dark: #ffffff;
-  --error: #dc2626;
-  --font-primary: 'Inter', sans-serif;
-  --font-secondary: 'Plus Jakarta Sans', sans-serif;
+  --primary: #1D2B31;
+  --secondary: #F5A623;
+  --success: #218838;
+  --error: #FF4040;
+  --font-primary: 'Montserrat', sans-serif;
+  --font-secondary: 'Inter', sans-serif;
 }
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   font-size: 16px;
   overflow-x: hidden;
-  color: #000000;
+  color: #242424;
 }
 
 /* Input styles */
@@ -27,10 +27,10 @@ body {
 }
 
 .inputContainer > label {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   font-size: 16px;
-  color: #292929;
+  color: #344054;
   gap: 2px;
   display: flex;
 }
@@ -40,28 +40,28 @@ textarea {
   padding-block: 14px;
   padding-inline: 17px;
   font-size: 16px;
-  font-family: 'Inter', sans-serif;
-  border: 1px solid #b0b0b0;
+  font-family: 'Montserrat', sans-serif;
+  border: 1px solid #D0D5DD;
   border-radius: 4px;
   width: 100%;
-  color: #000;
+  color: #344054;
 }
 
 .inputContainer > * input::placeholder,
 textarea::placeholder {
   color: #cccccc;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .inputError {
-  border: 1px solid #dc2626 !important;
+  border: 1px solid #FF4040 !important;
 }
 
 .error {
-  color: #dc2626;
+  color: #FF4040;
   font-size: 0.75rem;
 }
 
 .errorText {
-  color: #dc2626 !important;
+  color: #FF4040 !important;
 }
