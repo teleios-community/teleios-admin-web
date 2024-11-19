@@ -5,7 +5,6 @@ import ClickAwayListener from 'react-click-away-listener';
 import { Link, useNavigate } from 'react-router-dom';
 import { sendCatchFeedback, sendFeedback } from '../../../functions/feedback';
 import { RoutePaths } from '../../../routes/route-paths';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 // import { signOut } from '../../../store/slices/user';
 import { appAxios } from '../../../api/axios';
 import { navItemType, navLinks } from '../navLinks';
@@ -14,9 +13,9 @@ import Notification from './Notification';
 function UserMenu() {
   const [open, setOpen] = useState(false);
 
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { user } = useAppSelector((state) => state.user);
+  // const { user } = useAppSelector((state) => state.user);
   const parentRef = useRef(null);
 
   const logoutUser = async () => {

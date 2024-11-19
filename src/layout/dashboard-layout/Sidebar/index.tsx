@@ -3,13 +3,12 @@ import { LogoutCurve } from 'iconsax-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { appAxios } from '../../../api/axios';
 import { RoutePaths } from '../../../routes/route-paths';
-import { useAppDispatch } from '../../../store/hooks';
 import { navItemType, navLinks } from '../navLinks';
 import styles from '../styles.module.css';
 import SidebarLink from './SidebarLink';
 
 function Sidebar() {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const logoutUser = async () => {
