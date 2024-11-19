@@ -1,0 +1,115 @@
+trigger:
+  branches:
+    include:
+      - master
+      - main
+      - development
+      - "feature/*"
+
+pr:
+  branches:
+    include:
+      - master
+      - main
+      - development
+      - "feature/*"
+
+variables:
+  - group: aws-develop
+  - group: aws-credentials
+
+stages:
+  - stage: BuildAndPush
+    jobs:
+      - job: BuildAndPushImage
+        pool:
+          vmImage: "ubuntu-latest"
+        steps:
+          - bash: |
+              curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+              unzip awscliv2.zip
+              sudo ./aws/install
+              aws --version
+            displayName: "Install AWS CLI"
+
+          - bash: |
+              aws configure set aws_access_key_id $(AWS_ACCESS_KEY_ID)
+              aws configure set aws_secret_access_key $(AWS_SECRET_ACCESS_KEY)
+              aws configure set default.region $(AWS_REGION)
+            displayName: "Configure AWS Credentials"
+
+          - bash: |
+              aws ecr get-login-password --region $(AWS_REGION) | docker login --username AWS --password-stdin $(AWS_ACCOUNT).dkr.ecr.$(AWS_REGION).amazonaws.com
+            displayName: "Login to Amazon ECR"
+
+          - bash: |
+              ECR_REGISTRY="$(AWS_ACCOUNT).dkr.ecr.$(AWS_REGION).amazonaws.com"
+              IMAGE_TAG="$(Build.SourceVersion)"
+              docker build -t $ECR_REGISTRY/$(ECR_REPOSITORY_FRONTEND):$IMAGE_TAG .
+              docker push $ECR_REGISTRY/$(ECR_REPOSITORY_FRONTEND):$IMAGE_TAG
+
+              # Create a variable that can be used in the release pipeline
+              echo "##vso[task.setvariable variable=IMAGE_TAG;isOutput=true]$IMAGE_TAG"
+            displayName: "Build and Push Docker Image"
+            name: imageDetails
+
+          - bash: |
+              ECR_REGISTRY="$(AWS_ACCOUNT).dkr.ecr.$(AWS_REGION).amazonaws.com"
+              IMAGE_TAG="$(Build.SourceVersion)"
+
+              cat << EOF > task-definition.json
+              {
+                "family": "$(ECS_TASK_DEFINITION)",
+                "networkMode": "awsvpc",
+                "requiresCompatibilities": [
+                    "FARGATE"
+                ],
+                "cpu": "512",
+                "memory": "1024",
+                "executionRoleArn": "$(ECS_TASK_EXECUTION_ROLE)",
+                "taskRoleArn": "$(ECS_TASK_ROLE)",
+                "containerDefinitions": [
+                    {
+                        "name": "$(CONTAINER_NAME)",
+                        "image": "$ECR_REGISTRY/$(ECR_REPOSITORY_FRONTEND):$IMAGE_TAG",
+                        "essential": true,
+                        "portMappings": [
+                            {
+                                "containerPort": 80,
+                                "protocol": "tcp"
+                            }
+                        ],
+                        "environment": [
+                            {
+                                "name": "AWS_ACCESS_KEY_ID",
+                                "value": "$(AWS_ACCESS_KEY_ID)"
+                            },
+                            {
+                                "name": "AWS_SECRET_ACCESS_KEY",
+                                "value": "$(AWS_SECRET_ACCESS_KEY)"
+                            },
+                            {
+                                "name": "AWS_REGION",
+                                "value": "$(AWS_REGION)"
+                            }
+                        ],
+                        "logConfiguration": {
+                            "logDriver": "awslogs",
+                            "options": {
+                                "awslogs-group": "/ecs/$(ECS_TASK_DEFINITION)",
+                                "awslogs-region": "$(AWS_REGION)",
+                                "awslogs-stream-prefix": "ecs",
+                                "awslogs-create-group": "true"
+                            }
+                        }
+                    }
+                ]
+              }
+              EOF
+            displayName: "Create Task Definition"
+
+          - task: PublishPipelineArtifact@1
+            inputs:
+              targetPath: "$(System.DefaultWorkingDirectory)/task-definition.json"
+              artifact: "task-definition"
+              publishLocation: "pipeline"
