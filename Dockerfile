@@ -12,8 +12,8 @@ RUN npm install -g pm2
 # Install Yarn globally
 #RUN npm install -g yarn
 
-# Copy package.json and yarn.lock to the container
-COPY package*.json yarn.lock ./
+# Copy package.json to the container
+COPY package*.json ./
 
 # Install dependencies using Yarn
 RUN npm install
