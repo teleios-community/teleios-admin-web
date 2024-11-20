@@ -6,7 +6,7 @@ function Navbar() {
   // const user = getSessionDetails();
 
   return (
-    <nav className=' bg-white px-[22px] h-[70px] flex flex-row items-center sticky z-10 top-0 border-b border-b-[#F3F5F7]'>
+    <nav className='border-l bg-white px-[22px] h-[78px] flex flex-row items-center sticky z-10 top-0 border-b border-b-[#F0F2F5]'>
       <div className='flex flex-row items-center justify-between lg:justify-end w-full'>
         <Link
           to={RoutePaths.DASHBOARD}
