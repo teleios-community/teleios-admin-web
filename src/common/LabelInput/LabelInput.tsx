@@ -1,5 +1,5 @@
+import { Eye, EyeSlash } from 'iconsax-react';
 import { useState } from 'react';
-import { HidePasswordIcon, ShowPasswordIcon } from './PasswordIcons';
 
 interface Props {
   formik?: any;
@@ -66,7 +66,11 @@ function LabelInput({
                 className='absolute bottom-3 right-3 cursor-pointer'
                 onClick={togglePasswordReveal}
               >
-                {passwordShown ? <HidePasswordIcon /> : <ShowPasswordIcon />}
+                {passwordShown ? (
+                  <EyeSlash size={22} color='#23343B' />
+                ) : (
+                  <Eye size={22} color='#23343B' />
+                )}
               </div>
             )}
           </div>
@@ -92,7 +96,11 @@ function LabelInput({
                 className='absolute bottom-3 right-3 cursor-pointer'
                 onClick={togglePasswordReveal}
               >
-                {passwordShown ? <HidePasswordIcon /> : <ShowPasswordIcon />}
+                {passwordShown ? (
+                  <EyeSlash size={22} color='#23343B' />
+                ) : (
+                  <Eye size={22} color='#23343B' />
+                )}
               </div>
             )}
           </div>

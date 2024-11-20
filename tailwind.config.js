@@ -24,7 +24,7 @@ module.exports = {
         secondary: 'Inter, sans-serif',
       },
       padding: {
-        primary: '5vw',
+        primary: '3vw',
       },
     },
   },

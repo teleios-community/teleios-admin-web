@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_URL } from 'functions/environmentVariables';
+import { USER_API_URL } from 'functions/environmentVariables';
 import { getTokenDetails } from 'functions/userSession';
 import { store } from 'store';
 
@@ -9,7 +9,7 @@ export const appAxios = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  baseURL: API_URL,
+  baseURL: USER_API_URL,
 });
 
 appAxios.interceptors.request.use(
@@ -40,17 +40,17 @@ appAxios.interceptors.response.use(
 
     if (
       // urls to avoid (don't logout when they fail)
-      originalConfig.url !== `${API_URL}/auth/login` && //login
+      originalConfig.url !== `${USER_API_URL}/auth/login` && //login
       err.response
     ) {
       if (
         err.response.status === 401 &&
         sessionToken && // refresh token only when a user has session
         !originalConfig._retry &&
-        originalConfig.url !== `${API_URL}/token/refresh`
+        originalConfig.url !== `${USER_API_URL}/token/refresh`
       ) {
         // const getNewAccessToken = await axios.get(
-        //   `${API_URL}/token/refresh`,
+        //   `${USER_API_URL}/token/refresh`,
         //   {
         //     headers: {
         //       Authorization: 'Bearer ' + sessionDetails?.accessToken,

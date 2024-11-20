@@ -11,7 +11,7 @@ export const sendFeedback = (message: Message, type?: Type) => {
 
 export const sendCatchFeedback = (error: any) => {
   toast.error(
-    error.response?.data ? error.response.data.message : 'Request unsuccessful',
+    error.response?.data ? error.response.data.detail : 'Request unsuccessful',
     {
       toastId: 'toastId',
     }
