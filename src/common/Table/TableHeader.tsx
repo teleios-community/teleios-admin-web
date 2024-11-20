@@ -8,12 +8,12 @@ function TableHeader({
   headerStyle?: React.CSSProperties;
 }) {
   return (
-    <thead className='font-medium text-xs text-[#667085] uppercase  bg-white'>
+    <thead className='font-semibold text-[13px] text-[#6D6D6D] capitalize bg-white rounded-t-xl border-[#919191]'>
       <tr>
         {tableHeaders.map((header, index) =>
           header !== 'tableAction' ? (
             <th
-              className='px-3 py-3 align-middle'
+              className='px-6 py-4 align-middle'
               scope='col'
               key={header}
               style={{
@@ -35,7 +35,9 @@ function TableHeader({
               style={{
                 textAlign: index === 0 ? 'left' : 'center',
               }}
-            ></th>
+            >
+              Action
+            </th>
           )
         )}
       </tr>

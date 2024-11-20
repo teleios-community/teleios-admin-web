@@ -13,8 +13,8 @@ const customStyles: ReactModal.Styles = {
     overflow: 'auto',
     width: '900px',
     maxWidth: '90vw',
-    padding: 32,
-    paddingTop: 16,
+    padding: 0,
+    paddingBlock: 16,
     maxHeight: '95vh',
     backgroundColor: '#fff',
     color: '#000',
@@ -100,6 +100,7 @@ function CustomModal({
           &#x2715;
         </button>
       </div>
+
       {children}
     </ReactModal>
   );

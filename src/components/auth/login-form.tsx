@@ -1,6 +1,6 @@
 import { appAxios } from 'api/axios';
-import Button from 'common/Button';
-import LabelInput from 'common/LabelInput/LabelInput';
+import Button from 'common/button';
+import LabelInput from 'common/label-input/LabelInput';
 import { useFormik } from 'formik';
 import { sendCatchFeedback, sendFeedback } from 'functions/feedback';
 import { useState } from 'react';

@@ -10,7 +10,7 @@ const DashboardLayout: FC = () => {
         <Sidebar />
         <main className='w-full bg-[#FBFBFB] overflow-auto'>
           <Navbar />
-          <div className='px-[15px] py-[18px] min-h-screen '>
+          <div className='px-primary py-[18px] min-h-screen '>
             <Outlet />
           </div>
         </main>

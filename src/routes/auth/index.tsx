@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { getSessionDetails } from 'functions/userSession';
+import DashboardLayoutWithChildren from 'layout/dashboard-layout/DashboardLayoutWithChildren';
 import { lazy } from 'react';
 import { RouteObject } from 'react-router-dom';
 import { RoutePaths } from 'routes/route-paths';
@@ -14,7 +15,13 @@ const currentUser: UserType | null = getSessionDetails();
 const authRoutes: RouteObject[] = [
   {
     path: RoutePaths.HOME,
-    element: !currentUser ? <LoginPage /> : <DashboardPage />,
+    element: !currentUser ? (
+      <LoginPage />
+    ) : (
+      <DashboardLayoutWithChildren>
+        <DashboardPage />
+      </DashboardLayoutWithChildren>
+    ),
   },
   {
     path: RoutePaths.LOGIN,

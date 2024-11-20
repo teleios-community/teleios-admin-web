@@ -1,4 +1,4 @@
-import LoadingIndicator from '../LoadingIndicator';
+import LoadingIndicator from '../loading-indicator';
 
 const ProgressButton = ({
   progressTitle,

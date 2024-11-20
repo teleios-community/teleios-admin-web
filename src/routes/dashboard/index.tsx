@@ -6,6 +6,7 @@ import { RoutePaths } from 'routes/route-paths';
 import { PrivateRoute } from 'routes/utils';
 
 const DashboardPage = lazy(() => import('../../pages/dashboard'));
+const TeamsPage = lazy(() => import('../../pages/dashboard/teams'));
 
 const dashboardRoutes: RouteObject[] = [
   {
@@ -21,14 +22,14 @@ const dashboardRoutes: RouteObject[] = [
         ),
         index: true,
       },
-      // {
-      //   path: RoutePaths.PROFILE,
-      //   element: (
-      //     <PrivateRoute>
-      //       <ProfilePage />
-      //     </PrivateRoute>
-      //   ),
-      // },
+      {
+        path: RoutePaths.TEAMS,
+        element: (
+          <PrivateRoute>
+            <TeamsPage />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
 ];

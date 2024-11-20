@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { USER_API_URL } from 'functions/environmentVariables';
-import { getTokenDetails } from 'functions/userSession';
+import { getTokenDetails, storeTokenDetails } from 'functions/userSession';
 import { store } from 'store';
 
 const sessionToken = getTokenDetails();
@@ -49,23 +49,25 @@ appAxios.interceptors.response.use(
         !originalConfig._retry &&
         originalConfig.url !== `${USER_API_URL}/token/refresh`
       ) {
-        // const getNewAccessToken = await axios.get(
-        //   `${USER_API_URL}/token/refresh`,
-        //   {
-        //     headers: {
-        //       Authorization: 'Bearer ' + sessionDetails?.accessToken,
-        //       'X-Refresh-Token': sessionDetails?.refreshToken,
-        //     },
-        //   }
-        // );
-        // const newAccessToken = getNewAccessToken.data.accessToken;
-        // const newRefreshToken = getNewAccessToken.data.refreshToken;
+        const appState = store.getState();
+        const storeToken = appState?.user.token;
+        // get state is called here to be current at the time of rendering
 
-        // storeSessionDetails({
-        //   ...getSessionDetails(),
-        //   accessToken: newAccessToken,
-        //   refreshToken: newRefreshToken,
-        // });
+        const token = storeToken || sessionToken;
+        const getNewAccessToken = await axios.post(
+          `${USER_API_URL}/auth/refresh?token=${token}`,
+          {},
+          {
+            headers: {
+              Authorization: 'Bearer ' + token,
+            },
+          }
+        );
+        const newAccessToken = getNewAccessToken.data.access_token;
+
+        storeTokenDetails(newAccessToken);
+
+        window.location.reload();
 
         return appAxios(originalConfig);
       }

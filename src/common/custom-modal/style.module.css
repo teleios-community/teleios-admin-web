@@ -4,19 +4,20 @@
 	align-items: center;
 	justify-content: space-between;
 	flex-wrap: nowrap;
-	margin-bottom: 38px;
-	padding-bottom: 10px;
+	margin-bottom: 20px;
+	padding-bottom: 16px;
 	border-bottom: 2px solid #F3F6FA;
+	padding-inline: 20px;
+	position: relative;
 }
 
 .modalTitleContainer>h1 {
 	margin: 0;
-	font-size: 1.3rem;
 	font-weight: 600;
 }
 
 .modalTitleContainer>button {
-	font-size: 20px;
+	font-size: 18px;
 	border: none;
 	transition: color 0.5s;
 }

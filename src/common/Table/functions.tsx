@@ -1,5 +1,5 @@
 import TableMenu from './TableMenu';
-import { menuItemType } from './types';
+import { menuItemType } from './data';
 
 export const formatTableValue = ({
   value,
@@ -24,8 +24,9 @@ export const formatTableValue = ({
   }
 
   // Data check
-  if (['createdAt', 'creation_date', 'last_update_date'].includes(headerName)) {
-    return new Date(value).toDateString();
+  if (['created_at', 'used_at', 'expires_at'].includes(headerName)) {
+    return new Date(value).toLocaleDateString('en-GB');
+    // return new Date(value).toLocaleDateString('en-GB').split('/').join('-');
   }
 
   // Array check
