@@ -89,7 +89,10 @@ const LoginForm = () => {
           className=''
         />
         <div className='mt-2 text-right mb-[32px]'>
-          <Link to='/auth/forgot-password' className='text-sm font-medium text-secondary'>
+          <Link
+            to={RoutePaths.FORGOT_PASSWORD}
+            className='text-sm font-medium text-secondary'
+          >
             Forgot password
           </Link>
         </div>

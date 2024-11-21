@@ -3,6 +3,10 @@ export const RoutePaths = Object.freeze({
 
   // auth
   LOGIN: '/auth/login',
+  FORGOT_PASSWORD: '/auth/forgot-password',
+  CHECK_EMAIL: '/auth/check-email',
+  SET_PASSWORD: '/auth/set-password',
+  PASSWORD_SUCCESS: '/auth/password-success',
 
   // dashboard
   DASHBOARD: '/dashboard',

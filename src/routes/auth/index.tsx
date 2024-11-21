@@ -8,6 +8,11 @@ import { ProtectedRoute } from 'routes/utils';
 import { UserType } from 'types/user';
 
 const LoginPage = lazy(() => import('pages/auth/login'));
+const ForgotPasswordPage = lazy(() => import('pages/auth/forgot-password'));
+const CheckEmailPage = lazy(() => import('pages/auth/check-email'));
+const SetPasswordPage = lazy(() => import('pages/auth/set-password'));
+const PasswordSuccessPage = lazy(() => import('pages/auth/password-success'));
+
 const DashboardPage = lazy(() => import('../../pages/dashboard'));
 
 const currentUser: UserType | null = getSessionDetails();
@@ -28,6 +33,38 @@ const authRoutes: RouteObject[] = [
     element: (
       <ProtectedRoute>
         <LoginPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: RoutePaths.FORGOT_PASSWORD,
+    element: (
+      <ProtectedRoute>
+        <ForgotPasswordPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `${RoutePaths.CHECK_EMAIL}/:email`,
+    element: (
+      <ProtectedRoute>
+        <CheckEmailPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: `${RoutePaths.SET_PASSWORD}/:email`,
+    element: (
+      <ProtectedRoute>
+        <SetPasswordPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: RoutePaths.PASSWORD_SUCCESS,
+    element: (
+      <ProtectedRoute>
+        <PasswordSuccessPage />
       </ProtectedRoute>
     ),
   },

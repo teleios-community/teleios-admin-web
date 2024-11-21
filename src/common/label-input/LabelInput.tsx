@@ -51,7 +51,6 @@ function LabelInput({
               {rest.required && <span>*</span>}
             </label>
           )}
-          {hint && <div className='font-light text-xs italic text-gray-400'>{hint}</div>}
           <div className='relative'>
             <input
               id={name}
@@ -74,6 +73,7 @@ function LabelInput({
               </div>
             )}
           </div>
+          {hint && <div className='text-sm text-[#667085]'>{hint}</div>}
 
           {formik.touched[name] && formik.errors[name] && (
             <div className='error'>{formik.errors[name]}</div>
@@ -87,7 +87,6 @@ function LabelInput({
               {rest.required && <span>*</span>}
             </label>
           )}
-          {hint && <div className='font-light text-xs italic text-gray-400'>{hint}</div>}
           <div className='relative'>
             <input id={name} {...rest} />
 
@@ -104,6 +103,7 @@ function LabelInput({
               </div>
             )}
           </div>
+          {hint && <div className='text-sm text-[#667085]'>{hint}</div>}
 
           {showError && <div className='error'>{error}</div>}
         </>
