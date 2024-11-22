@@ -4,7 +4,7 @@ import CustomModal from 'common/custom-modal/CustomModal';
 import Dropdown from 'common/drop-down';
 import LabelInput from 'common/label-input/LabelInput';
 import { useFormik } from 'formik';
-import { sendCatchFeedback, sendFeedback } from 'functions/feedback';
+import { sendCatchFeedback } from 'functions/feedback';
 import { useState } from 'react';
 import * as yup from 'yup';
 
@@ -12,9 +12,10 @@ interface Props {
   closeModal: () => void;
   reload: () => void;
   open: boolean;
+  openSuccessModal: () => void;
 }
 
-function AddTeamModal({ closeModal, reload, open }: Props) {
+function AddTeamModal({ closeModal, reload, open, openSuccessModal }: Props) {
   const [loading, setLoading] = useState(false);
 
   const formik = useFormik({
@@ -34,14 +35,14 @@ function AddTeamModal({ closeModal, reload, open }: Props) {
   const submitValues = async () => {
     try {
       setLoading(true);
-      const response = await appAxios.post(`/admin/invite`, {
+      await appAxios.post(`/admin/invite`, {
         email: formik.values.email,
         role: formik.values.role,
       });
       closeModal();
       reload();
       formik.resetForm();
-      sendFeedback(response.data?.message, 'success');
+      openSuccessModal();
     } catch (error) {
       sendCatchFeedback(error);
     } finally {

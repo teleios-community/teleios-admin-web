@@ -1,21 +1,22 @@
 /* eslint-disable react-refresh/only-export-components */
-import { getSessionDetails } from 'functions/userSession';
+import { getTokenDetails } from 'functions/userSession';
 import DashboardLayoutWithChildren from 'layout/dashboard-layout/DashboardLayoutWithChildren';
 import { lazy } from 'react';
 import { RouteObject } from 'react-router-dom';
 import { RoutePaths } from 'routes/route-paths';
 import { ProtectedRoute } from 'routes/utils';
-import { UserType } from 'types/user';
+import { store } from 'store';
 
 const LoginPage = lazy(() => import('pages/auth/login'));
 const ForgotPasswordPage = lazy(() => import('pages/auth/forgot-password'));
 const CheckEmailPage = lazy(() => import('pages/auth/check-email'));
-const SetPasswordPage = lazy(() => import('pages/auth/set-password'));
+const ResetPasswordPage = lazy(() => import('pages/auth/reset-password'));
 const PasswordSuccessPage = lazy(() => import('pages/auth/password-success'));
+const AcceptInvitePage = lazy(() => import('pages/auth/accept-invite'));
 
 const DashboardPage = lazy(() => import('../../pages/dashboard'));
 
-const currentUser: UserType | null = getSessionDetails();
+const currentUser = store.getState().user.token || getTokenDetails();
 
 const authRoutes: RouteObject[] = [
   {
@@ -53,10 +54,10 @@ const authRoutes: RouteObject[] = [
     ),
   },
   {
-    path: `${RoutePaths.SET_PASSWORD}/:email`,
+    path: `${RoutePaths.RESET_PASSWORD}`,
     element: (
       <ProtectedRoute>
-        <SetPasswordPage />
+        <ResetPasswordPage />
       </ProtectedRoute>
     ),
   },
@@ -65,6 +66,14 @@ const authRoutes: RouteObject[] = [
     element: (
       <ProtectedRoute>
         <PasswordSuccessPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: RoutePaths.ACCEPT_INVITE,
+    element: (
+      <ProtectedRoute>
+        <AcceptInvitePage />
       </ProtectedRoute>
     ),
   },

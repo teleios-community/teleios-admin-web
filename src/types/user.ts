@@ -11,3 +11,7 @@ export type UserType = {
   onboarding_completed_at: Date;
 };
 
+export type TokenType = {
+  access_token: string;
+  refresh_token: string;
+};

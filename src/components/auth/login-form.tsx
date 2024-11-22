@@ -36,10 +36,23 @@ const LoginForm = () => {
         email: formik.values.email,
         password: formik.values.password,
       });
-      const userToken = response.data?.access_token;
-      dispatch(updateToken({ token: userToken }));
 
-      const accountResponse = await appAxios.get('/users/profile');
+      const loginResponseData = response.data.data;
+
+      dispatch(
+        updateToken({
+          token: {
+            access_token: loginResponseData.access_token,
+            refresh_token: loginResponseData.refresh_token,
+          },
+        })
+      );
+
+      const accountResponse = await appAxios.get('/users/profile', {
+        headers: {
+          Authorization: 'Bearer ' + loginResponseData.access_token,
+        },
+      });
       const accountInfo: UserType = accountResponse.data;
       dispatch(updateUser({ user: accountInfo }));
 

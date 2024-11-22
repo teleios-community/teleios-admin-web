@@ -13,10 +13,12 @@ const CheckEmailView = () => {
   const resendEmail = async () => {
     try {
       setLoading(true);
-      await appAxios.post(`/auth/resend-verification?email=${param?.email}`);
+      const response = await appAxios.post(`/auth/forgot-password`, {
+        email: param?.email,
+      });
 
       // Successful
-      sendFeedback('Verification email sent', 'success');
+      sendFeedback(response.data.message, 'success');
     } catch (error: any) {
       sendCatchFeedback(error);
     } finally {

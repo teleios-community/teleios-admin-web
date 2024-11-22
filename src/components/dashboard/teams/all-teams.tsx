@@ -1,7 +1,19 @@
 import Table from 'common/table';
+import { Dispatch, SetStateAction } from 'react';
+import { UserType } from 'types/user';
 
-const AllTeams = ({ allData, loading }: { allData: []; loading: boolean }) => {
-  const tableHeaders = ['email', 'role', 'created_at', 'used_at', 'tableAction'];
+const AllTeams = ({
+  allData,
+  loading,
+  setSelected,
+  setDeleteModal,
+}: {
+  allData: [];
+  loading: boolean;
+  setSelected: Dispatch<SetStateAction<UserType | undefined>>;
+  setDeleteModal: Dispatch<SetStateAction<boolean>>;
+}) => {
+  const tableHeaders = ['email', 'role', 'created_at', 'used', 'tableAction'];
 
   return (
     <Table
@@ -9,21 +21,21 @@ const AllTeams = ({ allData, loading }: { allData: []; loading: boolean }) => {
       data={allData}
       loading={loading}
       menuItems={[
-        {
-          label: 'Edit',
-          onClick: (data) => {
-            console.log(data);
-            // setSelected(data);
-            // setEditModal(true);
-          },
-        },
+        // {
+        //   label: 'Edit',
+        //   onClick: (data) => {
+        //     console.log(data);
+        //     // setSelected(data);
+        //     // setEditModal(true);
+        //   },
+        // },
 
         {
           label: 'Remove',
           onClick: (data) => {
             console.log(data);
-            // setSelected(data);
-            // setDeleteModal(true);
+            setSelected(data);
+            setDeleteModal(true);
           },
           style: {
             color: 'var(--error)',

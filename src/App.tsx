@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import routes from 'routes';
 import { useAppDispatch } from 'store/hooks';
+import { updateToken } from 'store/slices/user';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -14,7 +15,7 @@ function App() {
   useEffect(() => {
     const token = getTokenDetails();
     if (token) {
-      // dispatch(updateToken({ token }));
+      dispatch(updateToken({ token }));
     }
   }, [dispatch]);
 

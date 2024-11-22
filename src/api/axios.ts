@@ -2,6 +2,7 @@ import axios from 'axios';
 import { USER_API_URL } from 'functions/environmentVariables';
 import { getTokenDetails, storeTokenDetails } from 'functions/userSession';
 import { store } from 'store';
+import { updateToken } from 'store/slices/user';
 
 const sessionToken = getTokenDetails();
 
@@ -18,7 +19,7 @@ appAxios.interceptors.request.use(
     const storeToken = appState?.user.token;
     // get state is called here to be current at the time of rendering
 
-    const token = storeToken || sessionToken;
+    const token = storeToken?.access_token || sessionToken?.access_token;
 
     if (token) {
       config.headers.Authorization = 'Bearer ' + token;
@@ -47,29 +48,47 @@ appAxios.interceptors.response.use(
         err.response.status === 401 &&
         sessionToken && // refresh token only when a user has session
         !originalConfig._retry &&
-        originalConfig.url !== `${USER_API_URL}/token/refresh`
+        originalConfig.url !== `${USER_API_URL}/auth/refresh`
       ) {
-        const appState = store.getState();
-        const storeToken = appState?.user.token;
-        // get state is called here to be current at the time of rendering
+        originalConfig._retry = true;
 
-        const token = storeToken || sessionToken;
-        const getNewAccessToken = await axios.post(
-          `${USER_API_URL}/auth/refresh?token=${token}`,
-          {},
-          {
-            headers: {
-              Authorization: 'Bearer ' + token,
-            },
-          }
-        );
-        const newAccessToken = getNewAccessToken.data.access_token;
+        try {
+          const appState = store.getState();
+          const storeToken = appState?.user.token;
+          // get state is called here to be current at the time of rendering
 
-        storeTokenDetails(newAccessToken);
+          const refreshToken = storeToken?.refresh_token || sessionToken.refresh_token;
+          const getNewAccessToken = await axios.post(
+            `${USER_API_URL}/auth/refresh`,
+            {
+              token: refreshToken,
+            }
+            // {
+            //   headers: {
+            //     Authorization: 'Bearer ' + token,
+            //   },
+            // }
+          );
+          const newAccessToken = getNewAccessToken.data.access_token;
 
-        window.location.reload();
+          storeTokenDetails({
+            access_token: newAccessToken,
+            refresh_token: refreshToken,
+          });
 
-        return appAxios(originalConfig);
+          store.dispatch(
+            updateToken({
+              token: {
+                access_token: newAccessToken,
+                refresh_token: refreshToken,
+              },
+            })
+          );
+
+          return appAxios(originalConfig);
+        } catch (error) {
+          return Promise.reject(error);
+        }
       }
     }
     return Promise.reject(err);

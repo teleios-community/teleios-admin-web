@@ -5,13 +5,15 @@ import { useFormik } from 'formik';
 import { sendCatchFeedback, sendFeedback } from 'functions/feedback';
 import { ArrowLeft } from 'iconsax-react';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { RoutePaths } from 'routes/route-paths';
 import * as yup from 'yup';
 
-const SetPasswordForm = () => {
+const ResetPasswordForm = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get('token');
 
   const formik = useFormik({
     initialValues: {
@@ -22,7 +24,10 @@ const SetPasswordForm = () => {
       submitValues();
     },
     validationSchema: yup.object({
-      newPassword: yup.string().required('New password is required'),
+      newPassword: yup
+        .string()
+        .required('New password is required')
+        .min(8, 'Minimum of 8 characters'),
       confirmPassword: yup
         .string()
         .required('Please confirm new password')
@@ -32,8 +37,8 @@ const SetPasswordForm = () => {
   const submitValues = async () => {
     try {
       setLoading(true);
-      await appAxios.post('/auth/forgot-password', {
-        token: 'string',
+      await appAxios.post('/auth/reset-password', {
+        token,
         new_password: formik.values.newPassword,
         new_password_confirm: formik.values.confirmPassword,
       });
@@ -64,6 +69,7 @@ const SetPasswordForm = () => {
           label='New password'
           type='password'
           className='mb-6'
+          hint='Must be at least 8 characters.'
         />
         <LabelInput
           formik={formik}
@@ -71,7 +77,6 @@ const SetPasswordForm = () => {
           label='Confirm new password'
           type='password'
           className='mb-6'
-          hint='Must be at least 8 characters.'
         />
 
         <Button type='submit' loading={loading} className='!w-full'>
@@ -92,4 +97,4 @@ const SetPasswordForm = () => {
   );
 };
 
-export default SetPasswordForm;
+export default ResetPasswordForm;

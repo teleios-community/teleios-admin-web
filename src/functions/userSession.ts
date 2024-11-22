@@ -1,4 +1,4 @@
-import { UserType } from '../types/user';
+import { TokenType, UserType } from '../types/user';
 import { decryptItem, encryptItem } from './encryption';
 import { SESSION_KEY, SESSION_NAME, TOKEN_KEY, TOKEN_NAME } from './environmentVariables';
 
@@ -32,10 +32,10 @@ export const getTokenDetails = () => {
     token = JSON.parse(token as string);
   }
 
-  return token as string | null;
+  return token as TokenType | null;
 };
 
-export const storeTokenDetails = (token: string) => {
+export const storeTokenDetails = (token: TokenType) => {
   const encryptedSession = encryptItem(token, TOKEN_KEY!);
   localStorage.setItem(TOKEN_NAME!, encryptedSession);
   return true;
