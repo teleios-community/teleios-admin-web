@@ -58,7 +58,7 @@ appAxios.interceptors.response.use(
           // get state is called here to be current at the time of rendering
 
           const refreshToken = storeToken?.refresh_token || sessionToken.refresh_token;
-          const getNewAccessToken = await axios.post(
+          const getNewAccessTokenResponse = await axios.post(
             `${USER_API_URL}/auth/refresh`,
             {
               token: refreshToken,
@@ -69,7 +69,7 @@ appAxios.interceptors.response.use(
             //   },
             // }
           );
-          const newAccessToken = getNewAccessToken.data.access_token;
+          const newAccessToken = getNewAccessTokenResponse.data.data.access_token;
 
           storeTokenDetails({
             access_token: newAccessToken,

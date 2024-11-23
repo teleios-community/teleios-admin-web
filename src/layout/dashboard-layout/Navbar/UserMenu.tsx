@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { sendCatchFeedback, sendFeedback } from '../../../functions/feedback';
 import { RoutePaths } from '../../../routes/route-paths';
 // import { signOut } from '../../../store/slices/user';
-import { getNameInitials } from 'functions/stringManipulations';
+import DefaultImage from 'assets/images/default-profile-image.svg';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { signOut } from 'store/slices/user';
 import { appAxios } from '../../../api/axios';
@@ -43,25 +43,17 @@ function UserMenu() {
     <ClickAwayListener onClickAway={() => setOpen(false)}>
       <div className='flex items-center self-end gap-4' ref={parentRef}>
         <Notification />
-        <div className='h-[49px] w-[1px] bg-[#EAEBED]'></div>
+        <div className='h-[49px] w-[1px] bg-[#EAEBED]' />
         <div className='relative'>
           <button onClick={() => setOpen(true)} className='flex items-center relative'>
             <div className='w-[39px] h-[39px]  flex items-center justify-center rounded-full mr-[5px]'>
-              {user?.profile_picture_url ? (
-                <div className='w-10 h-10 rounded-full p-1 bg-[#F4CE9B]'>
-                  <img
-                    src='https://picsum.photos/100'
-                    alt='user'
-                    className='w-8 h-8 rounded-full object-cover'
-                  />
-                </div>
-              ) : (
-                <div className='bg-gray-500 text-black flex items-center justify-center w-10 h-10 text-md rounded-full'>
-                  {getNameInitials(
-                    (user?.first_name || 'First') + ' ' + (user?.last_name || 'Last')
-                  )}
-                </div>
-              )}
+              <div className='w-10 h-10 rounded-full p-1 bg-[#F4CE9B] flex items-center justify-center'>
+                <img
+                  src={user?.profile_picture_url || DefaultImage}
+                  alt='user'
+                  className='w-8 h-8 object-contain rounded-full'
+                />
+              </div>
             </div>
             <div className='md:flex flex-col items-start mr-2 ml-2 hidden'>
               <div className='flex flex-col'>

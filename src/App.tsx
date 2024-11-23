@@ -1,21 +1,29 @@
 import ErrorBoundaryLayout from 'components/error-boundary/layout';
 import SuspenseLayout from 'components/suspense';
-import { getTokenDetails } from 'functions/userSession';
+import { getSessionDetails, getTokenDetails } from 'functions/userSession';
 import NotFound from 'pages/NotFound';
 import { useEffect } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import routes from 'routes';
 import { useAppDispatch } from 'store/hooks';
-import { updateToken } from 'store/slices/user';
+import { updateToken, updateUser } from 'store/slices/user';
 
 function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const token = getTokenDetails();
+    const user = getSessionDetails();
     if (token) {
       dispatch(updateToken({ token }));
+    }
+    if (user) {
+      dispatch(
+        updateUser({
+          user,
+        })
+      );
     }
   }, [dispatch]);
 

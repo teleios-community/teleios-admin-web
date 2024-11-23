@@ -17,5 +17,5 @@ export const RoutePaths = Object.freeze({
   CERTIFICATES: '/dashboard/certificates',
   LEADERBOARD: '/dashboard/leaderboard',
   TEAMS: '/dashboard/teams',
-  PROFILE: '/dashboard/profile',
+  SETTINGS: '/dashboard/settings',
 });

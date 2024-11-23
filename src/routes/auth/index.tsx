@@ -16,7 +16,8 @@ const AcceptInvitePage = lazy(() => import('pages/auth/accept-invite'));
 
 const DashboardPage = lazy(() => import('../../pages/dashboard'));
 
-const currentUser = store.getState().user.token || getTokenDetails();
+const currentUser =
+  store.getState().user.token?.access_token || getTokenDetails()?.access_token;
 
 const authRoutes: RouteObject[] = [
   {

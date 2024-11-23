@@ -54,8 +54,8 @@ export const navLinks: navItemType[] = [
     icon: <People size={18} />,
   },
   {
-    label: 'Profile',
-    href: RoutePaths.PROFILE,
+    label: 'Settings',
+    href: RoutePaths.SETTINGS,
     icon: <Setting2 size={18} />,
   },
 ];
