@@ -65,7 +65,7 @@ const LoginForm = () => {
         // Send warning
         sendFeedback('Complete your profile');
 
-        return navigate(RoutePaths.PROFILE);
+        return navigate(RoutePaths.SETTINGS);
       }
 
       // Successful

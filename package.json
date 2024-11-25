@@ -15,6 +15,7 @@
     "@reduxjs/toolkit": "^2.3.0",
     "axios": "^1.7.7",
     "crypto-js": "^4.2.0",
+    "firebase": "^11.0.2",
     "formik": "^2.4.6",
     "iconsax-react": "^0.0.8",
     "react": "^18.3.1",
@@ -36,7 +37,7 @@
   "devDependencies": {
     "@eslint/js": "^9.13.0",
     "@types/crypto-js": "^4.2.2",
-    "@types/firebase": "^3.2.3",
+    "@types/node": "^22.9.3",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@types/react-modal": "^3.16.3",

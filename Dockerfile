@@ -21,13 +21,6 @@ RUN npm install
 # Copy the rest of the application code to the container
 COPY . .
 
-# Set environment variables
-ENV VITE_API_URL="https://dev.jointeleios.com/api/admin"
-ENV VITE_SESSION_NAME="TELE_SESSION"
-ENV VITE_SESSION_KEY="TELE_IOS_SESS_ION_KEY"
-ENV VITE_TOKEN_NAME="TELE_TOKEN"
-ENV VITE_TOKEN_KEY="TELE_IOS_TOK_EN_KEY"
-
 # Build the React app
 RUN npm run build
 
