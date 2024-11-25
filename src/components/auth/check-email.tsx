@@ -1,10 +1,10 @@
-import { appAxios } from 'api/axios';
-import LoadingIndicator from 'common/loading-indicator';
-import { sendCatchFeedback, sendFeedback } from 'functions/feedback';
 import { ArrowLeft } from 'iconsax-react';
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { RoutePaths } from 'routes/route-paths';
+import { appAxios } from '../../api/axios';
+import LoadingIndicator from '../../common/loading-indicator';
+import { sendCatchFeedback, sendFeedback } from '../../functions/feedback';
+import { RoutePaths } from '../../routes/route-paths';
 
 const CheckEmailView = () => {
   const [loading, setLoading] = useState(false);

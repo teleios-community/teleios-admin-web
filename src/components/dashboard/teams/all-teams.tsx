@@ -1,6 +1,6 @@
-import Table from 'common/table';
 import { Dispatch, SetStateAction } from 'react';
-import { UserType } from 'types/user';
+import Table from '../../../common/table';
+import { UserType } from '../../../types/user';
 
 const AllTeams = ({
   allData,

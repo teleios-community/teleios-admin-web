@@ -1,5 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { removeSessionDetails, removeTokenDetails, storeSessionDetails, storeTokenDetails } from 'functions/userSession';
+import {
+  removeSessionDetails,
+  removeTokenDetails,
+  storeSessionDetails,
+  storeTokenDetails,
+} from '../../functions/userSession';
 import { TokenType, UserType } from '../../types/user';
 
 // Define a type for the slice state

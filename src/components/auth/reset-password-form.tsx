@@ -1,13 +1,13 @@
-import { appAxios } from 'api/axios';
-import Button from 'common/button';
-import LabelInput from 'common/label-input/LabelInput';
 import { useFormik } from 'formik';
-import { sendCatchFeedback, sendFeedback } from 'functions/feedback';
 import { ArrowLeft } from 'iconsax-react';
 import { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { RoutePaths } from 'routes/route-paths';
 import * as yup from 'yup';
+import { appAxios } from '../../api/axios';
+import Button from '../../common/button';
+import LabelInput from '../../common/label-input/LabelInput';
+import { sendCatchFeedback, sendFeedback } from '../../functions/feedback';
+import { RoutePaths } from '../../routes/route-paths';
 
 const ResetPasswordForm = () => {
   const navigate = useNavigate();

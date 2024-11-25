@@ -1,15 +1,15 @@
-import { appAxios } from 'api/axios';
-import Button from 'common/button';
-import LabelInput from 'common/label-input/LabelInput';
 import { useFormik } from 'formik';
-import { sendCatchFeedback, sendFeedback } from 'functions/feedback';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { RoutePaths } from 'routes/route-paths';
-import { useAppDispatch } from 'store/hooks';
-import { updateToken, updateUser } from 'store/slices/user';
-import { UserType } from 'types/user';
 import * as yup from 'yup';
+import { appAxios } from '../../api/axios';
+import Button from '../../common/button';
+import LabelInput from '../../common/label-input/LabelInput';
+import { sendCatchFeedback, sendFeedback } from '../../functions/feedback';
+import { RoutePaths } from '../../routes/route-paths';
+import { useAppDispatch } from '../../store/hooks';
+import { updateToken, updateUser } from '../../store/slices/user';
+import { UserType } from '../../types/user';
 
 const LoginForm = () => {
   const dispatch = useAppDispatch();

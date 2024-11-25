@@ -1,11 +1,11 @@
-import Logo from 'assets/brand/logo-full.svg';
-import { sendCatchFeedback, sendFeedback } from 'functions/feedback';
 import { LogoutCurve } from 'iconsax-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from 'store/hooks';
-import { signOut } from 'store/slices/user';
 import { appAxios } from '../../../api/axios';
+import Logo from '../../../assets/brand/logo-full.svg';
+import { sendCatchFeedback, sendFeedback } from '../../../functions/feedback';
 import { RoutePaths } from '../../../routes/route-paths';
+import { useAppDispatch } from '../../../store/hooks';
+import { signOut } from '../../../store/slices/user';
 import { navItemType, navLinks } from '../navLinks';
 import styles from '../styles.module.css';
 import SidebarLink from './SidebarLink';

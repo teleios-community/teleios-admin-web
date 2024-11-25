@@ -1,13 +1,13 @@
-import { appAxios } from 'api/axios';
-import DefaultImage from 'assets/images/default-profile-image.svg';
-import Button from 'common/button';
-import { firebaseApp } from 'config/firebaseConfig';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
-import { sendCatchFeedback, sendFeedback } from 'functions/feedback';
 import { useRef, useState } from 'react';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { updateUser } from 'store/slices/user';
-import { UserType } from 'types/user';
+import { appAxios } from '../../../api/axios';
+import DefaultImage from '../../../assets/images/default-profile-image.svg';
+import Button from '../../../common/button';
+import { firebaseApp } from '../../../config/firebaseConfig';
+import { sendCatchFeedback, sendFeedback } from '../../../functions/feedback';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { updateUser } from '../../../store/slices/user';
+import { UserType } from '../../../types/user';
 
 const EditProfileImage = () => {
   const { user } = useAppSelector((state) => state.user);

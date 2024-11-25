@@ -1,6 +1,6 @@
-import LoginImage from 'assets/backgrounds/auth/login.png';
-import LoginForm from 'components/auth/login-form';
-import AuthLayout from 'layout/auth-layout';
+import LoginImage from '../../assets/backgrounds/auth/login.png';
+import LoginForm from '../../components/auth/login-form';
+import AuthLayout from '../../layout/auth-layout';
 
 const LoginPage = () => {
   return (

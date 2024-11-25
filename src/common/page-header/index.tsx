@@ -1,5 +1,5 @@
-import BackComponent from 'common/back-component';
 import React from 'react';
+import BackComponent from '../back-component';
 
 export interface PageHeaderProps {
   pageTitle: string;

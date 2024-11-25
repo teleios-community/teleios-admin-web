@@ -1,12 +1,12 @@
-import { appAxios } from 'api/axios';
-import Button from 'common/button';
-import CustomModal from 'common/custom-modal/CustomModal';
-import Dropdown from 'common/drop-down';
-import LabelInput from 'common/label-input/LabelInput';
 import { useFormik } from 'formik';
-import { sendCatchFeedback } from 'functions/feedback';
 import { useState } from 'react';
 import * as yup from 'yup';
+import { appAxios } from '../../../api/axios';
+import Button from '../../../common/button';
+import CustomModal from '../../../common/custom-modal/CustomModal';
+import Dropdown from '../../../common/drop-down';
+import LabelInput from '../../../common/label-input/LabelInput';
+import { sendCatchFeedback } from '../../../functions/feedback';
 
 interface Props {
   closeModal: () => void;

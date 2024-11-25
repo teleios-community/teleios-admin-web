@@ -1,7 +1,7 @@
-import Logo from 'assets/brand/logo-full.svg';
 import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { RoutePaths } from 'routes/route-paths';
+import Logo from '../../assets/brand/logo-full.svg';
+import { RoutePaths } from '../../routes/route-paths';
 
 const AuthLayout = ({
   image,

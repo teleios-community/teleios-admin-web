@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { RoutePaths } from 'routes/route-paths';
+import { RoutePaths } from '../../../routes/route-paths';
 import UserMenu from './UserMenu';
 
 function Navbar() {

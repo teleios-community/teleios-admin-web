@@ -1,6 +1,6 @@
 import { Edit2 } from 'iconsax-react';
 import { lazy, useState } from 'react';
-import { useAppSelector } from 'store/hooks';
+import { useAppSelector } from '../../../store/hooks';
 import ProfileImageAndUpload from './profile-image-and-upload';
 import ProfileInfo from './profile-info';
 

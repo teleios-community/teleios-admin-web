@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { USER_API_URL } from 'functions/environmentVariables';
-import { getTokenDetails, storeTokenDetails } from 'functions/userSession';
-import { store } from 'store';
-import { updateToken } from 'store/slices/user';
+import { USER_API_URL } from '../functions/environmentVariables';
+import { getTokenDetails, storeTokenDetails } from '../functions/userSession';
+import { store } from '../store';
+import { updateToken } from '../store/slices/user';
 
 const sessionToken = getTokenDetails();
 

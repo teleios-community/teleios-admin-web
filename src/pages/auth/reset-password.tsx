@@ -1,6 +1,6 @@
-import PasswordImage from 'assets/backgrounds/auth/set-password.svg';
-import ResetPasswordForm from 'components/auth/reset-password-form';
-import AuthLayout from 'layout/auth-layout';
+import PasswordImage from '../../assets/backgrounds/auth/set-password.svg';
+import ResetPasswordForm from '../../components/auth/reset-password-form';
+import AuthLayout from '../../layout/auth-layout';
 
 const ResetPasswordPage = () => {
   return (

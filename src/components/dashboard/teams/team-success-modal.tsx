@@ -1,5 +1,5 @@
-import OpenMailGif from 'assets/images/open-mail.gif';
-import CustomModal from 'common/custom-modal/CustomModal';
+import OpenMailGif from '../../../assets/images/open-mail.gif';
+import CustomModal from '../../../common/custom-modal/CustomModal';
 
 interface Props {
   closeModal: () => void;

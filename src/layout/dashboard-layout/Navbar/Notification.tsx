@@ -1,6 +1,6 @@
 import { NotificationBing as NotificationIcon } from 'iconsax-react';
 import { Link } from 'react-router-dom';
-import { RoutePaths } from 'routes/route-paths';
+import { RoutePaths } from '../../../routes/route-paths';
 
 const Notification = () => {
   // const [allData, setAllData] = React.useState([]);

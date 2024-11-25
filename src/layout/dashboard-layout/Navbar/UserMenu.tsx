@@ -3,13 +3,12 @@ import { ArrowDown2 } from 'iconsax-react';
 import { useEffect, useRef, useState } from 'react';
 import ClickAwayListener from 'react-click-away-listener';
 import { Link, useNavigate } from 'react-router-dom';
+import { appAxios } from '../../../api/axios';
+import DefaultImage from '../../../assets/images/default-profile-image.svg';
 import { sendCatchFeedback, sendFeedback } from '../../../functions/feedback';
 import { RoutePaths } from '../../../routes/route-paths';
-// import { signOut } from '../../../store/slices/user';
-import DefaultImage from 'assets/images/default-profile-image.svg';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { signOut } from 'store/slices/user';
-import { appAxios } from '../../../api/axios';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { signOut } from '../../../store/slices/user';
 import { navItemType, navLinks } from '../navLinks';
 import Notification from './Notification';
 

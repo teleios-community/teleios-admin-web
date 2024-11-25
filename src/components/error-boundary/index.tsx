@@ -1,7 +1,7 @@
-import Button from 'common/button';
-import DashboardLayoutWithChildren from 'layout/dashboard-layout/DashboardLayoutWithChildren';
 import { FC } from 'react';
 import { FallbackProps } from 'react-error-boundary';
+import Button from '../../common/button';
+import DashboardLayoutWithChildren from '../../layout/dashboard-layout/DashboardLayoutWithChildren';
 
 const ErrorBoundary: FC<FallbackProps> = ({ error, resetErrorBoundary }) => {
   return (

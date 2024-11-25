@@ -1,6 +1,6 @@
-import Button from 'common/button';
 import { Link } from 'react-router-dom';
-import { RoutePaths } from 'routes/route-paths';
+import Button from '../../common/button';
+import { RoutePaths } from '../../routes/route-paths';
 
 const PasswordSuccessView = () => {
   return (

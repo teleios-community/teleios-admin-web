@@ -1,14 +1,14 @@
-import { appAxios } from 'api/axios';
-import CameraIcon from 'assets/icons/camera.svg';
-import DefaultImage from 'assets/images/default-profile-image.svg';
-import LoadingIndicator from 'common/loading-indicator';
-import { firebaseApp } from 'config/firebaseConfig';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
-import { sendCatchFeedback, sendFeedback } from 'functions/feedback';
 import { useRef, useState } from 'react';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { updateUser } from 'store/slices/user';
-import { UserType } from 'types/user';
+import { appAxios } from '../../../api/axios';
+import CameraIcon from '../../../assets/icons/camera.svg';
+import DefaultImage from '../../../assets/images/default-profile-image.svg';
+import LoadingIndicator from '../../../common/loading-indicator';
+import { firebaseApp } from '../../../config/firebaseConfig';
+import { sendCatchFeedback, sendFeedback } from '../../../functions/feedback';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { updateUser } from '../../../store/slices/user';
+import { UserType } from '../../../types/user';
 
 const ProfileImageAndUpload = () => {
   const { user } = useAppSelector((state) => state.user);

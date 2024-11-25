@@ -1,6 +1,6 @@
-import ForgotImage from 'assets/backgrounds/auth/forgot-password.svg';
-import ForgotPasswordForm from 'components/auth/forgot-password-form';
-import AuthLayout from 'layout/auth-layout';
+import ForgotImage from '../../assets/backgrounds/auth/forgot-password.svg';
+import ForgotPasswordForm from '../../components/auth/forgot-password-form';
+import AuthLayout from '../../layout/auth-layout';
 
 const ForgotPasswordPage = () => {
   return (

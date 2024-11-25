@@ -1,9 +1,9 @@
-import { appAxios } from 'api/axios';
-import Button from 'common/button';
-import CustomModal from 'common/custom-modal/CustomModal';
-import { sendCatchFeedback, sendFeedback } from 'functions/feedback';
 import { useState } from 'react';
-import { UserType } from 'types/user';
+import { appAxios } from '../../../api/axios';
+import Button from '../../../common/button';
+import CustomModal from '../../../common/custom-modal/CustomModal';
+import { sendCatchFeedback, sendFeedback } from '../../../functions/feedback';
+import { UserType } from '../../../types/user';
 
 interface Props {
   closeModal: () => void;

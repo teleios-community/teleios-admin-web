@@ -1,6 +1,6 @@
-import PasswordImage from 'assets/backgrounds/auth/set-password.svg';
-import AcceptInviteForm from 'components/auth/accept-invite-form';
-import AuthLayout from 'layout/auth-layout';
+import PasswordImage from '../../assets/backgrounds/auth/set-password.svg';
+import AcceptInviteForm from '../../components/auth/accept-invite-form';
+import AuthLayout from '../../layout/auth-layout';
 
 const AcceptInvitePage = () => {
   return (

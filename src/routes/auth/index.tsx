@@ -1,18 +1,18 @@
 /* eslint-disable react-refresh/only-export-components */
-import { getTokenDetails } from 'functions/userSession';
-import DashboardLayoutWithChildren from 'layout/dashboard-layout/DashboardLayoutWithChildren';
 import { lazy } from 'react';
 import { RouteObject } from 'react-router-dom';
-import { RoutePaths } from 'routes/route-paths';
-import { ProtectedRoute } from 'routes/utils';
-import { store } from 'store';
+import { getTokenDetails } from '../../functions/userSession';
+import DashboardLayoutWithChildren from '../../layout/dashboard-layout/DashboardLayoutWithChildren';
+import { RoutePaths } from '../../routes/route-paths';
+import { ProtectedRoute } from '../../routes/utils';
+import { store } from '../../store';
 
-const LoginPage = lazy(() => import('pages/auth/login'));
-const ForgotPasswordPage = lazy(() => import('pages/auth/forgot-password'));
-const CheckEmailPage = lazy(() => import('pages/auth/check-email'));
-const ResetPasswordPage = lazy(() => import('pages/auth/reset-password'));
-const PasswordSuccessPage = lazy(() => import('pages/auth/password-success'));
-const AcceptInvitePage = lazy(() => import('pages/auth/accept-invite'));
+const LoginPage = lazy(() => import('../../pages/auth/login'));
+const ForgotPasswordPage = lazy(() => import('../../pages/auth/forgot-password'));
+const CheckEmailPage = lazy(() => import('../../pages/auth/check-email'));
+const ResetPasswordPage = lazy(() => import('../../pages/auth/reset-password'));
+const PasswordSuccessPage = lazy(() => import('../../pages/auth/password-success'));
+const AcceptInvitePage = lazy(() => import('../../pages/auth/accept-invite'));
 
 const DashboardPage = lazy(() => import('../../pages/dashboard'));
 

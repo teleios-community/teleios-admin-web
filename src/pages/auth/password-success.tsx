@@ -1,6 +1,6 @@
-import PasswordImage from 'assets/backgrounds/auth/set-password.svg';
-import PasswordSuccessView from 'components/auth/password-success';
-import AuthLayout from 'layout/auth-layout';
+import PasswordImage from '../../assets/backgrounds/auth/set-password.svg';
+import PasswordSuccessView from '../../components/auth/password-success';
+import AuthLayout from '../../layout/auth-layout';
 
 const PasswordSuccessPage = () => {
   return (

@@ -1,16 +1,18 @@
-import { appAxios } from 'api/axios';
-import Button from 'common/button';
-import PageHeader from 'common/page-header';
-import AllTeams from 'components/dashboard/teams/all-teams';
-import TeamSuccessModal from 'components/dashboard/teams/team-success-modal';
-import { sendCatchFeedback } from 'functions/feedback';
 import { AddCircle, DocumentDownload } from 'iconsax-react';
 import { lazy, useEffect, useState } from 'react';
-import { UserType } from 'types/user';
+import { appAxios } from '../../../api/axios';
+import Button from '../../../common/button';
+import PageHeader from '../../../common/page-header';
+import AllTeams from '../../../components/dashboard/teams/all-teams';
+import TeamSuccessModal from '../../../components/dashboard/teams/team-success-modal';
+import { sendCatchFeedback } from '../../../functions/feedback';
+import { UserType } from '../../../types/user';
 
-const AddTeamModal = lazy(() => import('components/dashboard/teams/add-team-modal'));
+const AddTeamModal = lazy(
+  () => import('../../../components/dashboard/teams/add-team-modal')
+);
 const DeleteTeamModal = lazy(
-  () => import('components/dashboard/teams/delete-team-modal')
+  () => import('../../../components/dashboard/teams/delete-team-modal')
 );
 
 const TeamsPage = () => {

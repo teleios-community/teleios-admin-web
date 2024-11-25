@@ -1,6 +1,6 @@
-import LoadingIndicator from 'common/loading-indicator';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+import LoadingIndicator from '../../common/loading-indicator';
 
 const SuspenseLayout = () => (
   <Suspense

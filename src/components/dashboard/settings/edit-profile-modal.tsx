@@ -1,14 +1,14 @@
-import { appAxios } from 'api/axios';
-import Button from 'common/button';
-import CustomModal from 'common/custom-modal/CustomModal';
-import LabelInput from 'common/label-input/LabelInput';
 import { useFormik } from 'formik';
-import { sendCatchFeedback, sendFeedback } from 'functions/feedback';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { updateUser } from 'store/slices/user';
-import { UserType } from 'types/user';
 import * as yup from 'yup';
+import { appAxios } from '../../../api/axios';
+import Button from '../../../common/button';
+import CustomModal from '../../../common/custom-modal/CustomModal';
+import LabelInput from '../../../common/label-input/LabelInput';
+import { sendCatchFeedback, sendFeedback } from '../../../functions/feedback';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { updateUser } from '../../../store/slices/user';
+import { UserType } from '../../../types/user';
 import EditProfileImage from './edit-profile-image';
 
 interface Props {

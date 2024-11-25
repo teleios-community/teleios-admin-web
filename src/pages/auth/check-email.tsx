@@ -1,6 +1,6 @@
-import EmailImage from 'assets/backgrounds/auth/check-email.svg';
-import CheckEmailView from 'components/auth/check-email';
-import AuthLayout from 'layout/auth-layout';
+import EmailImage from '../../assets/backgrounds/auth/check-email.svg';
+import CheckEmailView from '../../components/auth/check-email';
+import AuthLayout from '../../layout/auth-layout';
 
 const CheckEmailPage = () => {
   return (
