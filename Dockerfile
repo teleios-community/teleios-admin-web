@@ -21,13 +21,6 @@ RUN npm install
 # Copy the rest of the application code to the container
 COPY . .
 
-# Set environment variables
-ENV VITE_API_URL=
-ENV VITE_SESSION_NAME=
-ENV VITE_SESSION_KEY=
-ENV VITE_TOKEN_NAME=
-ENV VITE_TOKEN_KEY=
-
 # Build the React app
 RUN npm run build
 

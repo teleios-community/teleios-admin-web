@@ -9,8 +9,10 @@ export const PrivateRoute = ({ children }: { children: React.ReactElement }) => 
   const currentUser: UserType | null = getSessionDetails();
 
   if (!currentUser) {
-    sendFeedback('Login to continue');
-    return <Navigate to={RoutePaths.LOGIN} replace />;
+    setTimeout(() => {
+      sendFeedback('Login to continue');
+    }, 500);
+    return <Navigate to={RoutePaths.LOGIN} />;
   }
   return children;
 };
@@ -19,7 +21,9 @@ export const ProtectedRoute = ({ children }: { children: React.ReactElement }) =
   const currentUser: UserType | null = getSessionDetails();
 
   if (currentUser && Object.keys(currentUser).length) {
-    sendFeedback('You are already logged in');
+    setTimeout(() => {
+      sendFeedback('You are already logged in');
+    }, 500);
     return <Navigate to={RoutePaths.DASHBOARD} replace />;
   }
   return children;

@@ -5,6 +5,7 @@ import App from './App.tsx';
 // App styles
 import './styles/backgrounds.css';
 import './styles/globals.css';
+import './styles/table.css';
 import './styles/tailwind.css';
 
 // Package styles

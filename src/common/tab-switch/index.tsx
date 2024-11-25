@@ -1,4 +1,5 @@
 import React from 'react';
+import ScrollContainer from 'react-indiana-drag-scroll';
 
 const TabSwitch = ({
   tabs,
@@ -10,28 +11,28 @@ const TabSwitch = ({
   setSelectedTab: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   return (
-    <nav className='w-full flex overflow-x-auto max-w-full gap-8 flex-nowrap whitespace-nowrap'>
+    <ScrollContainer className='mb-8 flex items-center w-full max-w-full no-scroll-bar overflow-x-auto text-[#8A8A8A] text-sm font-normal gap-3 border-b border-b-[#EBEBEB]'>
       {tabs.map((tab) =>
         tab === selectedTab ? (
-          <div
+          <button
             key={tab}
-            className='w-fit text-[#0C1F56] pb-[15px] font-semibold duration-500 transition-colors border-b-[#0C1F56] border-b-[2px]'
+            className='text-[#23343B] duration-300 pb-2 px-3 border-b-[2px] border-b-primary font-semibold transition-colors'
           >
             {tab}
-          </div>
+          </button>
         ) : (
-          <div
+          <button
             key={tab}
-            className='w-fit pb-[15px] text-[#BBCAF3] font-normal cursor-pointer duration-500 transition-colors'
+            className='duration-300 pb-2 px-3 transition-colors'
             onClick={() => {
               setSelectedTab(tab);
             }}
           >
             {tab}
-          </div>
+          </button>
         )
       )}
-    </nav>
+    </ScrollContainer>
   );
 };
 

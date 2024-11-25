@@ -1,4 +1,4 @@
-import LoadingIndicator from '../LoadingIndicator';
+import LoadingIndicator from '../loading-indicator';
 
 const ProgressButton = ({
   progressTitle,
@@ -20,7 +20,7 @@ const ProgressButton = ({
         </p>
         {/* Loading bar */}
         <div
-          className='bg-[#092C4C] absolute top-0 bottom-0 right-0 left-0 rounded-lg'
+          className='bg-primary absolute top-0 bottom-0 right-0 left-0 rounded-lg'
           style={{
             width: `${progressValue}%`,
           }}

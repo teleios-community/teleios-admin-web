@@ -1,6 +1,6 @@
 import React from 'react';
+import { menuItemType, rowType } from './data';
 import { formatTableValue } from './functions';
-import { menuItemType, rowType } from './types';
 
 function TableBody({
   data,
@@ -25,19 +25,19 @@ function TableBody({
   );
 
   return (
-    <tbody className='[&>*:last-child]:border-none text-[#667085]'>
+    <tbody className='[&>*:last-child]:border-none text-[#667085] '>
       {tableRows.map(({ row }, mainIndex) => (
         <tr
           key={mainIndex}
           className={
             mainIndex % 2 === 0
-              ? 'bg-[#F9FAFB] border border-[#EAECF0] px-3 py-6 border-x-0 '
-              : 'bg-white border border-[#EAECF0] px-3 py-6 border-x-0'
+              ? 'bg-[#FAFAFA] px-6 py-10  hover:bg-[#F4F5F6] '
+              : 'bg-white px-6 py-10  hover:bg-[#F4F5F6]'
           }
         >
           {row.map((item, index) => (
             <td
-              className='px-3 py-3 text-sm align-middle'
+              className='px-6 py-6 text-sm align-middle'
               key={index}
               style={{ textAlign: index === 0 ? 'left' : 'center', ...bodyStyle }}
             >

@@ -11,7 +11,7 @@ const DashboardLayoutWithChildren: FC<Props> = ({ children }) => {
     <div className='max-h-screen h-full'>
       <div className='flex flex-row flex-nowrap'>
         <Sidebar />
-        <main className='w-full bg-BrandBg3 overflow-auto'>
+        <main className='w-full bg-[#FBFBFB] overflow-auto'>
           <Navbar />
           <div className='px-[15px] py-[18px] min-h-screen'>{children}</div>
         </main>

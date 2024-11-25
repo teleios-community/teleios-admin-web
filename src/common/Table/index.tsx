@@ -1,7 +1,7 @@
-import LoadingIndicator from '../LoadingIndicator';
-import { TableProps } from './types';
-import TableHeader from './TableHeader';
+import LoadingIndicator from '../loading-indicator';
 import TableBody from './TableBody';
+import TableHeader from './TableHeader';
+import { TableProps } from './data';
 
 function Table({
   loading,
