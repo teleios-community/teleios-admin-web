@@ -17,7 +17,7 @@ const AuthLayout = ({
       {/* form */}
       <div className='h-screen flex flex-col items-center justify-center relative'>
         <Link to={RoutePaths.LOGIN}>
-          <div className='absolute top-5 left-0'>
+          <div className='lg:absolute lg:top-5 lg:left-0 mb-10 lg:mb-0'>
             <img
               src={Logo}
               alt='Teleios'
