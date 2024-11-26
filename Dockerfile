@@ -1,31 +1,29 @@
-FROM node:18-alpine
+# Build stage
+FROM node:18-alpine AS build
 
-# Set the working directory in the container
 WORKDIR /usr/src/app
 
-# Install a specific version of npm globally
-RUN npm install -g npm@8
-
-# Install PM2 globally
-RUN npm install -g pm2
-
-# Install Yarn globally
-#RUN npm install -g yarn
-
-# Copy package.json to the container
 COPY package*.json ./
 
-# Install dependencies using Yarn
 RUN npm install
 
-# Copy the rest of the application code to the container
 COPY . .
 
-# Build the React app
 RUN npm run build
+# Add these debug commands
+RUN echo "Listing contents of /usr/src/app"
+RUN ls -la /usr/src/app
+RUN echo "Listing contents of /usr/src/app/dist (if exists)"
+RUN ls -la /usr/src/app/dist || true
+RUN echo "Listing contents of /usr/src/app/build (if exists)"
+RUN ls -la /usr/src/app/build || true
 
-# Expose the port that the application will run on
-EXPOSE 3000
+# Production stage
+FROM nginx:alpine
 
-# Start the React app with PM2
-CMD ["npm", "start"]
+# Try both build and dist directories based on debug output
+COPY --from=build /usr/src/app/dist/ /usr/share/nginx/html/
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
