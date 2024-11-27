@@ -13,7 +13,7 @@ const DashboardLayoutWithChildren: FC<Props> = ({ children }) => {
         <Sidebar />
         <main className='w-full bg-[#FBFBFB] overflow-auto'>
           <Navbar />
-          <div className='px-[15px] py-[18px] min-h-screen'>{children}</div>
+          <div className='px-primary py-[18px] min-h-screen'>{children}</div>
         </main>
       </div>
     </div>

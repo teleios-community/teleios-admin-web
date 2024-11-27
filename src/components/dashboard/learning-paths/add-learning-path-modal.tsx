@@ -4,45 +4,43 @@ import * as yup from 'yup';
 import { appAxios } from '../../../api/axios';
 import Button from '../../../common/button';
 import CustomModal from '../../../common/custom-modal/CustomModal';
-import Dropdown from '../../../common/drop-down';
 import LabelInput from '../../../common/label-input/LabelInput';
+import TextArea from '../../../common/text-area/TextArea';
 import { sendCatchFeedback } from '../../../functions/feedback';
 
 interface Props {
   closeModal: () => void;
   reload: () => void;
   open: boolean;
-  openSuccessModal: () => void;
 }
 
-function AddTeamModal({ closeModal, reload, open, openSuccessModal }: Props) {
+function AddLearningPathModal({ closeModal, reload, open }: Props) {
   const [loading, setLoading] = useState(false);
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      role: 'admin',
+      title: '',
+      description: '',
     },
     onSubmit: () => {
       submitValues();
     },
     validationSchema: yup.object({
-      email: yup.string().email('Enter a valid email').required('Required'),
-      role: yup.string().required('Required'),
+      title: yup.string().required('Required'),
+      description: yup.string().required('Required'),
     }),
   });
 
   const submitValues = async () => {
     try {
       setLoading(true);
-      await appAxios.post(`/admin/invite`, {
-        email: formik.values.email,
-        role: formik.values.role,
+      await appAxios.post(`/curriculum/learning-paths`, {
+        title: formik.values.title,
+        description: formik.values.description,
       });
       closeModal();
       reload();
       formik.resetForm();
-      openSuccessModal();
     } catch (error) {
       sendCatchFeedback(error);
     } finally {
@@ -54,46 +52,34 @@ function AddTeamModal({ closeModal, reload, open, openSuccessModal }: Props) {
     <CustomModal
       isOpen={open}
       onRequestClose={closeModal}
-      title='Add New Team Member'
-      width='608px'
+      title='Add Learning Path'
+      sideView={true}
       controls={
-        <div className='flex items-center w-full justify-end'>
+        <div className='flex items-center w-full justify-between flex-wrap'>
           <Button
-            loading={loading}
             onClick={() => formik.handleSubmit()}
+            disabled={loading}
+            className='!w-[190px] !h-10 !text-sm'
+            color='outline'
+          >
+            Discard
+          </Button>
+          <Button
+            onClick={() => formik.handleSubmit()}
+            loading={loading}
             className='!w-[190px] !h-10 !text-sm'
           >
-            Send Invite
+            Save
           </Button>
         </div>
       }
     >
       <div className='w-full'>
-        <LabelInput
-          formik={formik}
-          name='email'
-          label="Team member's email address"
-          type='email'
-          className='mb-4'
-        />
-        <Dropdown
-          options={['admin', 'superAdmin'].map((item) => ({
-            label: item,
-            value: item,
-          }))}
-          name='role'
-          formik={formik}
-          placeholder='Admin Type'
-          className='capitalize mb-6'
-          defaultValue={{
-            label: formik.values.role,
-            value: formik.values.role,
-          }}
-          label='Role'
-        />
+        <LabelInput formik={formik} name='title' label='Title' className='mb-4' />
+        <TextArea formik={formik} name='description' label='Description' rows={5} />
       </div>
     </CustomModal>
   );
 }
 
-export default AddTeamModal;
+export default AddLearningPathModal;

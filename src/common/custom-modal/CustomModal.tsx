@@ -1,33 +1,7 @@
+import { CloseCircle } from 'iconsax-react';
 import React from 'react';
 import ReactModal from 'react-modal';
 import styles from './style.module.css';
-
-const customStyles: ReactModal.Styles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    overflow: 'auto',
-    width: '900px',
-    maxWidth: '90vw',
-    padding: 0,
-    paddingBlock: 16,
-    maxHeight: '95vh',
-    backgroundColor: '#fff',
-    color: '#000',
-    transition: 'all 0.3s',
-    border: 'none',
-    borderRadius: 12,
-  },
-  overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.9)',
-    overscrollBehavior: 'contain',
-    zIndex: 20,
-  },
-};
 
 function CustomModal({
   title,
@@ -36,6 +10,8 @@ function CustomModal({
   children,
   shouldCloseOnOverlayClick = true,
   width = '536px',
+  sideView = false,
+  controls,
   ...rest
 }: {
   title?: string;
@@ -44,6 +20,8 @@ function CustomModal({
   children: React.ReactNode;
   shouldCloseOnOverlayClick?: boolean;
   width?: string;
+  sideView?: boolean;
+  controls?: React.ReactNode;
 } & ReactModal.Props) {
   React.useEffect(() => {
     // Check if modal is open and prevent body from scrolling
@@ -65,6 +43,33 @@ function CustomModal({
     ReactModal.setAppElement('#root');
   }, []);
 
+  const customStyles: ReactModal.Styles = {
+    content: {
+      top: sideView ? 0 : '50%',
+      left: sideView ? 'revert' : '50%',
+      right: sideView ? 0 : 'auto',
+      bottom: 'auto',
+      marginRight: sideView ? 0 : '-50%',
+      transform: sideView ? 'none' : 'translate(-50%, -50%)',
+      overflow: 'auto',
+      width: sideView ? '85vw' : '900px',
+      maxWidth: '90vw',
+      padding: 0,
+      height: sideView ? '100vh' : 'auto',
+      maxHeight: sideView ? '100vh' : '95vh',
+      backgroundColor: sideView ? '#FBFBFB' : '#fff',
+      color: 'var(--black)',
+      transition: 'all 0.3s',
+      border: 'none',
+      borderRadius: sideView ? 0 : 12,
+    },
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.9)',
+      overscrollBehavior: 'contain',
+      zIndex: 20,
+    },
+  };
+
   return (
     <ReactModal
       isOpen={isOpen}
@@ -75,7 +80,7 @@ function CustomModal({
         // @ts-ignore
         content: {
           ...customStyles.content,
-          width: width || customStyles.content?.width,
+          width: sideView ? '85vw' : width || customStyles.content?.width,
           opacity: isOpen ? 1 : 0,
         },
         overlay: customStyles.overlay,
@@ -84,6 +89,7 @@ function CustomModal({
       shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
       {...rest}
     >
+      {/* Header */}
       <div
         className={styles.modalTitleContainer}
         style={{
@@ -97,11 +103,22 @@ function CustomModal({
             backgroundColor: 'transparent',
           }}
         >
-          &#x2715;
+          <CloseCircle />
         </button>
       </div>
 
-      {children}
+      {/* Body */}
+      <div className='p-4'>{children}</div>
+
+      {controls && (
+        <>
+          {/* Divider */}
+          <div className='w-full bg-[#F0F2F5] h-[1px] mt-5' />
+
+          {/* Controls */}
+          <div className='px-4 py-2'>{controls}</div>
+        </>
+      )}
     </ReactModal>
   );
 }
