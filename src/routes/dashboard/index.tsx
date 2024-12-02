@@ -9,6 +9,9 @@ const DashboardPage = lazy(() => import('../../pages/dashboard'));
 const TeamsPage = lazy(() => import('../../pages/dashboard/teams'));
 const SettingsPage = lazy(() => import('../../pages/dashboard/settings'));
 const LearningPathsPage = lazy(() => import('../../pages/dashboard/learning-paths'));
+const LearningPathsCoursesPage = lazy(
+  () => import('../../pages/dashboard/learning-paths/courses')
+);
 
 const dashboardRoutes: RouteObject[] = [
   {
@@ -34,7 +37,13 @@ const dashboardRoutes: RouteObject[] = [
       },
       {
         path: RoutePaths.LEARNING_PATHS,
-        element: <LearningPathsPage />,
+        children: [
+          { index: true, element: <LearningPathsPage /> },
+          {
+            path: `${RoutePaths.LEARNING_PATHS_COURSES}/:id`,
+            element: <LearningPathsCoursesPage />,
+          },
+        ],
       },
     ],
   },

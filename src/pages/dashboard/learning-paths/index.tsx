@@ -6,7 +6,7 @@ import PageHeader from '../../../common/page-header';
 import AllLearningPaths from '../../../components/dashboard/learning-paths/all-learning-paths';
 import { sendCatchFeedback } from '../../../functions/feedback';
 
-const AddLearningPathModal = lazy(
+const AddCourseToPathModal = lazy(
   () => import('../../../components/dashboard/learning-paths/add-learning-path-modal')
 );
 
@@ -14,15 +14,16 @@ const LearningPathsPage = () => {
   const [addModal, setAddModal] = useState(false);
   const [allData, setAllData] = useState<[]>([]);
   const [loading, setLoading] = useState(true);
+  const [totalResults, setTotalResults] = useState(0);
+  const [page, setPage] = useState(1);
 
   const getData = async () => {
     try {
       setLoading(true);
 
-      const response = await appAxios.get(
-        `/curriculum/learning-paths?skip=${100}&limit=${20}`
-      );
-      setAllData(response.data);
+      const response = await appAxios.get(`/curriculum/learning-paths?page=${page}`);
+      setAllData(response.data.data.items);
+      setTotalResults(response.data.data.total);
     } catch (error) {
       sendCatchFeedback(error);
     } finally {
@@ -31,7 +32,8 @@ const LearningPathsPage = () => {
   };
   useEffect(() => {
     getData();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
   return (
     <>
@@ -47,10 +49,13 @@ const LearningPathsPage = () => {
       <AllLearningPaths
         allData={allData}
         loading={loading}
+        page={page}
+        setPage={setPage}
+        totalResults={totalResults}
         // setSelected={setSelected}
         // setDeleteModal={setDeleteModal}
       />
-      <AddLearningPathModal
+      <AddCourseToPathModal
         open={addModal}
         closeModal={() => setAddModal(false)}
         reload={getData}

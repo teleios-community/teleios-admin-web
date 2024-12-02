@@ -53,7 +53,7 @@ const LoginForm = () => {
           Authorization: 'Bearer ' + loginResponseData.access_token,
         },
       });
-      const accountInfo: UserType = accountResponse.data;
+      const accountInfo: UserType = accountResponse.data.data;
       dispatch(updateUser({ user: accountInfo }));
 
       // Check if account is updated

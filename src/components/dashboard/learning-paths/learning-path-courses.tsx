@@ -5,7 +5,7 @@ import Table from '../../../common/table';
 import { RoutePaths } from '../../../routes/route-paths';
 import { LearningPathType } from '../../../types/learning-path';
 
-const AllLearningPaths = ({
+const AllLearningPathCourses = ({
   allData,
   loading,
   page,
@@ -73,4 +73,4 @@ const AllLearningPaths = ({
   );
 };
 
-export default AllLearningPaths;
+export default AllLearningPathCourses;

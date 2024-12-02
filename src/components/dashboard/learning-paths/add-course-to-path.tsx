@@ -1,5 +1,6 @@
 import { useFormik } from 'formik';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import * as yup from 'yup';
 import { appAxios } from '../../../api/axios';
 import Button from '../../../common/button';
@@ -8,8 +9,6 @@ import Dropdown from '../../../common/drop-down';
 import LabelInput from '../../../common/label-input/LabelInput';
 import TextArea from '../../../common/text-area/TextArea';
 import { sendCatchFeedback, sendFeedback } from '../../../functions/feedback';
-import { CourseType } from '../../../types/learning-path';
-import LearningPathThumbnail from './learning-path-thumbnail';
 
 interface Props {
   closeModal: () => void;
@@ -17,36 +16,19 @@ interface Props {
   open: boolean;
 }
 
-function AddLearningPathModal({ closeModal, reload, open }: Props) {
+function AddCourseToPathModal({ closeModal, reload, open }: Props) {
   const [loading, setLoading] = useState(false);
-  const [courses, setCourses] = useState<CourseType[] | undefined>(undefined);
-
-  const getCourses = async () => {
-    try {
-      setLoading(true);
-
-      const response = await appAxios.get(`/curriculum/courses?page=1&page_size=100`);
-      setCourses(response.data.data.items);
-    } catch (error) {
-      sendCatchFeedback(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-  useEffect(() => {
-    getCourses();
-  }, []);
+  const params = useParams<{ id: string }>();
 
   const formik = useFormik({
     initialValues: {
       title: '',
       description: '',
-      courses: [],
+      shortDescription: '',
+      tags: '',
       difficultyLevel: '',
       estimatedHours: '',
       learningObjectives: '',
-      prerequisites: '',
-      thumbnail: '',
     },
     onSubmit: () => {
       submitValues();
@@ -61,25 +43,22 @@ function AddLearningPathModal({ closeModal, reload, open }: Props) {
   const submitValues = async () => {
     try {
       setLoading(true);
-      await appAxios.post(`/curriculum/learning-paths`, {
+      await appAxios.post(`/curriculum/courses`, {
         title: formik.values.title,
         description: formik.values.description,
-
-        course_ids: formik.values.courses.map(
-          (item: { label: string; value: string }) => item.value
-        ),
+        short_description: formik.values.shortDescription,
+        learning_path_ids: [params.id],
         difficulty_level: formik.values.difficultyLevel,
         estimated_hours: formik.values.estimatedHours,
+        tags: formik.values.tags.split(',').map((item) => item.trim()),
         learning_objectives: formik.values.learningObjectives
           .split(',')
           .map((item) => item.trim()),
-        prerequisites: formik.values.prerequisites,
-        thumbnail_url: formik.values.thumbnail,
       });
       closeModal();
       reload();
       formik.resetForm();
-      sendFeedback('Learning path added successfully', 'success');
+      sendFeedback('Course created successfully', 'success');
     } catch (error) {
       sendCatchFeedback(error);
     } finally {
@@ -91,7 +70,7 @@ function AddLearningPathModal({ closeModal, reload, open }: Props) {
     <CustomModal
       isOpen={open}
       onRequestClose={closeModal}
-      title='Add Learning Path'
+      title='Add Course'
       sideView={true}
       controls={
         <div className='flex items-center w-full justify-between flex-wrap'>
@@ -108,17 +87,12 @@ function AddLearningPathModal({ closeModal, reload, open }: Props) {
             loading={loading}
             className='!w-[190px] !h-10 !text-sm'
           >
-            Save
+            Create
           </Button>
         </div>
       }
     >
       <div className='w-full'>
-        {/* Thumbnail */}
-        <LearningPathThumbnail
-          imageValue={formik.values.thumbnail}
-          setImageValue={(value) => formik.setFieldValue('thumbnail', value)}
-        />
         <LabelInput formik={formik} name='title' label='Title' className='mb-4' />
         <TextArea
           formik={formik}
@@ -127,18 +101,13 @@ function AddLearningPathModal({ closeModal, reload, open }: Props) {
           rows={3}
           className='mb-4'
         />
-        <Dropdown
-          options={courses?.map((item) => ({
-            label: item.title,
-            value: item.id,
-          }))}
-          isMulti
-          name='courses'
+        <LabelInput
           formik={formik}
-          placeholder='Select courses'
+          name='shortDescription'
+          label='Short description'
           className='mb-4'
-          label='Courses'
         />
+
         <Dropdown
           options={['beginner', 'intermediate']?.map((item) => ({
             label: item,
@@ -166,12 +135,14 @@ function AddLearningPathModal({ closeModal, reload, open }: Props) {
         />
         <LabelInput
           formik={formik}
-          name='prerequisites'
-          label='Prerequisites (optional)'
+          name='tags'
+          label='Tags'
+          className='mb-4'
+          hint='Separate objectives with a comma'
         />
       </div>
     </CustomModal>
   );
 }
 
-export default AddLearningPathModal;
+export default AddCourseToPathModal;
