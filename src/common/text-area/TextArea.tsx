@@ -47,18 +47,20 @@ function TextArea({
             </label>
           )}
           {hint && <div className='font-light text-xs italic text-gray-400'>{hint}</div>}
-          <div className='relative'>
-            <textarea
-              name={name}
-              id={name}
-              placeholder={placeholder}
-              value={formik.values[name]}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              className={formik.touched[name] && formik.errors[name] ? 'inputError' : ''}
-              {...rest}
-            ></textarea>
-          </div>
+          <textarea
+            name={name}
+            id={name}
+            placeholder={placeholder}
+            value={formik.values[name]}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            className={
+              formik.touched[name] && formik.errors[name]
+                ? 'inputError px-[14px] py-[10px]'
+                : 'px-[14px] py-[10px]'
+            }
+            {...rest}
+          />
 
           {formik.touched[name] && formik.errors[name] && (
             <div className='error'>{formik.errors[name]}</div>
@@ -71,17 +73,21 @@ function TextArea({
             {required && <span>*</span>}
           </label>
           {hint && <div className='font-light text-xs italic text-gray-400'>{hint}</div>}
-          <div className='relative'>
-            <textarea
-              name={name}
-              id={name}
-              placeholder={placeholder}
-              value={value}
-              onChange={onChange}
-              required={required}
-              {...rest}
-            ></textarea>
-          </div>
+
+          <textarea
+            name={name}
+            id={name}
+            placeholder={placeholder}
+            value={value}
+            onChange={onChange}
+            required={required}
+            className={
+              formik.touched[name] && formik.errors[name]
+                ? 'inputError px-[14px] py-[10px]'
+                : 'px-[14px] py-[10px]'
+            }
+            {...rest}
+          />
 
           {showError && <div className='error'>{error}</div>}
         </div>

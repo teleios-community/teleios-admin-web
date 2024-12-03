@@ -1,5 +1,11 @@
+import StatisticsSummary from '../../components/dashboard/dashboard-page/statistics-summary';
+
 const DashboardPage = () => {
-  return <div>DashboardPage</div>;
+  return (
+    <>
+      <StatisticsSummary />
+    </>
+  );
 };
 
 export default DashboardPage;

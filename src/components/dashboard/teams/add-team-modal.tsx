@@ -56,39 +56,42 @@ function AddTeamModal({ closeModal, reload, open, openSuccessModal }: Props) {
       onRequestClose={closeModal}
       title='Add New Team Member'
       width='608px'
-    >
-      <form onSubmit={formik.handleSubmit} className='w-full'>
-        <div className='w-full px-5'>
-          <LabelInput
-            formik={formik}
-            name='email'
-            label="Team member's email address"
-            type='email'
-            className='mb-4'
-          />
-          <Dropdown
-            options={['admin', 'superAdmin'].map((item) => ({
-              label: item,
-              value: item,
-            }))}
-            name='role'
-            formik={formik}
-            placeholder='Admin Type'
-            className='capitalize mb-6'
-            defaultValue={{
-              label: formik.values.role,
-              value: formik.values.role,
-            }}
-            label='Role'
-          />
-        </div>
-        <div className='w-full bg-[#F0F2F5] h-[1px] mt-5 mb-3' />
-        <div className='flex items-center w-full justify-end px-5'>
-          <Button type='submit' loading={loading} className='!w-[190px] !h-10 !text-sm'>
+      controls={
+        <div className='flex items-center w-full justify-end'>
+          <Button
+            loading={loading}
+            onClick={() => formik.handleSubmit()}
+            className='!w-[190px] !h-10 !text-sm'
+          >
             Send Invite
           </Button>
         </div>
-      </form>
+      }
+    >
+      <div className='w-full'>
+        <LabelInput
+          formik={formik}
+          name='email'
+          label="Team member's email address"
+          type='email'
+          className='mb-4'
+        />
+        <Dropdown
+          options={['admin', 'superAdmin'].map((item) => ({
+            label: item,
+            value: item,
+          }))}
+          name='role'
+          formik={formik}
+          placeholder='Admin Type'
+          className='capitalize mb-6'
+          defaultValue={{
+            label: formik.values.role,
+            value: formik.values.role,
+          }}
+          label='Role'
+        />
+      </div>
     </CustomModal>
   );
 }

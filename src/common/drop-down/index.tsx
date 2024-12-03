@@ -92,6 +92,7 @@ const Dropdown = <
             styles={selectStyles}
             placeholder={placeholder}
             escapeClearsValue
+            isMulti={isMulti}
             backspaceRemovesValue
             noOptionsMessage={() => 'No option found at the moment'}
             {...props}

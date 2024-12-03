@@ -8,36 +8,56 @@ import { PrivateRoute } from '../../routes/utils';
 const DashboardPage = lazy(() => import('../../pages/dashboard'));
 const TeamsPage = lazy(() => import('../../pages/dashboard/teams'));
 const SettingsPage = lazy(() => import('../../pages/dashboard/settings'));
+const LearningPathsPage = lazy(() => import('../../pages/dashboard/learning-paths'));
+const LearningPathsCoursesPage = lazy(
+  () => import('../../pages/dashboard/learning-paths/courses')
+);
+const CoursesSectionsPage = lazy(
+  () => import('../../pages/dashboard/learning-paths/courses/sections')
+);
+const LearningPathLessonsPage = lazy(
+  () => import('../../pages/dashboard/learning-paths/courses/sections/lessons')
+);
 
 const dashboardRoutes: RouteObject[] = [
   {
     path: RoutePaths.DASHBOARD,
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: RoutePaths.DASHBOARD,
-        element: (
-          <PrivateRoute>
-            <DashboardPage />
-          </PrivateRoute>
-        ),
+        element: <DashboardPage />,
         index: true,
       },
       {
         path: RoutePaths.TEAMS,
-        element: (
-          <PrivateRoute>
-            <TeamsPage />
-          </PrivateRoute>
-        ),
+        element: <TeamsPage />,
       },
       {
         path: RoutePaths.SETTINGS,
-        element: (
-          <PrivateRoute>
-            <SettingsPage />
-          </PrivateRoute>
-        ),
+        element: <SettingsPage />,
+      },
+      {
+        path: RoutePaths.LEARNING_PATHS,
+        children: [
+          { index: true, element: <LearningPathsPage /> },
+          {
+            path: `${RoutePaths.LEARNING_PATHS_COURSES}/:id`,
+            element: <LearningPathsCoursesPage />,
+          },
+          {
+            element: <CoursesSectionsPage />,
+            path: `${RoutePaths.LEARNING_PATHS_SECTIONS}/:id`,
+          },
+          {
+            element: <LearningPathLessonsPage />,
+            path: `${RoutePaths.LEARNING_PATHS_LESSONS}/:courseId/:sectionId`,
+          },
+        ],
       },
     ],
   },
