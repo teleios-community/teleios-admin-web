@@ -1,20 +1,21 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { Dispatch, SetStateAction } from 'react';
 import Table from '../../../../common/table';
+import { LessonType } from '../../../../types/learning-path';
 
 const AllLessons = ({
   allData,
   loading,
-}: // setSelected,
-// setDeleteModal,
-{
+  setSelected,
+  setDeleteModal,
+  setEditModal,
+}: {
   allData: [];
   loading: boolean;
-  // setSelected: Dispatch<SetStateAction<UserType | undefined>>;
-  // setDeleteModal: Dispatch<SetStateAction<boolean>>;
+  setSelected: Dispatch<SetStateAction<LessonType | undefined>>;
+  setDeleteModal: Dispatch<SetStateAction<boolean>>;
+  setEditModal: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const navigate = useNavigate();
   const tableHeaders = ['title', 'content_type', 'content', 'created_at', 'tableAction'];
-  const params = useParams<{ courseId: string; sectionId: string }>();
 
   return (
     <>
@@ -22,38 +23,25 @@ const AllLessons = ({
         tableHeaders={tableHeaders}
         data={allData}
         loading={loading}
-        menuItems={
-          [
-            // {
-            //   label: 'View lessons',
-            //   onClick: (data: SectionType) => {
-            //     navigate(`${RoutePaths.LEARNING_PATHS_LESSONS}/${params.id}/${data.id}`);
-            //     console.log(data);
-            //     // setSelected(data);
-            //     // setEditModal(true);
-            //   },
-            // },
-            // {
-            //   label: 'Edit',
-            //   onClick: (data) => {
-            //     console.log(data);
-            //     // setSelected(data);
-            //     // setEditModal(true);
-            //   },
-            // },
-            // {
-            //   label: 'Remove',
-            //   onClick: (data) => {
-            //     console.log(data);
-            //     setSelected(data);
-            //     setDeleteModal(true);
-            //   },
-            //   style: {
-            //     color: 'var(--error)',
-            //   },
-            // },
-          ]
-        }
+        menuItems={[
+          {
+            label: 'Edit overview',
+            onClick: (data) => {
+              setSelected(data);
+              setEditModal(true);
+            },
+          },
+          {
+            label: 'Delete',
+            onClick: (data: LessonType) => {
+              setSelected(data);
+              setDeleteModal(true);
+            },
+            style: {
+              color: 'var(--error)',
+            },
+          },
+        ]}
       />
     </>
   );

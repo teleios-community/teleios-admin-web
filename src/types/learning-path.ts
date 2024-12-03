@@ -52,3 +52,20 @@ export type SectionType = {
   updated_at: Date;
   lessons: [];
 };
+
+export type LessonType = {
+  id: number;
+  title: string;
+  content_type: 'text';
+  content: string;
+  video_url: string;
+  video_duration: string;
+  order: number;
+  is_free: boolean;
+  slug: string;
+  section_id: 3;
+  created_at: Date;
+  updated_at: Date;
+  attachments: [];
+  additional_resources: [];
+};

@@ -9,11 +9,25 @@ import NoDataComponent from '../../../../../../common/no-data-component';
 import PageHeader from '../../../../../../common/page-header';
 import AllLessons from '../../../../../../components/dashboard/learning-paths/lessons/all-lessons';
 import { sendCatchFeedback } from '../../../../../../functions/feedback';
+import { RoutePaths } from '../../../../../../routes/route-paths';
+import { LessonType, SectionType } from '../../../../../../types/learning-path';
 
 const AddLessonToSection = lazy(
   () =>
     import(
       '../../../../../../components/dashboard/learning-paths/lessons/add-lesson-to-section'
+    )
+);
+const DeleteLessonModal = lazy(
+  () =>
+    import(
+      '../../../../../../components/dashboard/learning-paths/lessons/delete-lesson-modal'
+    )
+);
+const EditLessonToSection = lazy(
+  () =>
+    import(
+      '../../../../../../components/dashboard/learning-paths/lessons/edit-lesson-to-section'
     )
 );
 
@@ -22,6 +36,10 @@ const LearningPathLessonsPage = () => {
   const [allData, setAllData] = useState<[]>([]);
   const [loading, setLoading] = useState(true);
   const params = useParams<{ courseId: string; sectionId: string }>();
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
+  const [selected, setSelected] = useState<LessonType | undefined>(undefined);
+  const [infoDetails, setInfoDetails] = useState<SectionType | undefined>(undefined);
 
   const getData = async () => {
     try {
@@ -38,16 +56,43 @@ const LearningPathLessonsPage = () => {
       setLoading(false);
     }
   };
+
+  const getInfoDetails = async () => {
+    try {
+      setLoading(true);
+
+      const response = await appAxios.get(
+        `/curriculum/courses/${params.courseId}/sections/${params.sectionId}`
+      );
+
+      setInfoDetails(response.data.data);
+    } catch (error) {
+      sendCatchFeedback(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
     getData();
+    getInfoDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      <Breadcrumb links={['Learning paths', 'Product Design']} />
+      <Breadcrumb
+        links={[
+          {
+            label: 'Learning paths',
+            link: RoutePaths.LEARNING_PATHS,
+          },
+          {
+            label: loading ? '...' : infoDetails?.title || 'Section',
+          },
+        ]}
+      />
       <PageHeader
-        pageTitle={''}
+        pageTitle={loading ? '...' : infoDetails?.title || 'Section'}
         pageActions={
           <Button onClick={() => setAddModal(true)}>
             <AddCircle />
@@ -61,8 +106,9 @@ const LearningPathLessonsPage = () => {
         <AllLessons
           allData={allData}
           loading={loading}
-          // setSelected={setSelected}
-          // setDeleteModal={setDeleteModal}
+          setSelected={setSelected}
+          setDeleteModal={setDeleteModal}
+          setEditModal={setEditModal}
         />
       ) : (
         <NoDataComponent
@@ -77,6 +123,19 @@ const LearningPathLessonsPage = () => {
         open={addModal}
         closeModal={() => setAddModal(false)}
         reload={getData}
+      />
+
+      <DeleteLessonModal
+        open={deleteModal}
+        closeModal={() => setDeleteModal(false)}
+        reload={getData}
+        selected={selected}
+      />
+      <EditLessonToSection
+        open={editModal}
+        closeModal={() => setEditModal(false)}
+        reload={getData}
+        selected={selected}
       />
     </>
   );
