@@ -7,7 +7,7 @@ import Button from '../../../../common/button';
 import LoadingIndicator from '../../../../common/loading-indicator';
 import NoDataComponent from '../../../../common/no-data-component';
 import PageHeader from '../../../../common/page-header';
-import AllLearningPaths from '../../../../components/dashboard/learning-paths/all-learning-paths';
+import AllCourses from '../../../../components/dashboard/learning-paths/all-courses';
 import { sendCatchFeedback, sendFeedback } from '../../../../functions/feedback';
 import { LearningPathType } from '../../../../types/learning-path';
 
@@ -76,7 +76,7 @@ const LearningPathCoursesPage = () => {
       {loading ? (
         <LoadingIndicator />
       ) : allData && allData.length > 0 ? (
-        <AllLearningPaths
+        <AllCourses
           allData={allData}
           loading={loading}
           page={page}

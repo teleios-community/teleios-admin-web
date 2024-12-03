@@ -35,3 +35,16 @@ export type LearningPathType = {
   last_updated_by: number;
   slug: string;
 };
+
+export type SectionType = {
+  id: number;
+  title: string;
+  description: string;
+  order: number;
+  estimated_minutes: string;
+  is_free: boolean;
+  course_id: number;
+  created_at: Date;
+  updated_at: Date;
+  lessons: [];
+};

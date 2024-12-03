@@ -18,7 +18,7 @@ export const formatTableValue = ({
   }
 
   // Capitalize Check
-  if (['email', 'userName'].includes(headerName)) {
+  if (['email', 'userName', 'content'].includes(headerName)) {
     // should not be capitalized
     return value;
   }

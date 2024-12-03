@@ -6,6 +6,11 @@ import PageHeader from '../../../common/page-header';
 import AllLearningPaths from '../../../components/dashboard/learning-paths/all-learning-paths';
 import { sendCatchFeedback } from '../../../functions/feedback';
 
+
+// Flow Path
+// Learning Path > Courses > Sections > Lessons
+
+
 const AddCourseToPathModal = lazy(
   () => import('../../../components/dashboard/learning-paths/add-learning-path-modal')
 );

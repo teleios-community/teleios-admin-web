@@ -12,6 +12,12 @@ const LearningPathsPage = lazy(() => import('../../pages/dashboard/learning-path
 const LearningPathsCoursesPage = lazy(
   () => import('../../pages/dashboard/learning-paths/courses')
 );
+const CoursesSectionsPage = lazy(
+  () => import('../../pages/dashboard/learning-paths/courses/sections')
+);
+const LearningPathLessonsPage = lazy(
+  () => import('../../pages/dashboard/learning-paths/courses/sections/lessons')
+);
 
 const dashboardRoutes: RouteObject[] = [
   {
@@ -42,6 +48,14 @@ const dashboardRoutes: RouteObject[] = [
           {
             path: `${RoutePaths.LEARNING_PATHS_COURSES}/:id`,
             element: <LearningPathsCoursesPage />,
+          },
+          {
+            element: <CoursesSectionsPage />,
+            path: `${RoutePaths.LEARNING_PATHS_SECTIONS}/:id`,
+          },
+          {
+            element: <LearningPathLessonsPage />,
+            path: `${RoutePaths.LEARNING_PATHS_LESSONS}/:courseId/:sectionId`,
           },
         ],
       },
