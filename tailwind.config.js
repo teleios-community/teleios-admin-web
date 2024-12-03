@@ -5,27 +5,18 @@ module.exports = {
 
   theme: {
     extend: {
-      textColor: {
-        primary: '#1D4ED8',
-        success: '#25AD25',
-        secondary: '#F0AC27',
-        error: '#DC2626',
-      },
-      backgroundColor: {
-        primary: '#1D4ED8',
-        secondary: '#F0AC27',
-        error: '#DC2626',
-        grey: '#DEDCDC',
-      },
-      borderColor: {
-        primary: '#D0D5DD',
+      colors: {
+        primary: '#1D2B31',
+        success: '#218838',
+        secondary: '#F5A623',
+        error: '#FF4040',
       },
       fontFamily: {
-        primary: 'Inter, sans-serif',
-        secondary: 'Plus Jakarta Sans, sans-serif',
+        primary: 'Montserrat, sans-serif',
+        secondary: 'Inter, sans-serif',
       },
       padding: {
-        primary: '5vw',
+        primary: '3vw',
       },
     },
   },

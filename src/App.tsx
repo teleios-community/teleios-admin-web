@@ -1,34 +1,76 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import { useEffect } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import ErrorBoundaryLayout from './components/error-boundary/layout';
+import SuspenseLayout from './components/suspense';
+import { getSessionDetails, getTokenDetails } from './functions/userSession';
+import NotFound from './pages/NotFound';
+import routes from './routes';
+import { useAppDispatch } from './store/hooks';
+import { updateToken, updateUser } from './store/slices/user';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const token = getTokenDetails();
+    const user = getSessionDetails();
+    if (token) {
+      dispatch(updateToken({ token }));
+    }
+    if (user) {
+      dispatch(
+        updateUser({
+          user,
+        })
+      );
+    }
+  }, [dispatch]);
+
+  const router = createBrowserRouter(
+    [
+      {
+        element: <ErrorBoundaryLayout />,
+        errorElement: <NotFound />,
+        children: [
+          {
+            element: <SuspenseLayout />,
+            children: routes,
+          },
+        ],
+      },
+    ],
+    {
+      future: {
+        v7_fetcherPersist: true,
+        v7_normalizeFormMethod: true,
+        v7_partialHydration: true,
+        v7_relativeSplatPath: true,
+        v7_skipActionErrorRevalidation: true,
+      },
+    }
+  );
 
   return (
-    <div className='flex h-screen w-screen items-center justify-center flex-col'>
-      <div>
-        <a href='https://vite.dev' target='_blank'>
-          <img src={viteLogo} className='logo' alt='Vite logo' />
-        </a>
-        <a href='https://react.dev' target='_blank'>
-          <img src={reactLogo} className='logo react' alt='React logo' />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className='card'>
-        <button
-          onClick={() => setCount((count) => count + 1)}
-          className='p-4 bg-red-900 text-white text-center m-3 rounded-md'
-        >
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
-    </div>
+    <>
+      <RouterProvider
+        router={router}
+        future={{
+          v7_startTransition: true,
+        }}
+      />
+      <ToastContainer
+        style={{
+          fontSize: 16,
+          zIndex: 30,
+        }}
+        theme='colored'
+        autoClose={5000}
+        position='top-right'
+        hideProgressBar={true}
+        closeOnClick={true}
+      />
+    </>
   );
 }
 

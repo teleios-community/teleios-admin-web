@@ -1,0 +1,33 @@
+.modalTitleContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  padding: 16px;
+  border-bottom: 2px solid #f3f6fa;
+  position: relative;
+  background-color: #fff;
+}
+
+.modalTitleContainer > h1 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.modalTitleContainer > button {
+  font-size: 18px;
+  border: none;
+  transition: color 0.5s;
+}
+
+.modalTitleContainer > button:hover {
+  cursor: pointer;
+  color: var(--error);
+}
+
+@media (max-width: 800px) {
+  .modalTitleContainer > h1 {
+    font-size: 1rem;
+  }
+}
