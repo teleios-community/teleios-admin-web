@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Pagination from '../../../common/pagination';
-import Table from '../../../common/table';
-import { RoutePaths } from '../../../routes/route-paths';
-import { LearningPathType } from '../../../types/learning-path';
+import Pagination from '../../../../common/pagination';
+import Table from '../../../../common/table';
+import { RoutePaths } from '../../../../routes/route-paths';
+import { CourseType } from '../../../../types/learning-path';
 
-const AllLearningPaths = ({
+const AllCourses = ({
   allData,
   loading,
   page,
@@ -13,13 +13,11 @@ const AllLearningPaths = ({
   totalResults,
   setSelected,
   setDeleteModal,
-  setEditModal,
 }: {
   allData: [];
   loading: boolean;
-  setSelected: Dispatch<SetStateAction<LearningPathType | undefined>>;
+  setSelected: Dispatch<SetStateAction<CourseType | undefined>>;
   setDeleteModal: Dispatch<SetStateAction<boolean>>;
-  setEditModal: Dispatch<SetStateAction<boolean>>;
   page: number;
   totalResults: number;
   setPage: Dispatch<SetStateAction<number>>;
@@ -41,21 +39,14 @@ const AllLearningPaths = ({
         loading={loading}
         menuItems={[
           {
-            label: 'View courses',
-            onClick: (data: LearningPathType) => {
-              navigate(`${RoutePaths.LEARNING_PATHS_COURSES}/${data.id}`);
+            label: 'View sections',
+            onClick: (data: CourseType) => {
+              navigate(`${RoutePaths.LEARNING_PATHS_SECTIONS}/${data.id}`);
             },
           },
           {
-            label: 'Edit overview',
+            label: 'Remove course',
             onClick: (data) => {
-              setSelected(data);
-              setEditModal(true);
-            },
-          },
-          {
-            label: 'Delete',
-            onClick: (data: LearningPathType) => {
               setSelected(data);
               setDeleteModal(true);
             },
@@ -70,4 +61,4 @@ const AllLearningPaths = ({
   );
 };
 
-export default AllLearningPaths;
+export default AllCourses;

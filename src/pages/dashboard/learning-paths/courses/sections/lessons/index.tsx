@@ -7,12 +7,14 @@ import Button from '../../../../../../common/button';
 import LoadingIndicator from '../../../../../../common/loading-indicator';
 import NoDataComponent from '../../../../../../common/no-data-component';
 import PageHeader from '../../../../../../common/page-header';
-import AllLessons from '../../../../../../components/dashboard/learning-paths/all-lessons';
+import AllLessons from '../../../../../../components/dashboard/learning-paths/lessons/all-lessons';
 import { sendCatchFeedback } from '../../../../../../functions/feedback';
 
 const AddLessonToSection = lazy(
   () =>
-    import('../../../../../../components/dashboard/learning-paths/add-lesson-to-section')
+    import(
+      '../../../../../../components/dashboard/learning-paths/lessons/add-lesson-to-section'
+    )
 );
 
 const LearningPathLessonsPage = () => {

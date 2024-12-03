@@ -5,18 +5,26 @@ import Button from '../../../common/button';
 import PageHeader from '../../../common/page-header';
 import AllLearningPaths from '../../../components/dashboard/learning-paths/all-learning-paths';
 import { sendCatchFeedback } from '../../../functions/feedback';
-
+import { LearningPathType } from '../../../types/learning-path';
 
 // Flow Path
 // Learning Paths > Courses > Sections > Lessons
 
-
 const AddCourseToPathModal = lazy(
   () => import('../../../components/dashboard/learning-paths/add-learning-path-modal')
+);
+const DeleteLearningPathModal = lazy(
+  () => import('../../../components/dashboard/learning-paths/delete-learning-path-modal')
+);
+const EditLearningPathModal = lazy(
+  () => import('../../../components/dashboard/learning-paths/edit-learning-path-modal')
 );
 
 const LearningPathsPage = () => {
   const [addModal, setAddModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
+  const [selected, setSelected] = useState<LearningPathType | undefined>(undefined);
   const [allData, setAllData] = useState<[]>([]);
   const [loading, setLoading] = useState(true);
   const [totalResults, setTotalResults] = useState(0);
@@ -57,13 +65,26 @@ const LearningPathsPage = () => {
         page={page}
         setPage={setPage}
         totalResults={totalResults}
-        // setSelected={setSelected}
-        // setDeleteModal={setDeleteModal}
+        setSelected={setSelected}
+        setDeleteModal={setDeleteModal}
+        setEditModal={setEditModal}
       />
       <AddCourseToPathModal
         open={addModal}
         closeModal={() => setAddModal(false)}
         reload={getData}
+      />
+      <DeleteLearningPathModal
+        open={deleteModal}
+        closeModal={() => setDeleteModal(false)}
+        reload={getData}
+        selected={selected}
+      />
+      <EditLearningPathModal
+        open={editModal}
+        closeModal={() => setEditModal(false)}
+        reload={getData}
+        selected={selected}
       />
     </>
   );

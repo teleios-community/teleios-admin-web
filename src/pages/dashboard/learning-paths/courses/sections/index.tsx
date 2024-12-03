@@ -7,13 +7,29 @@ import Button from '../../../../../common/button';
 import LoadingIndicator from '../../../../../common/loading-indicator';
 import NoDataComponent from '../../../../../common/no-data-component';
 import PageHeader from '../../../../../common/page-header';
-import AllSections from '../../../../../components/dashboard/learning-paths/all-sections';
+import AllSections from '../../../../../components/dashboard/learning-paths/sections/all-sections';
 import { sendCatchFeedback } from '../../../../../functions/feedback';
+import { RoutePaths } from '../../../../../routes/route-paths';
+import { CourseType, SectionType } from '../../../../../types/learning-path';
 
 const AddSectionToCourseModal = lazy(
   () =>
     import(
-      '../../../../../components/dashboard/learning-paths/add-section-to-course-modal'
+      '../../../../../components/dashboard/learning-paths/sections/add-section-to-course-modal'
+    )
+);
+
+const EditSectionToCourseModal = lazy(
+  () =>
+    import(
+      '../../../../../components/dashboard/learning-paths/sections/edit-section-to-course-modal'
+    )
+);
+
+const DeleteSectionModal = lazy(
+  () =>
+    import(
+      '../../../../../components/dashboard/learning-paths/sections/delete-section-modal'
     )
 );
 
@@ -22,6 +38,10 @@ const LearningPathSectionsPage = () => {
   const [allData, setAllData] = useState<[]>([]);
   const [loading, setLoading] = useState(true);
   const params = useParams<{ id: string }>();
+  const [infoDetails, setInfoDetails] = useState<CourseType | undefined>(undefined);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
+  const [selected, setSelected] = useState<SectionType | undefined>(undefined);
 
   const getData = async () => {
     try {
@@ -36,16 +56,42 @@ const LearningPathSectionsPage = () => {
       setLoading(false);
     }
   };
+
+  const getInfoDetails = async () => {
+    try {
+      setLoading(true);
+
+      const response = await appAxios.get(`/curriculum/courses/${params.id}`);
+
+      setInfoDetails(response.data.data);
+    } catch (error) {
+      sendCatchFeedback(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     getData();
+    getInfoDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      <Breadcrumb links={['Learning paths', 'Product Design']} />
+      <Breadcrumb
+        links={[
+          {
+            label: 'Learning paths',
+            link: RoutePaths.LEARNING_PATHS,
+          },
+          {
+            label: loading ? '...' : infoDetails?.title || 'Course',
+          },
+        ]}
+      />
       <PageHeader
-        pageTitle={''}
+        pageTitle={loading ? '...' : infoDetails?.title || 'Course'}
         pageActions={
           <Button onClick={() => setAddModal(true)}>
             <AddCircle />
@@ -59,8 +105,9 @@ const LearningPathSectionsPage = () => {
         <AllSections
           allData={allData}
           loading={loading}
-          // setSelected={setSelected}
-          // setDeleteModal={setDeleteModal}
+          setSelected={setSelected}
+          setDeleteModal={setDeleteModal}
+          setEditModal={setEditModal}
         />
       ) : (
         <NoDataComponent
@@ -75,6 +122,19 @@ const LearningPathSectionsPage = () => {
         open={addModal}
         closeModal={() => setAddModal(false)}
         reload={getData}
+      />
+
+      <DeleteSectionModal
+        open={deleteModal}
+        closeModal={() => setDeleteModal(false)}
+        reload={getData}
+        selected={selected}
+      />
+      <EditSectionToCourseModal
+        open={editModal}
+        closeModal={() => setEditModal(false)}
+        reload={getData}
+        selected={selected}
       />
     </>
   );

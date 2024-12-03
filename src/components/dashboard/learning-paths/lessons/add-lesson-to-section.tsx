@@ -2,13 +2,12 @@ import { useFormik } from 'formik';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import * as yup from 'yup';
-import { appAxios } from '../../../api/axios';
-import Button from '../../../common/button';
-import CustomModal from '../../../common/custom-modal/CustomModal';
-import Dropdown from '../../../common/drop-down';
-import LabelInput from '../../../common/label-input/LabelInput';
-import TextArea from '../../../common/text-area/TextArea';
-import { sendCatchFeedback, sendFeedback } from '../../../functions/feedback';
+import { appAxios } from '../../../../api/axios';
+import Button from '../../../../common/button';
+import CustomModal from '../../../../common/custom-modal/CustomModal';
+import Dropdown from '../../../../common/drop-down';
+import LabelInput from '../../../../common/label-input/LabelInput';
+import { sendCatchFeedback, sendFeedback } from '../../../../functions/feedback';
 
 interface Props {
   closeModal: () => void;
@@ -16,41 +15,44 @@ interface Props {
   open: boolean;
 }
 
-function AddSectionToCourseModal({ closeModal, reload, open }: Props) {
+function AddLessonToSection({ closeModal, reload, open }: Props) {
   const [loading, setLoading] = useState(false);
-  const params = useParams<{ id: string }>();
+  const params = useParams<{ courseId: string; sectionId: string }>();
 
   const formik = useFormik({
     initialValues: {
       title: '',
-      description: '',
+      content: '',
       isFree: '',
-      estimatedHours: '',
+      contentType: '',
     },
     onSubmit: () => {
       submitValues();
     },
     validationSchema: yup.object({
       title: yup.string().required('Required'),
-      description: yup.string().required('Required'),
+      content: yup.string().required('Required'),
       isFree: yup.string().required('Required'),
-      estimatedHours: yup.string().required('Required'),
+      contentType: yup.string().required('Required'),
     }),
   });
 
   const submitValues = async () => {
     try {
       setLoading(true);
-      await appAxios.post(`/curriculum/courses/${params.id}/sections`, {
-        title: formik.values.title,
-        description: formik.values.description,
-        is_free: formik.values.isFree === 'Yes' ? true : false,
-        estimated_hours: formik.values.estimatedHours,
-      });
+      await appAxios.post(
+        `/curriculum/courses/${params.courseId}/sections/${params.sectionId}/lessons`,
+        {
+          title: formik.values.title,
+          content: formik.values.content,
+          is_free: formik.values.isFree === 'Yes' ? true : false,
+          content_type: formik.values.contentType,
+        }
+      );
       closeModal();
       reload();
       formik.resetForm();
-      sendFeedback('Section created successfully', 'success');
+      sendFeedback('Lesson created successfully', 'success');
     } catch (error) {
       sendCatchFeedback(error);
     } finally {
@@ -62,12 +64,12 @@ function AddSectionToCourseModal({ closeModal, reload, open }: Props) {
     <CustomModal
       isOpen={open}
       onRequestClose={closeModal}
-      title='Add Section'
+      title='Add Lesson'
       sideView={true}
       controls={
         <div className='flex items-center w-full justify-between flex-wrap'>
           <Button
-            onClick={() => formik.handleSubmit()}
+            onClick={closeModal}
             disabled={loading}
             className='!w-[190px] !h-10 !text-sm'
             color='outline'
@@ -79,20 +81,25 @@ function AddSectionToCourseModal({ closeModal, reload, open }: Props) {
             loading={loading}
             className='!w-[190px] !h-10 !text-sm'
           >
-            Create
+            Save
           </Button>
         </div>
       }
     >
       <div className='w-full'>
         <LabelInput formik={formik} name='title' label='Title' className='mb-4' />
-        <TextArea
+        <Dropdown
+          options={[{ label: 'Text', value: 'text' }]?.map((item) => ({
+            label: item.label,
+            value: item.value,
+          }))}
+          name='contentType'
           formik={formik}
-          name='description'
-          label='Description'
-          rows={3}
+          placeholder='Type of content'
           className='mb-4'
+          label='Content Type'
         />
+        <LabelInput formik={formik} name='content' label='Content' className='mb-4' />
 
         <Dropdown
           options={['Yes', 'No']?.map((item) => ({
@@ -101,20 +108,13 @@ function AddSectionToCourseModal({ closeModal, reload, open }: Props) {
           }))}
           name='isFree'
           formik={formik}
-          placeholder='Is this section free?'
+          placeholder='Is this lesson free?'
           className='mb-4'
-          label='Free Section?'
-        />
-        <LabelInput
-          formik={formik}
-          name='estimatedHours'
-          label='Estimated Hours'
-          className='mb-4'
-          type='number'
+          label='Free lesson?'
         />
       </div>
     </CustomModal>
   );
 }
 
-export default AddSectionToCourseModal;
+export default AddLessonToSection;

@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import Table from '../../../common/table';
+import Table from '../../../../common/table';
 
 const AllLessons = ({
   allData,

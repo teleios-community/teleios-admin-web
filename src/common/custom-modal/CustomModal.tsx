@@ -59,7 +59,7 @@ function CustomModal({
       maxHeight: sideView ? '100vh' : '95vh',
       backgroundColor: sideView ? '#FBFBFB' : '#fff',
       color: 'var(--black)',
-      transition: 'all 0.3s',
+      transition: 'all 0.2s ease-in-out',
       border: 'none',
       borderRadius: sideView ? 0 : 12,
     },
@@ -80,12 +80,12 @@ function CustomModal({
         // @ts-ignore
         content: {
           ...customStyles.content,
-          width: sideView ? '85vw' : width || customStyles.content?.width,
+          width: !isOpen ? 0 : sideView ? '85vw' : width || customStyles.content?.width,
           opacity: isOpen ? 1 : 0,
         },
         overlay: customStyles.overlay,
       }}
-      closeTimeoutMS={500}
+      closeTimeoutMS={200}
       shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
       {...rest}
     >

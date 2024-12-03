@@ -28,7 +28,10 @@ export type LearningPathType = {
   description: string;
   thumbnail_url: string;
   difficulty_level: DifficultyLevelType;
-  status: 'draft';
+  estimated_hours: number;
+  learning_objectives: string[];
+  prerequisites: string;
+  status: 'draft' | 'archived';
   created_at: Date;
   updated_at: Date;
   created_by: number;
@@ -44,6 +47,7 @@ export type SectionType = {
   estimated_minutes: string;
   is_free: boolean;
   course_id: number;
+  estimated_hours: number;
   created_at: Date;
   updated_at: Date;
   lessons: [];

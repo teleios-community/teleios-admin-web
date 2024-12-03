@@ -7,17 +7,25 @@ import Button from '../../../../common/button';
 import LoadingIndicator from '../../../../common/loading-indicator';
 import NoDataComponent from '../../../../common/no-data-component';
 import PageHeader from '../../../../common/page-header';
-import AllCourses from '../../../../components/dashboard/learning-paths/all-courses';
+import AllCourses from '../../../../components/dashboard/learning-paths/courses/all-courses';
 import { sendCatchFeedback, sendFeedback } from '../../../../functions/feedback';
-import { LearningPathType } from '../../../../types/learning-path';
+import { RoutePaths } from '../../../../routes/route-paths';
+import { CourseType, LearningPathType } from '../../../../types/learning-path';
 
 const AddCourseToPathModal = lazy(
-  () => import('../../../../components/dashboard/learning-paths/add-course-to-path')
+  () =>
+    import('../../../../components/dashboard/learning-paths/courses/add-course-to-path')
+);
+const DeleteCourseModal = lazy(
+  () =>
+    import('../../../../components/dashboard/learning-paths/courses/delete-course-modal')
 );
 
 const LearningPathCoursesPage = () => {
   const [addModal, setAddModal] = useState(false);
   const [allData, setAllData] = useState<[]>([]);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [selected, setSelected] = useState<CourseType | undefined>(undefined);
   const [loading, setLoading] = useState(true);
   const [totalResults, setTotalResults] = useState(0);
   const [page, setPage] = useState(1);
@@ -63,7 +71,17 @@ const LearningPathCoursesPage = () => {
 
   return (
     <>
-      <Breadcrumb links={['Learning paths', 'Product Design']} />
+      <Breadcrumb
+        links={[
+          {
+            label: 'Learning paths',
+            link: RoutePaths.LEARNING_PATHS,
+          },
+          {
+            label: loading ? '...' : pathDetails?.title || 'Learning path',
+          },
+        ]}
+      />
       <PageHeader
         pageTitle={loading ? 'Loading' : pathDetails?.title || 'Learning path'}
         pageActions={
@@ -82,8 +100,8 @@ const LearningPathCoursesPage = () => {
           page={page}
           setPage={setPage}
           totalResults={totalResults}
-          // setSelected={setSelected}
-          // setDeleteModal={setDeleteModal}
+          setSelected={setSelected}
+          setDeleteModal={setDeleteModal}
         />
       ) : (
         <NoDataComponent
@@ -98,6 +116,13 @@ const LearningPathCoursesPage = () => {
         open={addModal}
         closeModal={() => setAddModal(false)}
         reload={getData}
+      />
+
+      <DeleteCourseModal
+        open={deleteModal}
+        closeModal={() => setDeleteModal(false)}
+        reload={getData}
+        selected={selected}
       />
     </>
   );

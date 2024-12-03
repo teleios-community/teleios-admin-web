@@ -13,9 +13,10 @@ export default function Pagination({
   page: number;
   defaultTotalPages?: number;
 }) {
-  const limit = 20;
+  const defaultLimit = 10;
 
-  const totalPages: number = defaultTotalPages || Math.ceil((totalResults || 0) / limit);
+  const totalPages: number =
+    defaultTotalPages || Math.ceil((totalResults || 0) / defaultLimit);
   if (!totalResults && !defaultTotalPages) return null;
 
   return (
