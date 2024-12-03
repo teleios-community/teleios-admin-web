@@ -1,4 +1,6 @@
+import { ArrowLeft2, ArrowRight2 } from 'iconsax-react';
 import React from 'react';
+import ReactPaginate from 'react-paginate';
 
 export default function Pagination({
   totalResults,
@@ -17,26 +19,42 @@ export default function Pagination({
   if (!totalResults && !defaultTotalPages) return null;
 
   return (
-    <aside className='flex justify-between w-full items-center px-[30px] mt-[27px] flex-wrap'>
-      <span className='text-sm text-[#344054] font-medium'>
-        Page <span className='text-black'>{page}</span> of {totalPages}
-      </span>
-      <div className='flex gap-3 items-center flex-wrap'>
-        <button
-          className='disabled:pointer-events-none disabled:opacity-70 bg-white hover:bg-primary text-[#344054] hover:text-white duration-300 transition-colors px-[14px] py-2 rounded-lg border border-[#D0D5DD] shadow'
-          onClick={() => setPage(page - 1)}
-          disabled={page <= 1}
-        >
-          Previous
-        </button>
-        <button
-          className='disabled:pointer-events-none disabled:opacity-70 bg-white hover:bg-primary text-[#344054] hover:text-white duration-300 transition-colors px-[14px] py-2 rounded-lg border border-[#D0D5DD] shadow'
-          onClick={() => setPage(page + 1)}
-          disabled={page >= totalPages}
-        >
-          Next
-        </button>
-      </div>
-    </aside>
+    <>
+      <ReactPaginate
+        breakLabel='...'
+        containerClassName='flex items-center w-full justify-center flex-wrap mt-10'
+        breakClassName='text-[#919191] text-sm font-medium flex justify-center w-10 h-10 items-center '
+        pageClassName='text-sm font-medium flex justify-center w-10 h-10 items-center text-[#919191]'
+        activeClassName='!text-[#242424] bg-[#F2F2F2] rounded-[8px]'
+        nextLabel={
+          <button
+            className='disabled:pointer-events-none disabled:opacity-40 bg-white hover:bg-primary text-[#242424] hover:text-white duration-300 transition-colors px-[14px] py-2 rounded-lg border border-[#D3D3D3] shadow  flex items-center gap-2 text-sm font-medium'
+            // onClick={() => setPage(page + 1)}
+            disabled={page >= totalPages}
+          >
+            Next
+            <ArrowRight2 size={20} />
+          </button>
+        }
+        nextClassName='ml-auto'
+        previousClassName='mr-auto'
+        onPageChange={(e) => {
+          setPage(e.selected + 1);
+        }}
+        pageRangeDisplayed={3}
+        pageCount={totalPages}
+        previousLabel={
+          <button
+            className='disabled:pointer-events-none disabled:opacity-40 bg-white hover:bg-primary text-[#242424] hover:text-white duration-300 transition-colors px-[14px] py-2 rounded-lg border border-[#D3D3D3] shadow flex items-center gap-2 text-sm font-medium'
+            // onClick={() => setPage(page - 1)}
+            disabled={page <= 1}
+          >
+            <ArrowLeft2 size={20} />
+            Previous
+          </button>
+        }
+        renderOnZeroPageCount={null}
+      />
+    </>
   );
 }

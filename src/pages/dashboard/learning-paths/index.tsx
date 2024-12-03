@@ -8,7 +8,7 @@ import { sendCatchFeedback } from '../../../functions/feedback';
 
 
 // Flow Path
-// Learning Path > Courses > Sections > Lessons
+// Learning Paths > Courses > Sections > Lessons
 
 
 const AddCourseToPathModal = lazy(
