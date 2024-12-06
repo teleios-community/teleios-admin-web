@@ -9,26 +9,25 @@ import Dropdown from '../../../../common/drop-down';
 import LabelInput from '../../../../common/label-input/LabelInput';
 import TextArea from '../../../../common/text-area/TextArea';
 import { sendCatchFeedback, sendFeedback } from '../../../../functions/feedback';
+import { SectionType } from '../../../../types/learning-path';
 
 interface Props {
   closeModal: () => void;
   reload: () => void;
   open: boolean;
+  selected: SectionType | undefined;
 }
 
-function AddCourseToPathModal({ closeModal, reload, open }: Props) {
+function EditSectionModal({ closeModal, reload, open, selected }: Props) {
   const [loading, setLoading] = useState(false);
   const params = useParams<{ id: string }>();
 
   const formik = useFormik({
     initialValues: {
-      title: '',
-      description: '',
-      shortDescription: '',
-      tags: '',
-      difficultyLevel: '',
-      estimatedHours: '',
-      learningObjectives: '',
+      title: selected?.title || '',
+      description: selected?.description || '',
+      isFree: selected?.is_free ? 'Yes' : 'No',
+      estimatedHours: selected?.estimated_hours || '',
     },
     onSubmit: () => {
       submitValues();
@@ -36,30 +35,25 @@ function AddCourseToPathModal({ closeModal, reload, open }: Props) {
     validationSchema: yup.object({
       title: yup.string().required('Required'),
       description: yup.string().required('Required').min(10, 'Minimum of 10 characters'),
-      difficultyLevel: yup.string().required('Required'),
+      isFree: yup.string().required('Required'),
       estimatedHours: yup.string().required('Required'),
     }),
+    enableReinitialize: true,
   });
 
   const submitValues = async () => {
     try {
       setLoading(true);
-      await appAxios.post(`/curriculum/courses`, {
+      await appAxios.put(`/curriculum/courses/${params.id}/sections/${selected?.id}`, {
         title: formik.values.title,
         description: formik.values.description,
-        short_description: formik.values.shortDescription,
-        learning_path_ids: [params.id],
-        difficulty_level: formik.values.difficultyLevel,
+        is_free: formik.values.isFree === 'Yes' ? true : false,
         estimated_hours: formik.values.estimatedHours,
-        tags: formik.values.tags.split(',').map((item) => item.trim()),
-        learning_objectives: formik.values.learningObjectives
-          .split(',')
-          .map((item) => item.trim()),
       });
       closeModal();
       reload();
       formik.resetForm();
-      sendFeedback('Course created successfully', 'success');
+      sendFeedback('Section updated', 'success');
     } catch (error) {
       sendCatchFeedback(error);
     } finally {
@@ -71,7 +65,7 @@ function AddCourseToPathModal({ closeModal, reload, open }: Props) {
     <CustomModal
       isOpen={open}
       onRequestClose={closeModal}
-      title='Add Course'
+      title='Update Section'
       sideView={true}
       controls={
         <div className='flex items-center w-full justify-between flex-wrap'>
@@ -88,7 +82,7 @@ function AddCourseToPathModal({ closeModal, reload, open }: Props) {
             loading={loading}
             className='!w-[190px] !h-10 !text-sm'
           >
-            Create
+            Update
           </Button>
         </div>
       }
@@ -102,23 +96,21 @@ function AddCourseToPathModal({ closeModal, reload, open }: Props) {
           rows={3}
           className='mb-4'
         />
-        <LabelInput
-          formik={formik}
-          name='shortDescription'
-          label='Short description'
-          className='mb-4'
-        />
 
         <Dropdown
-          options={['beginner', 'intermediate']?.map((item) => ({
+          options={['Yes', 'No']?.map((item) => ({
             label: item,
             value: item,
           }))}
-          name='difficultyLevel'
+          name='isFree'
           formik={formik}
-          placeholder='Select difficulty'
-          className='mb-4 capitalize'
-          label='Difficulty'
+          placeholder='Is this section free?'
+          className='mb-4'
+          label='Free Section?'
+          value={{
+            label: formik.values.isFree,
+            value: formik.values.isFree,
+          }}
         />
         <LabelInput
           formik={formik}
@@ -127,23 +119,9 @@ function AddCourseToPathModal({ closeModal, reload, open }: Props) {
           className='mb-4'
           type='number'
         />
-        <LabelInput
-          formik={formik}
-          name='learningObjectives'
-          label='Learning Objectives'
-          className='mb-4'
-          hint='Separate objectives with a comma'
-        />
-        <LabelInput
-          formik={formik}
-          name='tags'
-          label='Tags'
-          className='mb-4'
-          hint='Separate objectives with a comma'
-        />
       </div>
     </CustomModal>
   );
 }
 
-export default AddCourseToPathModal;
+export default EditSectionModal;

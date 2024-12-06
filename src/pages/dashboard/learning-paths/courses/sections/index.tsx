@@ -19,10 +19,10 @@ const AddSectionToCourseModal = lazy(
     )
 );
 
-const EditSectionToCourseModal = lazy(
+const EditSectionModal = lazy(
   () =>
     import(
-      '../../../../../components/dashboard/learning-paths/sections/edit-section-to-course-modal'
+      '../../../../../components/dashboard/learning-paths/sections/edit-section-modal'
     )
 );
 
@@ -130,7 +130,7 @@ const LearningPathSectionsPage = () => {
         reload={getData}
         selected={selected}
       />
-      <EditSectionToCourseModal
+      <EditSectionModal
         open={editModal}
         closeModal={() => setEditModal(false)}
         reload={getData}

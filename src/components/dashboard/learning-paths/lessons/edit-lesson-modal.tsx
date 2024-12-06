@@ -17,7 +17,7 @@ interface Props {
   selected: LessonType | undefined;
 }
 
-function EditLessonToSection({ closeModal, reload, open, selected }: Props) {
+function EditLessonModal({ closeModal, reload, open, selected }: Props) {
   const [loading, setLoading] = useState(false);
   const params = useParams<{ courseId: string; sectionId: string }>();
 
@@ -128,4 +128,4 @@ function EditLessonToSection({ closeModal, reload, open, selected }: Props) {
   );
 }
 
-export default EditLessonToSection;
+export default EditLessonModal;

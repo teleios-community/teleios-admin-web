@@ -9,13 +9,13 @@ import Dropdown from '../../../../common/drop-down';
 import LabelInput from '../../../../common/label-input/LabelInput';
 import TextArea from '../../../../common/text-area/TextArea';
 import { sendCatchFeedback, sendFeedback } from '../../../../functions/feedback';
-import { SectionType } from '../../../../types/learning-path';
+import { CourseType } from '../../../../types/learning-path';
 
 interface Props {
   closeModal: () => void;
   reload: () => void;
   open: boolean;
-  selected: SectionType | undefined;
+  selected: CourseType | undefined;
 }
 
 function EditSectionToCourseModal({ closeModal, reload, open, selected }: Props) {
@@ -26,8 +26,11 @@ function EditSectionToCourseModal({ closeModal, reload, open, selected }: Props)
     initialValues: {
       title: selected?.title || '',
       description: selected?.description || '',
-      isFree: selected?.is_free ? 'Yes' : 'No',
+      shortDescription: selected?.short_description || '',
+      tags: selected?.tags.join(', ') || '',
+      difficultyLevel: selected?.difficulty_level || '',
       estimatedHours: selected?.estimated_hours || '',
+      learningObjectives: selected?.learning_objectives.join(', ') || '',
     },
     onSubmit: () => {
       submitValues();
@@ -35,7 +38,7 @@ function EditSectionToCourseModal({ closeModal, reload, open, selected }: Props)
     validationSchema: yup.object({
       title: yup.string().required('Required'),
       description: yup.string().required('Required').min(10, 'Minimum of 10 characters'),
-      isFree: yup.string().required('Required'),
+      difficultyLevel: yup.string().required('Required'),
       estimatedHours: yup.string().required('Required'),
     }),
     enableReinitialize: true,
@@ -44,16 +47,22 @@ function EditSectionToCourseModal({ closeModal, reload, open, selected }: Props)
   const submitValues = async () => {
     try {
       setLoading(true);
-      await appAxios.put(`/curriculum/courses/${params.id}/sections/${selected?.id}`, {
+      await appAxios.put(`/curriculum/courses/${selected?.id}`, {
         title: formik.values.title,
         description: formik.values.description,
-        is_free: formik.values.isFree === 'Yes' ? true : false,
+        short_description: formik.values.shortDescription,
+        learning_path_ids: [params.id],
+        difficulty_level: formik.values.difficultyLevel,
         estimated_hours: formik.values.estimatedHours,
+        tags: formik.values.tags.split(',').map((item) => item.trim()),
+        learning_objectives: formik.values.learningObjectives
+          .split(',')
+          .map((item) => item.trim()),
       });
       closeModal();
       reload();
       formik.resetForm();
-      sendFeedback('Section updated', 'success');
+      sendFeedback('Course updated', 'success');
     } catch (error) {
       sendCatchFeedback(error);
     } finally {
@@ -65,7 +74,7 @@ function EditSectionToCourseModal({ closeModal, reload, open, selected }: Props)
     <CustomModal
       isOpen={open}
       onRequestClose={closeModal}
-      title='Update Section'
+      title='Update Course'
       sideView={true}
       controls={
         <div className='flex items-center w-full justify-between flex-wrap'>
@@ -96,20 +105,26 @@ function EditSectionToCourseModal({ closeModal, reload, open, selected }: Props)
           rows={3}
           className='mb-4'
         />
+        <LabelInput
+          formik={formik}
+          name='shortDescription'
+          label='Short description'
+          className='mb-4'
+        />
 
         <Dropdown
-          options={['Yes', 'No']?.map((item) => ({
+          options={['beginner', 'intermediate']?.map((item) => ({
             label: item,
             value: item,
           }))}
-          name='isFree'
+          name='difficultyLevel'
           formik={formik}
-          placeholder='Is this section free?'
-          className='mb-4'
-          label='Free Section?'
+          placeholder='Select difficulty'
+          className='mb-4 capitalize'
+          label='Difficulty'
           value={{
-            label: formik.values.isFree,
-            value: formik.values.isFree,
+            label: formik.values.difficultyLevel,
+            value: formik.values.difficultyLevel,
           }}
         />
         <LabelInput
@@ -118,6 +133,20 @@ function EditSectionToCourseModal({ closeModal, reload, open, selected }: Props)
           label='Estimated Hours'
           className='mb-4'
           type='number'
+        />
+        <LabelInput
+          formik={formik}
+          name='learningObjectives'
+          label='Learning Objectives'
+          className='mb-4'
+          hint='Separate objectives with a comma'
+        />
+        <LabelInput
+          formik={formik}
+          name='tags'
+          label='Tags'
+          className='mb-4'
+          hint='Separate objectives with a comma'
         />
       </div>
     </CustomModal>
