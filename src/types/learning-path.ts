@@ -69,3 +69,19 @@ export type LessonType = {
   attachments: [];
   additional_resources: [];
 };
+
+export type QuizQuestionType = {
+  content: string;
+  options: string[];
+  correct_answer: string;
+  explanation: string;
+  id: number;
+  section_id: number;
+  status: 'pending_review';
+  ai_generated: boolean;
+  ai_model: string;
+  ai_generation_date: Date;
+  reviewed_by: number;
+  reviewed_at: Date;
+  review_notes: string;
+};

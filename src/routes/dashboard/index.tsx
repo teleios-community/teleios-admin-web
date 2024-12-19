@@ -18,6 +18,9 @@ const CoursesSectionsPage = lazy(
 const LearningPathLessonsPage = lazy(
   () => import('../../pages/dashboard/learning-paths/courses/sections/lessons')
 );
+const SectionQuizzesPage = lazy(
+  () => import('../../pages/dashboard/learning-paths/courses/sections/quizzes')
+);
 
 const dashboardRoutes: RouteObject[] = [
   {
@@ -56,6 +59,10 @@ const dashboardRoutes: RouteObject[] = [
           {
             element: <LearningPathLessonsPage />,
             path: `${RoutePaths.LEARNING_PATHS_LESSONS}/:courseId/:sectionId`,
+          },
+          {
+            element: <SectionQuizzesPage />,
+            path: `${RoutePaths.SECTION_QUIZZES}/:courseId/:sectionId`,
           },
         ],
       },
