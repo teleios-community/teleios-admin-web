@@ -14,6 +14,7 @@ export const RoutePaths = Object.freeze({
   LEARNING_PATHS: '/dashboard/learning-paths',
   LEARNING_PATHS_COURSES: '/dashboard/learning-paths/courses',
   LEARNING_PATHS_SECTIONS: '/dashboard/learning-paths/sections',
+  SECTION_QUIZZES: '/dashboard/learning-paths/sections/quizzes',
   LEARNING_PATHS_LESSONS: '/dashboard/learning-paths/lessons',
   LEARNERS: '/dashboard/learners',
   MENTORS: '/dashboard/mentors',
