@@ -58,7 +58,7 @@ function ReviewQuizQuestionModal({ closeModal, reload, open, selected }: Props) 
       onRequestClose={closeModal}
       title='Review Quiz Question'
       controls={
-        <div className='flex items-center w-full justify-between flex-wrap'>
+        <div className='flex items-center w-full justify-between flex-wrap gap-5'>
           <Button
             onClick={closeModal}
             disabled={loading}
@@ -80,8 +80,9 @@ function ReviewQuizQuestionModal({ closeModal, reload, open, selected }: Props) 
       <div className='w-full'>
         <Dropdown
           options={[
-            { label: 'Pending Review', value: 'pending_review' },
-            { label: 'Approved', value: 'approved' },
+            { label: 'Pending', value: 'PENDING' },
+            { label: 'Approved', value: 'APPROVED' },
+            { label: 'Rejected', value: 'REJECTED' },
           ]?.map((item) => ({
             label: item.label,
             value: item.value,

@@ -29,17 +29,18 @@ const AllSections = ({
         loading={loading}
         menuItems={[
           {
-            label: 'View quizzes',
-            onClick: (data: SectionType) => {
-              navigate(`${RoutePaths.SECTION_QUIZZES}/${params.id}/${data.id}`);
-            },
-          },
-          {
             label: 'View lessons',
             onClick: (data: SectionType) => {
               navigate(`${RoutePaths.LEARNING_PATHS_LESSONS}/${params.id}/${data.id}`);
             },
           },
+          {
+            label: 'View quizzes',
+            onClick: (data: SectionType) => {
+              navigate(`${RoutePaths.SECTION_QUIZZES}/${params.id}/${data.id}`);
+            },
+          },
+
           {
             label: 'Edit overview',
             onClick: (data) => {

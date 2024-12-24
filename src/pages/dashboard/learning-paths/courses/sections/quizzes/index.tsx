@@ -38,7 +38,9 @@ const SectionQuizzesPage = () => {
     try {
       setLoading(true);
 
-      const response = await appAxios.get(`/quiz/questions/pending-review?limit=100`);
+      const response = await appAxios.get(
+        `/quiz/questions/pending-review?limit=100&section_id=${params.sectionId}`
+      );
 
       setAllData(response.data);
     } catch (error) {

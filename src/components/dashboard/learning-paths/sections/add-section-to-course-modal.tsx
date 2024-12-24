@@ -65,7 +65,7 @@ function AddSectionToCourseModal({ closeModal, reload, open }: Props) {
       title='Add Section'
       sideView={true}
       controls={
-        <div className='flex items-center w-full justify-between flex-wrap'>
+        <div className='flex items-center w-full justify-between flex-wrap gap-5'>
           <Button
             onClick={closeModal}
             disabled={loading}

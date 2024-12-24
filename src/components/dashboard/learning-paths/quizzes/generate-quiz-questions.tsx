@@ -53,7 +53,7 @@ function GenerateQuizQuestionsModal({ closeModal, reload, open }: Props) {
       onRequestClose={closeModal}
       title='Generate new questions for this section'
       controls={
-        <div className='flex items-center w-full justify-between flex-wrap'>
+        <div className='flex items-center w-full justify-between flex-wrap gap-5'>
           <Button
             onClick={closeModal}
             disabled={loading}
