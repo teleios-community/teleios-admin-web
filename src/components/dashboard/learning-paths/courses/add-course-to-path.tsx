@@ -36,6 +36,7 @@ function AddCourseToPathModal({ closeModal, reload, open }: Props) {
     validationSchema: yup.object({
       title: yup.string().required('Required'),
       description: yup.string().required('Required').min(10, 'Minimum of 10 characters'),
+      shortDescription: yup.string().optional().max(200, 'Maximum of 200 characters'),
       difficultyLevel: yup.string().required('Required'),
       estimatedHours: yup.string().required('Required'),
     }),
@@ -74,7 +75,7 @@ function AddCourseToPathModal({ closeModal, reload, open }: Props) {
       title='Add Course'
       sideView={true}
       controls={
-        <div className='flex items-center w-full justify-between flex-wrap'>
+        <div className='flex items-center w-full justify-between flex-wrap gap-5'>
           <Button
             onClick={closeModal}
             disabled={loading}
