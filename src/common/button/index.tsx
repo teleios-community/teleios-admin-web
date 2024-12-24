@@ -25,11 +25,11 @@ function Button({
       type={type}
       className={
         (color === 'secondary'
-          ? 'relative w-fit h-[48px] bg-secondary text-black rounded-lg px-4 hover:brightness-125 duration-300 font-medium disabled:bg-gray-300 flex items-center justify-center gap-2'
+          ? 'relative flex-wrap w-fit min-h-fit h-[48px] bg-secondary text-black rounded-lg px-4 hover:brightness-125 duration-300 font-medium disabled:bg-gray-300 flex items-center justify-center gap-2'
           : color === 'primary'
-          ? 'relative w-fit h-[48px] bg-primary text-white rounded-lg px-4 hover:brightness-125 duration-300 font-medium disabled:bg-gray-300 flex items-center justify-center gap-2'
+          ? 'relative flex-wrap w-fit min-h-fit h-[48px] bg-primary text-white rounded-lg px-4 hover:brightness-125 duration-300 font-medium disabled:bg-gray-300 flex items-center justify-center gap-2'
           : color === 'outline'
-          ? 'relative w-fit h-[48px] bg-white border border-[#23343B] text-[#48565C] rounded-lg px-4 hover:brightness-125 duration-300 font-medium disabled:bg-gray-300 flex items-center justify-center gap-2'
+          ? 'relative flex-wrap w-fit min-h-fit h-[48px] bg-white border border-[#23343B] text-[#48565C] rounded-lg px-4 hover:brightness-125 duration-300 font-medium disabled:bg-gray-300 flex items-center justify-center gap-2'
           : '') +
         ' ' +
         className
