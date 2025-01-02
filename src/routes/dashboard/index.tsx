@@ -21,6 +21,11 @@ const LearningPathLessonsPage = lazy(
 const SectionQuizzesPage = lazy(
   () => import('../../pages/dashboard/learning-paths/courses/sections/quizzes')
 );
+const LearnersPage = lazy(() => import('../../pages/dashboard/learners'));
+const MentorsPage = lazy(() => import('../../pages/dashboard/mentors'));
+const CertificatesPage = lazy(() => import('../../pages/dashboard/certificates'));
+const LeaderboardPage = lazy(() => import('../../pages/dashboard/leaderboard'));
+const NotificationsPage = lazy(() => import('../../pages/dashboard/notifications'));
 
 const dashboardRoutes: RouteObject[] = [
   {
@@ -65,6 +70,26 @@ const dashboardRoutes: RouteObject[] = [
             path: `${RoutePaths.SECTION_QUIZZES}/:courseId/:sectionId`,
           },
         ],
+      },
+      {
+        path: RoutePaths.LEARNERS,
+        element: <LearnersPage />,
+      },
+      {
+        path: RoutePaths.MENTORS,
+        element: <MentorsPage />,
+      },
+      {
+        path: RoutePaths.CERTIFICATES,
+        element: <CertificatesPage />,
+      },
+      {
+        path: RoutePaths.LEADERBOARD,
+        element: <LeaderboardPage />,
+      },
+      {
+        path: RoutePaths.NOTIFICATIONS,
+        element: <NotificationsPage />,
       },
     ],
   },
