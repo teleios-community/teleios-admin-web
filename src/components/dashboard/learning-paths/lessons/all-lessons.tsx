@@ -15,7 +15,14 @@ const AllLessons = ({
   setDeleteModal: Dispatch<SetStateAction<boolean>>;
   setEditModal: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const tableHeaders = ['title', 'content_type', 'content', 'created_at', 'tableAction'];
+  const tableHeaders = [
+    'title',
+    'content_type',
+    'content',
+    'video_url',
+    'created_at',
+    'tableAction',
+  ];
 
   return (
     <>
