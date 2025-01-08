@@ -25,26 +25,35 @@ function AddLessonToSection({ closeModal, reload, open }: Props) {
       content: '',
       isFree: '',
       contentType: '',
+      videoURL: '',
     },
     onSubmit: () => {
       submitValues();
     },
     validationSchema: yup.object({
       title: yup.string().required('Required'),
-      content: yup.string().required('Required'),
       isFree: yup.string().required('Required'),
       contentType: yup.string().required('Required'),
     }),
   });
 
   const submitValues = async () => {
+    if (formik.values.contentType === 'video' && !formik.values.videoURL) {
+      return sendFeedback('Video URL is required', 'error');
+    }
+    if (formik.values.contentType === 'text' && !formik.values.content) {
+      return sendFeedback('Content is required', 'error');
+    }
+
     try {
       setLoading(true);
       await appAxios.post(
         `/curriculum/courses/${params.courseId}/sections/${params.sectionId}/lessons`,
         {
           title: formik.values.title,
-          content: formik.values.content,
+          ...(formik.values.content && { content: formik.values.content }),
+          ...(formik.values.videoURL && { video_url: encodeURI(formik.values.videoURL) }),
+          ...(formik.values.videoURL && { video_duration: 10 }),
           is_free: formik.values.isFree === 'Yes' ? true : false,
           content_type: formik.values.contentType,
         }
@@ -89,7 +98,10 @@ function AddLessonToSection({ closeModal, reload, open }: Props) {
       <div className='w-full'>
         <LabelInput formik={formik} name='title' label='Title' className='mb-4' />
         <Dropdown
-          options={[{ label: 'Text', value: 'text' }]?.map((item) => ({
+          options={[
+            { label: 'Text', value: 'text' },
+            { label: 'Video', value: 'video' },
+          ]?.map((item) => ({
             label: item.label,
             value: item.value,
           }))}
@@ -99,7 +111,17 @@ function AddLessonToSection({ closeModal, reload, open }: Props) {
           className='mb-4'
           label='Content Type'
         />
-        <LabelInput formik={formik} name='content' label='Content' className='mb-4' />
+        {formik.values.contentType === 'video' && (
+          <LabelInput
+            formik={formik}
+            name='videoURL'
+            label='Video URL'
+            className='mb-4'
+          />
+        )}
+        {formik.values.contentType === 'text' && (
+          <LabelInput formik={formik} name='content' label='Content' className='mb-4' />
+        )}
 
         <Dropdown
           options={['Yes', 'No']?.map((item) => ({

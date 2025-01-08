@@ -20,18 +20,29 @@ export const formatTableValue = ({
   // Capitalize Check
   if (['email', 'userName', 'content'].includes(headerName)) {
     // should not be capitalized
-    return value;
+    return value ?? '-';
   }
 
-  // Data check
+  // Date check
   if (['created_at', 'used_at', 'expires_at'].includes(headerName)) {
-    return new Date(value).toLocaleDateString('en-GB');
+    return value ? new Date(value).toLocaleDateString('en-GB') : '-';
     // return new Date(value).toLocaleDateString('en-GB').split('/').join('-');
+  }
+
+  // URL
+  if (['video_url'].includes(headerName)) {
+    return value ? (
+      <a href={value} target='_blank' rel='noreferrer' className='underline'>
+        {value}
+      </a>
+    ) : (
+      '-'
+    );
   }
 
   // Array check
   if (Array.isArray(value)) {
-    return <span className='capitalize'>{value.join(', ')}</span>;
+    return value ? <span className='capitalize'>{value.join(', ')}</span> : '-';
   }
 
   // Object check
@@ -74,7 +85,7 @@ export const formatTableValue = ({
         color = 'black';
         break;
     }
-    return (
+    return value ? (
       <span
         className='capitalize'
         style={{
@@ -83,6 +94,8 @@ export const formatTableValue = ({
       >
         {value}
       </span>
+    ) : (
+      '-'
     );
   }
 
@@ -93,7 +106,7 @@ export const formatTableValue = ({
 
   // image check
   if (['badge'].includes(headerName)) {
-    return (
+    return value ? (
       <img
         src={value}
         alt=''
@@ -102,6 +115,8 @@ export const formatTableValue = ({
         height={100}
         loading='lazy'
       />
+    ) : (
+      <div className='w-[50px] h-[50px] rounded-full bg-gray-600' />
     );
   }
 
