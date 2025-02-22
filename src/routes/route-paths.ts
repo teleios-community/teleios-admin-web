@@ -7,7 +7,7 @@ export const RoutePaths = Object.freeze({
   CHECK_EMAIL: '/auth/check-email',
   RESET_PASSWORD: '/auth/reset-password',
   PASSWORD_SUCCESS: '/auth/password-success',
-  ACCEPT_INVITE: '/auth/accept-invite',
+  ACCEPT_INVITE: '/admin/accept-invite',
 
   // dashboard
   DASHBOARD: '/dashboard',
