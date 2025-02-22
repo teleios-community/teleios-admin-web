@@ -46,7 +46,7 @@ const LearningPathLessonsPage = () => {
       setLoading(true);
 
       const response = await appAxios.get(
-        `/curriculum/courses/${params.courseId}/sections/${params.sectionId}/lessons`
+        `/curriculum/courses/${params.courseId}/sections/${params.sectionId}/lessons/admin`
       );
 
       setAllData(response.data);

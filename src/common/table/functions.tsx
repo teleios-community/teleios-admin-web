@@ -1,3 +1,4 @@
+import { convertSnakeCaseToPascal } from '../../functions/stringManipulations';
 import TableMenu from './TableMenu';
 import { menuItemType } from './data';
 
@@ -58,6 +59,12 @@ export const formatTableValue = ({
         }
       </span>
     );
+  }
+
+  // Snake case check
+  if (/^[a-z]+(_[a-z]+)*$/.test(headerName)) {
+    // should not be capitalized
+    return value ? convertSnakeCaseToPascal(value) : '-';
   }
 
   // Status Check

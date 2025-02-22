@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app';
+import { getStorage } from 'firebase/storage';
 import {
   FIREBASE_API_KEY,
   FIREBASE_APP_ID,
@@ -18,4 +19,7 @@ const firebaseApp = initializeApp({
   appId: FIREBASE_APP_ID,
 });
 
-export { firebaseApp };
+const firebaseStorage = getStorage(firebaseApp);
+
+export { firebaseApp, firebaseStorage };
+

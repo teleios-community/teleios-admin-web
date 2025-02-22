@@ -41,14 +41,14 @@ appAxios.interceptors.response.use(
 
     if (
       // urls to avoid (don't logout when they fail)
-      originalConfig.url !== `${USER_API_URL}/auth/login` && //login
+      originalConfig.url !== `${USER_API_URL}/admin/auth/login` && //login
       err.response
     ) {
       if (
         err.response.status === 401 &&
         sessionToken && // refresh token only when a user has session
         !originalConfig._retry &&
-        originalConfig.url !== `${USER_API_URL}/auth/refresh`
+        originalConfig.url !== `${USER_API_URL}/admin/auth/refresh-token`
       ) {
         originalConfig._retry = true;
 
@@ -59,7 +59,7 @@ appAxios.interceptors.response.use(
 
           const refreshToken = storeToken?.refresh_token || sessionToken.refresh_token;
           const getNewAccessTokenResponse = await axios.post(
-            `${USER_API_URL}/auth/refresh`,
+            `${USER_API_URL}/admin/auth/refresh-token`,
             {
               token: refreshToken,
             }

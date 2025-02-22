@@ -42,3 +42,10 @@ export const formatTime = (audioDuration: number, addIndicators?: boolean) => {
     : m + ':' + s;
   return newFormat;
 };
+
+export const convertSnakeCaseToPascal = (snakeStr: string) => {
+  return snakeStr
+    .split('_')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
+};

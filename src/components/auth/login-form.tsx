@@ -32,7 +32,7 @@ const LoginForm = () => {
   const submitValues = async () => {
     try {
       setLoading(true);
-      const response = await appAxios.post('/auth/login', {
+      const response = await appAxios.post('/admin/auth/login', {
         email: formik.values.email,
         password: formik.values.password,
       });
@@ -48,7 +48,7 @@ const LoginForm = () => {
         })
       );
 
-      const accountResponse = await appAxios.get('/users/profile', {
+      const accountResponse = await appAxios.get('/admin/auth/me', {
         headers: {
           Authorization: 'Bearer ' + loginResponseData.access_token,
         },
