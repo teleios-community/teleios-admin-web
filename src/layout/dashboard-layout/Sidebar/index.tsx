@@ -16,7 +16,7 @@ function Sidebar() {
 
   const logoutUser = async () => {
     try {
-      await appAxios.post('/admin/auth/logout');
+      await appAxios.get('/admin/auth/logout');
       sendFeedback('Logout successful', 'success');
     } catch (error) {
       sendCatchFeedback(error);
