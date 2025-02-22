@@ -22,7 +22,7 @@ function UserMenu() {
 
   const logoutUser = async () => {
     try {
-      await appAxios.post('/auth/logout');
+      await appAxios.post('/admin/auth/logout');
       sendFeedback('Logout successful', 'success');
     } catch (error) {
       sendCatchFeedback(error);
