@@ -5,10 +5,9 @@ export type UserType = {
   last_name: string;
   phone_number: string;
   profile_picture_url: string;
-  work_experiences: [];
-  social_links: [];
-  has_completed_onboarding: false;
-  onboarding_completed_at: Date;
+  created_at: string;
+  status: 'active' | 'inactive';
+  role: 'super_admin' | 'admin';
 };
 
 export type TokenType = {

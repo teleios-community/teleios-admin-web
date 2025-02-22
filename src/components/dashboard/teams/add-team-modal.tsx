@@ -77,14 +77,17 @@ function AddTeamModal({ closeModal, reload, open, openSuccessModal }: Props) {
           className='mb-4'
         />
         <Dropdown
-          options={['admin', 'superAdmin'].map((item) => ({
-            label: item,
-            value: item,
+          options={[
+            { label: 'Admin', value: 'admin' },
+            { label: 'Super Admin', value: 'super_admin' },
+          ].map(({ label, value }) => ({
+            label,
+            value,
           }))}
           name='role'
           formik={formik}
           placeholder='Admin Type'
-          className='capitalize mb-6'
+          className='mb-6'
           defaultValue={{
             label: formik.values.role,
             value: formik.values.role,

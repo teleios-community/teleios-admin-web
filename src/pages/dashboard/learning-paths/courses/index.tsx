@@ -57,7 +57,7 @@ const LearningPathCoursesPage = () => {
 
       // Find courses under this learning path
       const courseResponse = await appAxios.get(
-        `/curriculum/courses?page=${page}&page_size=100&learning_path_id=${foundLearningPath.id}`
+        `/curriculum/courses/admin?page=${page}&page_size=100&learning_path_id=${foundLearningPath.id}`
       );
 
       setAllData(courseResponse.data.data.items);

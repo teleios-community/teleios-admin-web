@@ -37,7 +37,7 @@ const ResetPasswordForm = () => {
   const submitValues = async () => {
     try {
       setLoading(true);
-      await appAxios.post('/auth/reset-password', {
+      await appAxios.post('/admin/auth/reset-password', {
         token,
         new_password: formik.values.newPassword,
         new_password_confirm: formik.values.confirmPassword,
