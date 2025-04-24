@@ -1,5 +1,5 @@
 :root {
-  --primary: #1d2b31;
+  --primary: #191A2F;
   --secondary: #f5a623;
   --success: #218838;
   --error: #ff4040;
@@ -44,7 +44,7 @@ textarea {
   border: 1px solid #d0d5dd;
   border-radius: 8px;
   width: 100%;
-  color: #1d2b31;
+  color: #191A2F;
   box-shadow: 0px 1px 2px 0px #1018280d;
 }
 

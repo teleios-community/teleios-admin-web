@@ -66,9 +66,9 @@ function LabelInput({
                 onClick={togglePasswordReveal}
               >
                 {passwordShown ? (
-                  <EyeSlash size={22} color='#23343B' />
+                  <EyeSlash size={22} color='#191A2F' />
                 ) : (
-                  <Eye size={22} color='#23343B' />
+                  <Eye size={22} color='#191A2F' />
                 )}
               </div>
             )}
@@ -96,9 +96,9 @@ function LabelInput({
                 onClick={togglePasswordReveal}
               >
                 {passwordShown ? (
-                  <EyeSlash size={22} color='#23343B' />
+                  <EyeSlash size={22} color='#191A2F' />
                 ) : (
-                  <Eye size={22} color='#23343B' />
+                  <Eye size={22} color='#191A2F' />
                 )}
               </div>
             )}

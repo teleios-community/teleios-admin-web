@@ -29,7 +29,7 @@ function Button({
           : color === 'primary'
           ? 'relative flex-wrap w-fit min-h-fit h-[48px] bg-primary text-white rounded-lg px-4 hover:brightness-125 duration-300 font-medium disabled:bg-gray-300 flex items-center justify-center gap-2'
           : color === 'outline'
-          ? 'relative flex-wrap w-fit min-h-fit h-[48px] bg-white border border-[#23343B] text-[#48565C] rounded-lg px-4 hover:brightness-125 duration-300 font-medium disabled:bg-gray-300 flex items-center justify-center gap-2'
+          ? 'relative flex-wrap w-fit min-h-fit h-[48px] bg-white border border-[#191A2F] text-[#48565C] rounded-lg px-4 hover:brightness-125 duration-300 font-medium disabled:bg-gray-300 flex items-center justify-center gap-2'
           : '') +
         ' ' +
         className
