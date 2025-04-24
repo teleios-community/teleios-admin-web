@@ -60,7 +60,7 @@ const ProfileImageAndUpload = () => {
         className='w-full h-full object-contain rounded-full'
       />
       <button
-        className='bg-[#23343B] cursor-pointer w-6 h-6 rounded-full absolute bottom-2 -right-1 flex items-center justify-center'
+        className='bg-[#191A2F] cursor-pointer w-6 h-6 rounded-full absolute bottom-2 -right-1 flex items-center justify-center'
         onClick={() => avatarFileRef.current?.click()}
         disabled={loading}
       >
