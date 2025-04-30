@@ -25,7 +25,7 @@ export const formatTableValue = ({
   }
 
   // Date check
-  if (['created_at', 'used_at', 'expires_at'].includes(headerName)) {
+  if (['created_at', 'used_at', 'expires_at', 'updated_at'].includes(headerName)) {
     return value ? new Date(value).toLocaleDateString('en-GB') : '-';
     // return new Date(value).toLocaleDateString('en-GB').split('/').join('-');
   }
@@ -62,9 +62,8 @@ export const formatTableValue = ({
   }
 
   // Snake case check
-  if (/^[a-z]+(_[a-z]+)*$/.test(headerName)) {
-    // should not be capitalized
-    return value ? convertSnakeCaseToPascal(value) : '-';
+  if (/^[a-z]+(_[a-z]+)*$/.test(value)) {
+    return value ? convertSnakeCaseToPascal(value.toString()) : '-';
   }
 
   // Status Check

@@ -1,0 +1,7 @@
+.charcoal-bg {
+  background-image: url(../assets/backgrounds/dashboard/charcoal.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--primary);
+}

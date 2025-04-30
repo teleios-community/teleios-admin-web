@@ -26,6 +26,7 @@ const MentorsPage = lazy(() => import('../../pages/dashboard/mentors'));
 const CertificatesPage = lazy(() => import('../../pages/dashboard/certificates'));
 const LeaderboardPage = lazy(() => import('../../pages/dashboard/leaderboard'));
 const NotificationsPage = lazy(() => import('../../pages/dashboard/notifications'));
+const ProjectsPage = lazy(() => import('../../pages/dashboard/projects'));
 
 const dashboardRoutes: RouteObject[] = [
   {
@@ -78,6 +79,10 @@ const dashboardRoutes: RouteObject[] = [
       {
         path: RoutePaths.MENTORS,
         element: <MentorsPage />,
+      },
+      {
+        path: RoutePaths.PROJECTS,
+        element: <ProjectsPage />,
       },
       {
         path: RoutePaths.CERTIFICATES,

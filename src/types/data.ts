@@ -16,3 +16,24 @@ export type DashboardSummary = {
   };
   last_updated: Date;
 };
+
+export type ProjectType = {
+  id: number;
+  name: string;
+  description: string;
+  repo_url: string;
+  course_id: number;
+  learning_path_id: number;
+  category: string;
+  difficulty_level: string;
+  difficulty_level_badge: string;
+  technology_tags: string;
+  long_description: string;
+  maximum_xp_assignable: number;
+  time_estimate: number;
+  created_at: string;
+  updated_at: string;
+  created_by: number;
+  last_updated_by: string;
+  slug: string;
+};

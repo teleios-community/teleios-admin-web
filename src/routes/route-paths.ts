@@ -23,4 +23,5 @@ export const RoutePaths = Object.freeze({
   TEAMS: '/dashboard/teams',
   SETTINGS: '/dashboard/settings',
   NOTIFICATIONS: '/dashboard/notifications',
+  PROJECTS: '/dashboard/projects',
 });
