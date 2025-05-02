@@ -6,6 +6,7 @@ import {
   // ProfileTick,
   // Rank,
   Setting2,
+  TaskSquare,
 } from 'iconsax-react';
 import { ReactNode } from 'react';
 import { RoutePaths } from '../../routes/route-paths';
@@ -27,6 +28,7 @@ export const navLinks: navItemType[] = [
     href: RoutePaths.LEARNING_PATHS,
     icon: <Book1 size={18} />,
   },
+
   // {
   //   label: 'Learners',
   //   href: RoutePaths.LEARNERS,
@@ -37,6 +39,12 @@ export const navLinks: navItemType[] = [
   //   href: RoutePaths.MENTORS,
   //   icon: <Sun1 size={18} />,
   // },
+
+  {
+    label: 'Projects',
+    href: RoutePaths.PROJECTS,
+    icon: <TaskSquare size={18} />,
+  },
   // {
   //   label: 'Certificates',
   //   href: RoutePaths.CERTIFICATES,

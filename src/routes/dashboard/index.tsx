@@ -26,6 +26,13 @@ const MentorsPage = lazy(() => import('../../pages/dashboard/mentors'));
 const CertificatesPage = lazy(() => import('../../pages/dashboard/certificates'));
 const LeaderboardPage = lazy(() => import('../../pages/dashboard/leaderboard'));
 const NotificationsPage = lazy(() => import('../../pages/dashboard/notifications'));
+const ProjectsPage = lazy(() => import('../../pages/dashboard/projects'));
+const ProjectMentorsPage = lazy(
+  () => import('../../pages/dashboard/projects/project-mentors')
+);
+const ProjectSubmissionsPage = lazy(
+  () => import('../../pages/dashboard/projects/project-submissions')
+);
 
 const dashboardRoutes: RouteObject[] = [
   {
@@ -78,6 +85,20 @@ const dashboardRoutes: RouteObject[] = [
       {
         path: RoutePaths.MENTORS,
         element: <MentorsPage />,
+      },
+      {
+        path: RoutePaths.PROJECTS,
+        children: [
+          { index: true, element: <ProjectsPage /> },
+          {
+            path: `${RoutePaths.PROJECT_MENTORS}/:id`,
+            element: <ProjectMentorsPage />,
+          },
+          {
+            path: `${RoutePaths.PROJECT_SUBMISSIONS}/:id`,
+            element: <ProjectSubmissionsPage />,
+          },
+        ],
       },
       {
         path: RoutePaths.CERTIFICATES,

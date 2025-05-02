@@ -25,7 +25,7 @@ export const formatTableValue = ({
   }
 
   // Date check
-  if (['created_at', 'used_at', 'expires_at'].includes(headerName)) {
+  if (['created_at', 'used_at', 'expires_at', 'updated_at'].includes(headerName)) {
     return value ? new Date(value).toLocaleDateString('en-GB') : '-';
     // return new Date(value).toLocaleDateString('en-GB').split('/').join('-');
   }
@@ -62,8 +62,7 @@ export const formatTableValue = ({
   }
 
   // Snake case check
-  if (/^[a-z]+(_[a-z]+)*$/.test(headerName)) {
-    // should not be capitalized
+  if (typeof value === 'string' && value.includes('_')) {
     return value ? convertSnakeCaseToPascal(value) : '-';
   }
 
@@ -109,6 +108,20 @@ export const formatTableValue = ({
   // Menu ID check
   if (headerName === 'tableAction') {
     return <TableMenu data={data} menuItems={menuItems} />;
+  }
+
+  // Check if it's a URL
+  if (/^https?:\/\/\S+$/i.test(value)) {
+    return (
+      <a
+        href={value}
+        target='_blank'
+        rel='noopener noreferrer'
+        className='text-blue-600 underline break-all'
+      >
+        {value}
+      </a>
+    );
   }
 
   // image check
