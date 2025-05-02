@@ -19,6 +19,9 @@ const DeleteProjectModal = lazy(
 const AddProjectModal = lazy(
   () => import('../../../components/dashboard/projects-page/add-project-modal')
 );
+const EditProjectModal = lazy(
+  () => import('../../../components/dashboard/projects-page/edit-project-modal')
+);
 
 const tableHeaders = [
   'name',
@@ -131,7 +134,7 @@ const AllProjects = ({
             },
           },
           {
-            label: 'Edit',
+            label: 'Edit Project',
             onClick: (data) => {
               setSelected(data);
               setEditModal(true);
@@ -169,6 +172,12 @@ const AllProjects = ({
         open={addModal}
         closeModal={() => setAddModal(false)}
         reload={getData}
+      />
+      <EditProjectModal
+        open={editModal}
+        closeModal={() => setEditModal(false)}
+        reload={getData}
+        project={selected}
       />
     </>
   );

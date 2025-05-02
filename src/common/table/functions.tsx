@@ -62,8 +62,8 @@ export const formatTableValue = ({
   }
 
   // Snake case check
-  if (/^[a-z]+(_[a-z]+)*$/.test(value)) {
-    return value ? convertSnakeCaseToPascal(value.toString()) : '-';
+  if (typeof value === 'string' && value.includes('_')) {
+    return value ? convertSnakeCaseToPascal(value) : '-';
   }
 
   // Status Check

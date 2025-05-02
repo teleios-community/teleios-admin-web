@@ -37,3 +37,15 @@ export type ProjectType = {
   last_updated_by: string;
   slug: string;
 };
+
+export type MentorType = {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  status: string;
+  profile_picture_url: string;
+  created_at: string;
+  expertise_areas: string[];
+  bio: string;
+};
