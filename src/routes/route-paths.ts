@@ -24,4 +24,6 @@ export const RoutePaths = Object.freeze({
   SETTINGS: '/dashboard/settings',
   NOTIFICATIONS: '/dashboard/notifications',
   PROJECTS: '/dashboard/projects',
+  PROJECT_MENTORS: '/dashboard/projects/mentors',
+  PROJECT_SUBMISSIONS: '/dashboard/projects/submissions',
 });

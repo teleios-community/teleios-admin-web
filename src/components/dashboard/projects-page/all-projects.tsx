@@ -1,4 +1,5 @@
 import { Dispatch, lazy, SetStateAction, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { appAxios } from '../../../api/axios';
 import Pagination from '../../../common/pagination';
 import SearchInput from '../../../common/search-input';
@@ -6,6 +7,7 @@ import TabSwitch from '../../../common/tab-switch';
 import Table from '../../../common/table';
 import { sendCatchFeedback } from '../../../functions/feedback';
 import { useDebounce } from '../../../hooks/useDebounce';
+import { RoutePaths } from '../../../routes/route-paths';
 import { ProjectType } from '../../../types/data';
 import { LearningPathType } from '../../../types/learning-path';
 import ProjectTotal from './project-total';
@@ -21,6 +23,9 @@ const AddProjectModal = lazy(
 );
 const EditProjectModal = lazy(
   () => import('../../../components/dashboard/projects-page/edit-project-modal')
+);
+const ProjectStatisticsModal = lazy(
+  () => import('../../../components/dashboard/projects-page/project-statistics-modal')
 );
 
 const tableHeaders = [
@@ -38,8 +43,10 @@ const AllProjects = ({
   addModal: boolean;
   setAddModal: Dispatch<SetStateAction<boolean>>;
 }) => {
+  const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState<string>('All');
   const [detailsModal, setDetailsModal] = useState(false);
+  const [statisticsModal, setStatisticsModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [selected, setSelected] = useState<ProjectType | undefined>(undefined);
@@ -134,6 +141,25 @@ const AllProjects = ({
             },
           },
           {
+            label: 'View mentors',
+            onClick: (data: ProjectType) => {
+              navigate(`${RoutePaths.PROJECT_MENTORS}/${data.id}`);
+            },
+          },
+          {
+            label: 'View submissions',
+            onClick: (data: ProjectType) => {
+              navigate(`${RoutePaths.PROJECT_SUBMISSIONS}/${data.id}`);
+            },
+          },
+          {
+            label: 'View project statistics',
+            onClick: (data: ProjectType) => {
+              setStatisticsModal(true);
+              setSelected(data);
+            },
+          },
+          {
             label: 'Edit Project',
             onClick: (data) => {
               setSelected(data);
@@ -160,6 +186,11 @@ const AllProjects = ({
         closeModal={() => setDetailsModal(false)}
         open={detailsModal}
         selected={selected}
+      />
+      <ProjectStatisticsModal
+        closeModal={() => setStatisticsModal(false)}
+        open={statisticsModal}
+        projectId={selected?.id}
       />
       <DeleteProjectModal
         closeModal={() => setDeleteModal(false)}

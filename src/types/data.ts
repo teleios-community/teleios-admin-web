@@ -49,3 +49,50 @@ export type MentorType = {
   expertise_areas: string[];
   bio: string;
 };
+
+export type ProjectSubmissionType = {
+  id: number;
+  repo_url: string;
+  project_id: number;
+  mentor_id: number;
+  user_id: number;
+  created_at: string;
+  reviewed_at: string;
+  status: string;
+  score: number;
+  mentor_comment: string;
+  project_name: string;
+  project_description: string;
+  project_repo_url: string;
+  project_course_id: number;
+  project_learning_path_id: number;
+  project_category: string;
+  project_difficulty_level: string;
+  project_difficulty_level_badge: string;
+  project_technology_tags: string;
+  project_long_description: string;
+  project_maximum_xp_assignable: number;
+  project_time_estimate: number;
+  project_slug: string;
+  user_first_name: string;
+  user_last_name: string;
+  user_email: string;
+  user_profile_picture_url: string;
+  user_bio: string;
+  user_learning_path: string;
+  submission_history: {
+    id: number;
+    repo_url: string;
+    user_note: string;
+    time_spent: number;
+    mentor_comment: string;
+    status: string;
+    created_at: string;
+    mentor_in_review_at: string;
+    mentor_reviewed_at: string;
+  }[];
+};
+
+export type ProjectStatisticsType = {
+  project: string;
+};

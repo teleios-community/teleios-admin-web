@@ -110,6 +110,20 @@ export const formatTableValue = ({
     return <TableMenu data={data} menuItems={menuItems} />;
   }
 
+  // Check if it's a URL
+  if (/^https?:\/\/\S+$/i.test(value)) {
+    return (
+      <a
+        href={value}
+        target='_blank'
+        rel='noopener noreferrer'
+        className='text-blue-600 underline break-all'
+      >
+        {value}
+      </a>
+    );
+  }
+
   // image check
   if (['badge'].includes(headerName)) {
     return value ? (
