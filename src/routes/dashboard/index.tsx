@@ -33,6 +33,7 @@ const ProjectMentorsPage = lazy(
 const ProjectSubmissionsPage = lazy(
   () => import('../../pages/dashboard/projects/project-submissions')
 );
+const TiersPage = lazy(() => import('../../pages/dashboard/tiers'));
 
 const dashboardRoutes: RouteObject[] = [
   {
@@ -99,6 +100,10 @@ const dashboardRoutes: RouteObject[] = [
             element: <ProjectSubmissionsPage />,
           },
         ],
+      },
+      {
+        path: RoutePaths.TIERS,
+        element: <TiersPage />,
       },
       {
         path: RoutePaths.CERTIFICATES,

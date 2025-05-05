@@ -6,6 +6,7 @@ import {
   // ProfileTick,
   // Rank,
   Setting2,
+  Stacks,
   TaskSquare,
 } from 'iconsax-react';
 import { ReactNode } from 'react';
@@ -44,6 +45,12 @@ export const navLinks: navItemType[] = [
     label: 'Projects',
     href: RoutePaths.PROJECTS,
     icon: <TaskSquare size={18} />,
+  },
+
+  {
+    label: 'Tiers',
+    href: RoutePaths.TIERS,
+    icon: <Stacks size={18} />,
   },
   // {
   //   label: 'Certificates',

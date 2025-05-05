@@ -50,6 +50,19 @@ export type MentorType = {
   bio: string;
 };
 
+export type AssignedMentorType = {
+  id: number;
+  mentor_id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  status: string;
+  profile_picture_url: string;
+  created_at: string;
+  expertise_areas: string[];
+  bio: string;
+};
+
 export type ProjectSubmissionType = {
   id: number;
   repo_url: string;
@@ -95,4 +108,21 @@ export type ProjectSubmissionType = {
 
 export type ProjectStatisticsType = {
   project: string;
+  no_of_users_taking_the_project: number;
+  no_of_mentor_assigned_to_the_project: number;
+  no_of_users_who_have_completed_the_project: number;
+  no_of_users_who_have_not_completed_the_project: number;
+};
+
+export type TierType = {
+  id: number;
+  name: string;
+  description: string;
+  badge_url: string;
+  priority: string;
+  needed_experience_points: number;
+  created_at: string;
+  updated_at: string;
+  created_by: number;
+  last_updated_by: number;
 };
