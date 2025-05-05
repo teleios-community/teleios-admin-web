@@ -1,14 +1,16 @@
+import { FormikProps } from 'formik';
 import { Eye, EyeSlash } from 'iconsax-react';
 import { useState } from 'react';
 
-interface Props {
-  formik?: any;
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+  formik?: FormikProps<any>;
   name: string;
   className?: string;
   hint?: string;
   useFormik?: boolean;
   showError?: boolean;
   error?: string;
+  label?: string;
 }
 
 function LabelInput({
@@ -19,12 +21,13 @@ function LabelInput({
   useFormik = true,
   showError = false,
   error,
+  label,
   ...rest
-}: Props & React.HTMLProps<HTMLInputElement>) {
+}: Props) {
   const [passwordShown, setPasswordShown] = useState(false);
 
   const togglePasswordReveal = () => {
-    const element: any = document.getElementById(name);
+    const element = document.getElementById(name) as HTMLInputElement | null;
     if (element) {
       if (element.type === 'password') {
         element.type = 'text';
@@ -40,24 +43,27 @@ function LabelInput({
     <div className={'inputContainer ' + className}>
       {useFormik ? (
         <>
-          {rest.label && (
+          {label && (
             <label
               htmlFor={name}
               className={`${
-                formik.touched[name] && formik.errors[name] ? 'errorText' : ''
+                formik?.touched?.[name] && formik?.errors?.[name] ? 'errorText' : ''
               }`}
             >
-              {rest.label}
+              {label}
               {rest.required && <span>*</span>}
             </label>
           )}
           <div className='relative'>
             <input
               id={name}
-              value={formik.values[name]}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              className={formik.touched[name] && formik.errors[name] ? 'inputError' : ''}
+              name={name}
+              value={formik?.values?.[name] ?? ''}
+              onChange={formik?.handleChange}
+              onBlur={formik?.handleBlur}
+              className={
+                formik?.touched?.[name] && formik?.errors?.[name] ? 'inputError' : ''
+              }
               {...rest}
             />
             {rest.type === 'password' && (
@@ -75,20 +81,20 @@ function LabelInput({
           </div>
           {hint && <div className='text-sm text-[#667085]'>{hint}</div>}
 
-          {formik.touched[name] && formik.errors[name] && (
-            <div className='error'>{formik.errors[name]}</div>
+          {formik?.touched?.[name] && formik?.errors?.[name] && (
+            <div className='error'>{String(formik.errors[name])}</div>
           )}
         </>
       ) : (
         <>
-          {rest.label && (
+          {label && (
             <label htmlFor={name} className={`${showError ? 'errorText' : ''}`}>
-              {rest.label}
+              {label}
               {rest.required && <span>*</span>}
             </label>
           )}
           <div className='relative'>
-            <input id={name} {...rest} />
+            <input id={name} name={name} {...rest} />
 
             {rest.type === 'password' && (
               <div

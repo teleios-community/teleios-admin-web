@@ -8,7 +8,7 @@ const ErrorBoundary: FC<FallbackProps> = ({ error, resetErrorBoundary }) => {
     <DashboardLayoutWithChildren>
       <div
         role='alert'
-        className='h-screen w-screen flex flex-col items-center justify-center text-BrandSecondary'
+        className='h-screen w-full flex flex-col items-center justify-center text-BrandSecondary'
       >
         <p className='text-lg mb-2'>Something went wrong:</p>
         <p className='text-red-error mb-4'>{error?.message}</p>

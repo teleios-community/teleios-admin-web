@@ -1,4 +1,7 @@
-import { convertSnakeCaseToPascal } from '../../functions/stringManipulations';
+import {
+  convertSnakeCaseToPascal,
+  formatQuantity,
+} from '../../functions/stringManipulations';
 import TableMenu from './TableMenu';
 import { menuItemType } from './data';
 
@@ -122,6 +125,10 @@ export const formatTableValue = ({
         {value}
       </a>
     );
+  }
+
+  if (typeof value === 'number') {
+    return formatQuantity(value);
   }
 
   // image check

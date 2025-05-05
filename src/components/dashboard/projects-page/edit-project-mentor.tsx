@@ -4,8 +4,9 @@ import { appAxios } from '../../../api/axios';
 import Button from '../../../common/button';
 import CustomCard from '../../../common/custom-card';
 import Dropdown from '../../../common/drop-down';
+import LoadingIndicator from '../../../common/loading-indicator';
 import { sendCatchFeedback, sendFeedback } from '../../../functions/feedback';
-import { MentorType, ProjectType } from '../../../types/data';
+import { AssignedMentorType, MentorType, ProjectType } from '../../../types/data';
 
 const EditProjectMentor = ({
   closeModal,
@@ -15,19 +16,20 @@ const EditProjectMentor = ({
   project: ProjectType;
 }) => {
   const [loading, setLoading] = useState(false);
+  const [fetchLoading, setFetchLoading] = useState(false);
   const [mentors, setMentors] = useState<MentorType[] | undefined>(undefined);
-  const [selectedMentors, setSelectedMentors] = useState<MentorType[]>([]);
+  const [selectedMentors, setSelectedMentors] = useState<AssignedMentorType[]>([]);
 
   const getAllMentors = async () => {
     try {
-      setLoading(true);
+      setFetchLoading(true);
 
       const response = await appAxios.get('/projects/admins/mentors/view-mentors');
       setMentors(response.data.data.items);
     } catch (error) {
       sendCatchFeedback(error);
     } finally {
-      setLoading(false);
+      setFetchLoading(false);
     }
   };
   const getProjectMentors = async () => {
@@ -64,7 +66,7 @@ const EditProjectMentor = ({
 
       const mentorDetails = mentors?.find((item) => item.id === mentorId);
       if (mentorDetails) {
-        setSelectedMentors((old) => [...old, mentorDetails]);
+        setSelectedMentors((old) => [...old, { ...mentorDetails, mentor_id: mentorId }]);
       }
 
       sendFeedback('Mentor assigned to project', 'success');
@@ -87,8 +89,9 @@ const EditProjectMentor = ({
       });
 
       const mentorDetails = mentors?.find((item) => item.id === mentorId);
+
       if (mentorDetails) {
-        setSelectedMentors((old) => old.filter((item) => item.id !== mentorId));
+        setSelectedMentors((old) => old.filter((item) => item.mentor_id !== mentorId));
       }
 
       sendFeedback('Mentor removed from project', 'success');
@@ -128,10 +131,12 @@ const EditProjectMentor = ({
           useFormik={false}
           placeholder='Choose mentors'
           label='Mentors'
-          isLoading={loading}
+          isLoading={fetchLoading}
         />
 
         {/* Selected Mentors */}
+        {loading && <LoadingIndicator size={20} />}
+
         {selectedMentors.length > 0 ? (
           <div className='flex flex-wrap items-center gap-5 w-full'>
             {selectedMentors.map((mentor) => (
@@ -143,7 +148,7 @@ const EditProjectMentor = ({
                   {mentor.first_name + ' ' + mentor.last_name}
                 </span>
                 <CloseCircle
-                  onClick={() => removeMentorFromProject(mentor.id)}
+                  onClick={() => removeMentorFromProject(mentor.mentor_id)}
                   color='#3B3B3B'
                   size={18}
                 />
@@ -151,7 +156,9 @@ const EditProjectMentor = ({
             ))}
           </div>
         ) : (
-          <p className='text-sm'>No mentor has been assigned to this project</p>
+          !loading && (
+            <p className='text-sm'>No mentor has been assigned to this project</p>
+          )
         )}
       </div>
     </CustomCard>
