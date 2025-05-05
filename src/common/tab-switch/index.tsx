@@ -16,14 +16,14 @@ const TabSwitch = ({
         tab === selectedTab ? (
           <button
             key={tab}
-            className='text-[#23343B] duration-300 pb-2 px-3 border-b-[2px] border-b-primary font-semibold transition-colors'
+            className='text-[#191A2F] duration-300 pb-2 px-3 border-b-[2px] border-b-primary font-semibold transition-colors min-w-fit'
           >
             {tab}
           </button>
         ) : (
           <button
             key={tab}
-            className='duration-300 pb-2 px-3 transition-colors'
+            className='duration-300 pb-2 px-3 transition-colors min-w-fit'
             onClick={() => {
               setSelectedTab(tab);
             }}

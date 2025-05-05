@@ -16,7 +16,7 @@ function Sidebar() {
 
   const logoutUser = async () => {
     try {
-      await appAxios.post('/auth/logout');
+      await appAxios.get('/admin/auth/logout');
       sendFeedback('Logout successful', 'success');
     } catch (error) {
       sendCatchFeedback(error);
@@ -29,7 +29,7 @@ function Sidebar() {
     <nav className='w-[270px] h-screen sticky top-0 bottom-0 hidden lg:block bg-white'>
       <div className='h-[78px] border-b border-b-[#F0F2F5] w-full flex items-center justify-center'>
         <Link to={RoutePaths.DASHBOARD}>
-          <img src={Logo} alt='Teleios' className='w-[50px] h-[57px] object-contain' />
+          <img src={Logo} alt='Teleios' />
         </Link>
       </div>
       <ul className='px-4 py-16 h-[calc(100vh-100px)] overflow-auto lg:overflow-hidden'>

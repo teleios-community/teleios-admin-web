@@ -12,6 +12,7 @@ const AllCourses = ({
   setPage,
   totalResults,
   setSelected,
+  setEditModal,
   setDeleteModal,
 }: {
   allData: [];
@@ -20,6 +21,7 @@ const AllCourses = ({
   setDeleteModal: Dispatch<SetStateAction<boolean>>;
   page: number;
   totalResults: number;
+  setEditModal: Dispatch<SetStateAction<boolean>>;
   setPage: Dispatch<SetStateAction<number>>;
 }) => {
   const navigate = useNavigate();
@@ -42,6 +44,13 @@ const AllCourses = ({
             label: 'View sections',
             onClick: (data: CourseType) => {
               navigate(`${RoutePaths.LEARNING_PATHS_SECTIONS}/${data.id}`);
+            },
+          },
+          {
+            label: 'Edit overview',
+            onClick: (data) => {
+              setSelected(data);
+              setEditModal(true);
             },
           },
           {

@@ -18,12 +18,7 @@ const AuthLayout = ({
       <div className='h-screen flex flex-col items-center justify-center relative'>
         <Link to={RoutePaths.LOGIN}>
           <div className='lg:absolute lg:top-5 lg:left-0 mb-10 lg:mb-0'>
-            <img
-              src={Logo}
-              alt='Teleios'
-              className='w-[71px] h-[92px] object-contain'
-              loading='lazy'
-            />
+            <img src={Logo} alt='Teleios' loading='lazy' />
           </div>
         </Link>
         <div className='px-primary w-full'>{children}</div>

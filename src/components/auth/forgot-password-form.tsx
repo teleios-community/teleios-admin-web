@@ -27,7 +27,7 @@ const ForgotPasswordForm = () => {
   const submitValues = async () => {
     try {
       setLoading(true);
-      await appAxios.post('/auth/forgot-password', {
+      await appAxios.post('/admin/auth/forgot-password', {
         email: formik.values.email,
       });
 

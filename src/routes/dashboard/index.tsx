@@ -18,6 +18,22 @@ const CoursesSectionsPage = lazy(
 const LearningPathLessonsPage = lazy(
   () => import('../../pages/dashboard/learning-paths/courses/sections/lessons')
 );
+const SectionQuizzesPage = lazy(
+  () => import('../../pages/dashboard/learning-paths/courses/sections/quizzes')
+);
+const LearnersPage = lazy(() => import('../../pages/dashboard/learners'));
+const MentorsPage = lazy(() => import('../../pages/dashboard/mentors'));
+const CertificatesPage = lazy(() => import('../../pages/dashboard/certificates'));
+const LeaderboardPage = lazy(() => import('../../pages/dashboard/leaderboard'));
+const NotificationsPage = lazy(() => import('../../pages/dashboard/notifications'));
+const ProjectsPage = lazy(() => import('../../pages/dashboard/projects'));
+const ProjectMentorsPage = lazy(
+  () => import('../../pages/dashboard/projects/project-mentors')
+);
+const ProjectSubmissionsPage = lazy(
+  () => import('../../pages/dashboard/projects/project-submissions')
+);
+const TiersPage = lazy(() => import('../../pages/dashboard/tiers'));
 
 const dashboardRoutes: RouteObject[] = [
   {
@@ -57,7 +73,49 @@ const dashboardRoutes: RouteObject[] = [
             element: <LearningPathLessonsPage />,
             path: `${RoutePaths.LEARNING_PATHS_LESSONS}/:courseId/:sectionId`,
           },
+          {
+            element: <SectionQuizzesPage />,
+            path: `${RoutePaths.SECTION_QUIZZES}/:courseId/:sectionId`,
+          },
         ],
+      },
+      {
+        path: RoutePaths.LEARNERS,
+        element: <LearnersPage />,
+      },
+      {
+        path: RoutePaths.MENTORS,
+        element: <MentorsPage />,
+      },
+      {
+        path: RoutePaths.PROJECTS,
+        children: [
+          { index: true, element: <ProjectsPage /> },
+          {
+            path: `${RoutePaths.PROJECT_MENTORS}/:id`,
+            element: <ProjectMentorsPage />,
+          },
+          {
+            path: `${RoutePaths.PROJECT_SUBMISSIONS}/:id`,
+            element: <ProjectSubmissionsPage />,
+          },
+        ],
+      },
+      {
+        path: RoutePaths.TIERS,
+        element: <TiersPage />,
+      },
+      {
+        path: RoutePaths.CERTIFICATES,
+        element: <CertificatesPage />,
+      },
+      {
+        path: RoutePaths.LEADERBOARD,
+        element: <LeaderboardPage />,
+      },
+      {
+        path: RoutePaths.NOTIFICATIONS,
+        element: <NotificationsPage />,
       },
     ],
   },

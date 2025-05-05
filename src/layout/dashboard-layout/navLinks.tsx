@@ -1,12 +1,13 @@
 import {
-  Award,
+  // Award,
   Book1,
   Element3,
   People,
-  ProfileTick,
-  Rank,
+  // ProfileTick,
+  // Rank,
   Setting2,
-  Sun1,
+  Stacks,
+  TaskSquare,
 } from 'iconsax-react';
 import { ReactNode } from 'react';
 import { RoutePaths } from '../../routes/route-paths';
@@ -28,26 +29,39 @@ export const navLinks: navItemType[] = [
     href: RoutePaths.LEARNING_PATHS,
     icon: <Book1 size={18} />,
   },
+
+  // {
+  //   label: 'Learners',
+  //   href: RoutePaths.LEARNERS,
+  //   icon: <ProfileTick size={18} />,
+  // },
+  // {
+  //   label: 'Mentors',
+  //   href: RoutePaths.MENTORS,
+  //   icon: <Sun1 size={18} />,
+  // },
+
   {
-    label: 'Learners',
-    href: RoutePaths.LEARNERS,
-    icon: <ProfileTick size={18} />,
+    label: 'Projects',
+    href: RoutePaths.PROJECTS,
+    icon: <TaskSquare size={18} />,
   },
+
   {
-    label: 'Mentors',
-    href: RoutePaths.MENTORS,
-    icon: <Sun1 size={18} />,
+    label: 'Tiers',
+    href: RoutePaths.TIERS,
+    icon: <Stacks size={18} />,
   },
-  {
-    label: 'Certificates',
-    href: RoutePaths.CERTIFICATES,
-    icon: <Award size={18} />,
-  },
-  {
-    label: 'Leaderboard',
-    href: RoutePaths.LEADERBOARD,
-    icon: <Rank size={18} />,
-  },
+  // {
+  //   label: 'Certificates',
+  //   href: RoutePaths.CERTIFICATES,
+  //   icon: <Award size={18} />,
+  // },
+  // {
+  //   label: 'Leaderboard',
+  //   href: RoutePaths.LEADERBOARD,
+  //   icon: <Rank size={18} />,
+  // },
   {
     label: 'Teams',
     href: RoutePaths.TEAMS,

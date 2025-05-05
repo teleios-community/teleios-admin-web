@@ -19,10 +19,10 @@ const AddSectionToCourseModal = lazy(
     )
 );
 
-const EditSectionToCourseModal = lazy(
+const EditSectionModal = lazy(
   () =>
     import(
-      '../../../../../components/dashboard/learning-paths/sections/edit-section-to-course-modal'
+      '../../../../../components/dashboard/learning-paths/sections/edit-section-modal'
     )
 );
 
@@ -47,7 +47,9 @@ const LearningPathSectionsPage = () => {
     try {
       setLoading(true);
 
-      const response = await appAxios.get(`/curriculum/courses/${params.id}/sections`);
+      const response = await appAxios.get(
+        `/curriculum/courses/${params.id}/sections/admin`
+      );
 
       setAllData(response.data);
     } catch (error) {
@@ -130,7 +132,7 @@ const LearningPathSectionsPage = () => {
         reload={getData}
         selected={selected}
       />
-      <EditSectionToCourseModal
+      <EditSectionModal
         open={editModal}
         closeModal={() => setEditModal(false)}
         reload={getData}

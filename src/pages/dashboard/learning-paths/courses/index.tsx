@@ -20,10 +20,14 @@ const DeleteCourseModal = lazy(
   () =>
     import('../../../../components/dashboard/learning-paths/courses/delete-course-modal')
 );
-
+const EditCourseModal = lazy(
+  () =>
+    import('../../../../components/dashboard/learning-paths/courses/edit-course-modal')
+);
 const LearningPathCoursesPage = () => {
   const [addModal, setAddModal] = useState(false);
   const [allData, setAllData] = useState<[]>([]);
+  const [editModal, setEditModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [selected, setSelected] = useState<CourseType | undefined>(undefined);
   const [loading, setLoading] = useState(true);
@@ -53,7 +57,7 @@ const LearningPathCoursesPage = () => {
 
       // Find courses under this learning path
       const courseResponse = await appAxios.get(
-        `/curriculum/courses?page=${page}&page_size=100&learning_path_id=${foundLearningPath.id}`
+        `/curriculum/courses/admin?page=${page}&page_size=100&learning_path_id=${foundLearningPath.id}`
       );
 
       setAllData(courseResponse.data.data.items);
@@ -100,6 +104,7 @@ const LearningPathCoursesPage = () => {
           page={page}
           setPage={setPage}
           totalResults={totalResults}
+          setEditModal={setEditModal}
           setSelected={setSelected}
           setDeleteModal={setDeleteModal}
         />
@@ -121,6 +126,12 @@ const LearningPathCoursesPage = () => {
       <DeleteCourseModal
         open={deleteModal}
         closeModal={() => setDeleteModal(false)}
+        reload={getData}
+        selected={selected}
+      />
+      <EditCourseModal
+        open={editModal}
+        closeModal={() => setEditModal(false)}
         reload={getData}
         selected={selected}
       />

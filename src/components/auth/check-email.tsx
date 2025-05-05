@@ -13,7 +13,7 @@ const CheckEmailView = () => {
   const resendEmail = async () => {
     try {
       setLoading(true);
-      const response = await appAxios.post(`/auth/forgot-password`, {
+      const response = await appAxios.post(`/admin/auth/forgot-password`, {
         email: param?.email,
       });
 

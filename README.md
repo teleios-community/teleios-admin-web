@@ -61,12 +61,12 @@ This project follows a **Feature-Based Structure**, which combines the organizat
 ```js
 import React from 'react';
 
-import { Dasboard } from 'components';
+import { Dashboard } from 'components';
 
 const DashboardPage = () => {
   return (
     <div>
-      <Dasboard />
+      <Dashboard />
     </div>
   );
 };

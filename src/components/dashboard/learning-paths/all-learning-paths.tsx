@@ -25,13 +25,7 @@ const AllLearningPaths = ({
   setPage: Dispatch<SetStateAction<number>>;
 }) => {
   const navigate = useNavigate();
-  const tableHeaders = [
-    'title',
-    'difficulty_level',
-    'status',
-    'created_at',
-    'tableAction',
-  ];
+  const tableHeaders = ['title', 'status', 'created_at', 'tableAction'];
 
   return (
     <>

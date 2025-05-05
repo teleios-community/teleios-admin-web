@@ -7,35 +7,36 @@ import Button from '../../../../common/button';
 import CustomModal from '../../../../common/custom-modal/CustomModal';
 import Dropdown from '../../../../common/drop-down';
 import LabelInput from '../../../../common/label-input/LabelInput';
+import TextArea from '../../../../common/text-area/TextArea';
 import { sendCatchFeedback, sendFeedback } from '../../../../functions/feedback';
-import { LessonType } from '../../../../types/learning-path';
+import { SectionType } from '../../../../types/learning-path';
 
 interface Props {
   closeModal: () => void;
   reload: () => void;
   open: boolean;
-  selected: LessonType | undefined;
+  selected: SectionType | undefined;
 }
 
-function EditLessonToSection({ closeModal, reload, open, selected }: Props) {
+function EditSectionModal({ closeModal, reload, open, selected }: Props) {
   const [loading, setLoading] = useState(false);
-  const params = useParams<{ courseId: string; sectionId: string }>();
+  const params = useParams<{ id: string }>();
 
   const formik = useFormik({
     initialValues: {
       title: selected?.title || '',
-      content: selected?.content || '',
+      description: selected?.description || '',
       isFree: selected?.is_free ? 'Yes' : 'No',
-      contentType: selected?.content_type || '',
+      estimatedHours: selected?.estimated_hours || '',
     },
     onSubmit: () => {
       submitValues();
     },
     validationSchema: yup.object({
       title: yup.string().required('Required'),
-      content: yup.string().required('Required'),
+      description: yup.string().required('Required').min(10, 'Minimum of 10 characters'),
       isFree: yup.string().required('Required'),
-      contentType: yup.string().required('Required'),
+      estimatedHours: yup.string().required('Required'),
     }),
     enableReinitialize: true,
   });
@@ -43,19 +44,16 @@ function EditLessonToSection({ closeModal, reload, open, selected }: Props) {
   const submitValues = async () => {
     try {
       setLoading(true);
-      await appAxios.put(
-        `/curriculum/courses/${params.courseId}/sections/${params.sectionId}/lessons/${selected?.id}`,
-        {
-          title: formik.values.title,
-          content: formik.values.content,
-          is_free: formik.values.isFree === 'Yes' ? true : false,
-          content_type: formik.values.contentType,
-        }
-      );
+      await appAxios.put(`/curriculum/courses/${params.id}/sections/${selected?.id}`, {
+        title: formik.values.title,
+        description: formik.values.description,
+        is_free: formik.values.isFree === 'Yes' ? true : false,
+        estimated_hours: formik.values.estimatedHours,
+      });
       closeModal();
       reload();
       formik.resetForm();
-      sendFeedback('Lesson updated', 'success');
+      sendFeedback('Section updated', 'success');
     } catch (error) {
       sendCatchFeedback(error);
     } finally {
@@ -67,10 +65,10 @@ function EditLessonToSection({ closeModal, reload, open, selected }: Props) {
     <CustomModal
       isOpen={open}
       onRequestClose={closeModal}
-      title='Update Lesson'
+      title='Update Section'
       sideView={true}
       controls={
-        <div className='flex items-center w-full justify-between flex-wrap'>
+        <div className='flex items-center w-full justify-between flex-wrap gap-5'>
           <Button
             onClick={closeModal}
             disabled={loading}
@@ -84,29 +82,20 @@ function EditLessonToSection({ closeModal, reload, open, selected }: Props) {
             loading={loading}
             className='!w-[190px] !h-10 !text-sm'
           >
-            Save
+            Update
           </Button>
         </div>
       }
     >
       <div className='w-full'>
         <LabelInput formik={formik} name='title' label='Title' className='mb-4' />
-        <Dropdown
-          options={[{ label: 'Text', value: 'text' }]?.map((item) => ({
-            label: item.label,
-            value: item.value,
-          }))}
-          name='contentType'
+        <TextArea
           formik={formik}
-          placeholder='Type of content'
+          name='description'
+          label='Description'
+          rows={3}
           className='mb-4'
-          label='Content Type'
-          value={{
-            label: formik.values.contentType,
-            value: formik.values.contentType,
-          }}
         />
-        <LabelInput formik={formik} name='content' label='Content' className='mb-4' />
 
         <Dropdown
           options={['Yes', 'No']?.map((item) => ({
@@ -115,17 +104,24 @@ function EditLessonToSection({ closeModal, reload, open, selected }: Props) {
           }))}
           name='isFree'
           formik={formik}
-          placeholder='Is this lesson free?'
+          placeholder='Is this section free?'
           className='mb-4'
-          label='Free lesson?'
+          label='Free Section?'
           value={{
             label: formik.values.isFree,
             value: formik.values.isFree,
           }}
+        />
+        <LabelInput
+          formik={formik}
+          name='estimatedHours'
+          label='Estimated Hours'
+          className='mb-4'
+          type='number'
         />
       </div>
     </CustomModal>
   );
 }
 
-export default EditLessonToSection;
+export default EditSectionModal;

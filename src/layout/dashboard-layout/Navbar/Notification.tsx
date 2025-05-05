@@ -22,7 +22,7 @@ const Notification = () => {
   //   return allData.filter((data) => !data.isRead);
   // }, [allData]);
   return (
-    <Link to={RoutePaths.DASHBOARD} className='relative '>
+    <Link to={RoutePaths.NOTIFICATIONS} className='relative '>
       <div className='w-[7px] h-[7px] bg-red-error rounded-full absolute right-[5px] top-0' />
       <NotificationIcon size={24} color='#626262' />
     </Link>

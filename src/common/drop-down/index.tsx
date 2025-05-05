@@ -40,7 +40,7 @@ const Dropdown = <
         ...base,
         borderRadius: 8,
         width: '100%',
-        color: '#1D2B31',
+        color: '#191A2F',
         minHeight: 48,
         paddingLeft: 3,
         fontSize: 16,

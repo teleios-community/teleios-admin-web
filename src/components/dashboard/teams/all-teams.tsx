@@ -24,7 +24,6 @@ const AllTeams = ({
         // {
         //   label: 'Edit',
         //   onClick: (data) => {
-        //     console.log(data);
         //     // setSelected(data);
         //     // setEditModal(true);
         //   },
@@ -33,7 +32,6 @@ const AllTeams = ({
         {
           label: 'Remove',
           onClick: (data) => {
-            console.log(data);
             setSelected(data);
             setDeleteModal(true);
           },

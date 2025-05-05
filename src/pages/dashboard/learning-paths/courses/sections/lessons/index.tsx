@@ -24,10 +24,10 @@ const DeleteLessonModal = lazy(
       '../../../../../../components/dashboard/learning-paths/lessons/delete-lesson-modal'
     )
 );
-const EditLessonToSection = lazy(
+const EditLessonModal = lazy(
   () =>
     import(
-      '../../../../../../components/dashboard/learning-paths/lessons/edit-lesson-to-section'
+      '../../../../../../components/dashboard/learning-paths/lessons/edit-lesson-modal'
     )
 );
 
@@ -46,7 +46,7 @@ const LearningPathLessonsPage = () => {
       setLoading(true);
 
       const response = await appAxios.get(
-        `/curriculum/courses/${params.courseId}/sections/${params.sectionId}/lessons`
+        `/curriculum/courses/${params.courseId}/sections/${params.sectionId}/lessons/admin`
       );
 
       setAllData(response.data);
@@ -131,7 +131,7 @@ const LearningPathLessonsPage = () => {
         reload={getData}
         selected={selected}
       />
-      <EditLessonToSection
+      <EditLessonModal
         open={editModal}
         closeModal={() => setEditModal(false)}
         reload={getData}

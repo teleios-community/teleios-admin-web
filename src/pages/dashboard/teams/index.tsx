@@ -1,5 +1,6 @@
 import { AddCircle, DocumentDownload } from 'iconsax-react';
-import { lazy, useEffect, useState } from 'react';
+import { lazy, useEffect, useRef, useState } from 'react';
+import { useReactToPrint } from 'react-to-print';
 import { appAxios } from '../../../api/axios';
 import Button from '../../../common/button';
 import PageHeader from '../../../common/page-header';
@@ -23,6 +24,8 @@ const TeamsPage = () => {
   const [selected, setSelected] = useState<UserType | undefined>(undefined);
   const [allData, setAllData] = useState<[]>([]);
   const [loading, setLoading] = useState(true);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const reactToPrintFn = useReactToPrint({ contentRef });
 
   const getData = async () => {
     try {
@@ -50,19 +53,21 @@ const TeamsPage = () => {
               <AddCircle />
               Invite Member
             </Button>
-            <Button color='outline'>
+            <Button color='outline' onClick={() => reactToPrintFn()}>
               <DocumentDownload />
               Download List
             </Button>
           </div>
         }
       />
-      <AllTeams
-        allData={allData}
-        loading={loading}
-        setSelected={setSelected}
-        setDeleteModal={setDeleteModal}
-      />
+      <div ref={contentRef}>
+        <AllTeams
+          allData={allData}
+          loading={loading}
+          setSelected={setSelected}
+          setDeleteModal={setDeleteModal}
+        />
+      </div>
       <AddTeamModal
         open={addModal}
         closeModal={() => setAddModal(false)}
