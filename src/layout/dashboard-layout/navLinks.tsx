@@ -3,7 +3,7 @@ import {
   Book1,
   Element3,
   People,
-  // ProfileTick,
+  ProfileTick,
   // Rank,
   Setting2,
   Stacks,
@@ -30,11 +30,11 @@ export const navLinks: navItemType[] = [
     icon: <Book1 size={18} />,
   },
 
-  // {
-  //   label: 'Learners',
-  //   href: RoutePaths.LEARNERS,
-  //   icon: <ProfileTick size={18} />,
-  // },
+  {
+    label: 'Learners',
+    href: RoutePaths.LEARNERS,
+    icon: <ProfileTick size={18} />,
+  },
   // {
   //   label: 'Mentors',
   //   href: RoutePaths.MENTORS,
