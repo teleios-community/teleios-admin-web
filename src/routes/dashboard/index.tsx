@@ -22,6 +22,7 @@ const SectionQuizzesPage = lazy(
   () => import('../../pages/dashboard/learning-paths/courses/sections/quizzes')
 );
 const LearnersPage = lazy(() => import('../../pages/dashboard/learners'));
+const LearnerDetailsPage = lazy(() => import('../../pages/dashboard/learners/details'));
 const MentorsPage = lazy(() => import('../../pages/dashboard/mentors'));
 const CertificatesPage = lazy(() => import('../../pages/dashboard/certificates'));
 const LeaderboardPage = lazy(() => import('../../pages/dashboard/leaderboard'));
@@ -81,7 +82,16 @@ const dashboardRoutes: RouteObject[] = [
       },
       {
         path: RoutePaths.LEARNERS,
-        element: <LearnersPage />,
+        children: [
+          {
+            index: true,
+            element: <LearnersPage />,
+          },
+          {
+            path: `${RoutePaths.LEARNERS}/:id`,
+            element: <LearnerDetailsPage />,
+          },
+        ],
       },
       {
         path: RoutePaths.MENTORS,

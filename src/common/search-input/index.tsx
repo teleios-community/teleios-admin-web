@@ -13,12 +13,16 @@ const SearchInput = ({
     <div className='flex gap-3 items-center p-3 rounded-lg border border-[#E4E4E4] bg-white'>
       <SearchNormal1 color='#959595' />
       <input
-        type='url'
+        type='search'
         className='w-full !outline-none !border-none'
         value={value}
         placeholder={placeholder ?? 'Search'}
-        name='search-input'
         onChange={(e) => onChange(e.target.value)}
+        name='no-autofill-search' // uncommon name
+        autoComplete='new-password'
+        autoCorrect='off'
+        autoCapitalize='off'
+        spellCheck='false'
       />
     </div>
   );
