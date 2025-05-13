@@ -5,7 +5,7 @@ const CustomCard = ({
   title,
   children,
 }: {
-  title: string;
+  title: ReactNode;
   controls?: ReactNode;
   children: ReactNode;
 }) => {

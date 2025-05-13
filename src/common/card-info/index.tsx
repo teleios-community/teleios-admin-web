@@ -2,7 +2,7 @@ import autoAnimate from '@formkit/auto-animate';
 import { ArrowDown2 } from 'iconsax-react';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 
-const CardInfo = ({ content, title }: { title: string; content: ReactNode }) => {
+const CardInfo = ({ content, title }: { title: ReactNode; content: ReactNode }) => {
   const [open, setOpen] = useState(true);
   const parentRef = useRef(null);
 

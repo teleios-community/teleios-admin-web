@@ -10,7 +10,7 @@ const SearchInput = ({
   placeholder?: string;
 }) => {
   return (
-    <div className='flex gap-3 items-center p-3 rounded-lg border border-[#E4E4E4] bg-white'>
+    <div className='flex gap-3 items-center p-3 rounded-lg border border-[#E4E4E4] bg-white w-full'>
       <SearchNormal1 color='#959595' />
       <input
         type='search'

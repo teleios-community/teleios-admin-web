@@ -7,6 +7,7 @@ import {
   // Rank,
   Setting2,
   Stacks,
+  Sun1,
   TaskSquare,
 } from 'iconsax-react';
 import { ReactNode } from 'react';
@@ -35,11 +36,11 @@ export const navLinks: navItemType[] = [
     href: RoutePaths.LEARNERS,
     icon: <ProfileTick size={18} />,
   },
-  // {
-  //   label: 'Mentors',
-  //   href: RoutePaths.MENTORS,
-  //   icon: <Sun1 size={18} />,
-  // },
+  {
+    label: 'Mentors',
+    href: RoutePaths.MENTORS,
+    icon: <Sun1 size={18} />,
+  },
 
   {
     label: 'Projects',

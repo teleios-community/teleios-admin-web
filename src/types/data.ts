@@ -178,3 +178,37 @@ export type SpecificLearnerType = {
     slug: string;
   };
 };
+
+export type AllMentorsType = {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  status: string;
+  profile_picture_url: string;
+  bio: string;
+  track: string;
+  years_of_experience: string;
+  phone_number: string;
+  expertise_areas: {
+    id: number;
+    skill: string;
+  }[];
+  created_at: string;
+};
+
+export type MenteesType = {
+  id: number;
+  project_count: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  learning_path: string;
+};
+
+export type ReviewType = {
+  review: string;
+  user_first_name: string;
+  user_last_name: string;
+  user_profile_picture_url: string;
+};

@@ -44,13 +44,22 @@ export const formatTableValue = ({
     );
   }
 
+  // Expertise areas
+  if (headerName === 'expertise_areas') {
+    return value
+      ? (value as unknown as { id: string; skill: string }[])
+          .map((item) => item.skill)
+          .join(', ')
+      : '-';
+  }
+
   // Array check
   if (Array.isArray(value)) {
     return value ? <span className='capitalize'>{value.join(', ')}</span> : '-';
   }
 
-  // Object check
   if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
+    // Object check
     return (
       <span className='capitalize'>
         {

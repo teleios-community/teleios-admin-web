@@ -9,7 +9,7 @@ import LearningInfo from '../../../../components/dashboard/learners-page/details
 import PersonalInfo from '../../../../components/dashboard/learners-page/details/profile-details';
 import SocialInfoForm from '../../../../components/dashboard/learners-page/details/social-info';
 import WorkExperienceList from '../../../../components/dashboard/learners-page/details/work-experience';
-import LearnerStatusModal from '../../../../components/dashboard/learners-page/learner-status-modal';
+import LearnerStatusModal from '../../../../components/dashboard/learners-page/mentor-status-modal';
 import SendNotificationModal from '../../../../components/dashboard/learners-page/send-notification-modal';
 import { sendCatchFeedback } from '../../../../functions/feedback';
 import { RoutePaths } from '../../../../routes/route-paths';
