@@ -1,5 +1,5 @@
 import PageHeader from '../../../common/page-header';
-import AllLearners from '../../../components/dashboard/learners-page/all-mentors';
+import AllLearners from '../../../components/dashboard/learners-page/all-learners';
 
 const LearnersPage = () => {
   return (
