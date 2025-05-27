@@ -61,7 +61,7 @@ const MentorsCount = () => {
                   label={(entry) => `${entry.name}: ${entry.value}`}
                   labelLine={false}
                 >
-                  {pieData.map((entry, index) => (
+                  {pieData.map((_entry, index) => (
                     <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
                   ))}
                 </Pie>
