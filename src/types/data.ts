@@ -126,3 +126,89 @@ export type TierType = {
   created_by: number;
   last_updated_by: number;
 };
+
+export type AllLearnersType = {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  profile_picture_url: string;
+  learning_path: string;
+  phone_number: string;
+  status: string;
+  created_at: string;
+};
+
+export type SpecificLearnerType = {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  phone_number: string;
+  profile_picture_url: string;
+  gender: string;
+  bio: string;
+  status: string;
+  learning_path: string;
+  work_experiences: {
+    id: number;
+    company: string;
+    position: string;
+    start_date: string;
+    end_date: string;
+    description: string;
+    skills: string[];
+    employment_type: string;
+    company_location: string;
+    location_type: string;
+    sector: string;
+  }[];
+  social_links: {
+    id: number;
+    platform: string;
+    url: string;
+  }[];
+  has_completed_onboarding: boolean;
+  onboarding_completed_at: string;
+  is_verified: boolean;
+  created_at: string;
+  learning_path_details: {
+    id: number;
+    title: string;
+    slug: string;
+  };
+};
+
+export type AllMentorsType = {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  status: string;
+  profile_picture_url: string;
+  bio: string;
+  track: string;
+  years_of_experience: string;
+  phone_number: string;
+  expertise_areas: {
+    id: number;
+    skill: string;
+  }[];
+  created_at: string;
+};
+
+export type MenteesType = {
+  id: number;
+  project_count: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  learning_path: string;
+};
+
+export type ReviewType = {
+  review: string;
+  user_first_name: string;
+  user_last_name: string;
+  user_profile_picture_url: string;
+};

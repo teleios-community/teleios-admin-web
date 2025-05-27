@@ -3,10 +3,11 @@ import {
   Book1,
   Element3,
   People,
-  // ProfileTick,
+  ProfileTick,
   // Rank,
   Setting2,
   Stacks,
+  Sun1,
   TaskSquare,
 } from 'iconsax-react';
 import { ReactNode } from 'react';
@@ -30,16 +31,16 @@ export const navLinks: navItemType[] = [
     icon: <Book1 size={18} />,
   },
 
-  // {
-  //   label: 'Learners',
-  //   href: RoutePaths.LEARNERS,
-  //   icon: <ProfileTick size={18} />,
-  // },
-  // {
-  //   label: 'Mentors',
-  //   href: RoutePaths.MENTORS,
-  //   icon: <Sun1 size={18} />,
-  // },
+  {
+    label: 'Learners',
+    href: RoutePaths.LEARNERS,
+    icon: <ProfileTick size={18} />,
+  },
+  {
+    label: 'Mentors',
+    href: RoutePaths.MENTORS,
+    icon: <Sun1 size={18} />,
+  },
 
   {
     label: 'Projects',

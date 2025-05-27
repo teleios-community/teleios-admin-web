@@ -9,6 +9,7 @@ import './styles/table.css';
 import './styles/tailwind.css';
 
 // Package styles
+import 'react-datepicker/dist/react-datepicker.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'reactjs-popup/dist/index.css';
 

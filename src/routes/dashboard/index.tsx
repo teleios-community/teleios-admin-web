@@ -22,7 +22,9 @@ const SectionQuizzesPage = lazy(
   () => import('../../pages/dashboard/learning-paths/courses/sections/quizzes')
 );
 const LearnersPage = lazy(() => import('../../pages/dashboard/learners'));
+const LearnerDetailsPage = lazy(() => import('../../pages/dashboard/learners/details'));
 const MentorsPage = lazy(() => import('../../pages/dashboard/mentors'));
+const MentorsDetailsPage = lazy(() => import('../../pages/dashboard/mentors/details'));
 const CertificatesPage = lazy(() => import('../../pages/dashboard/certificates'));
 const LeaderboardPage = lazy(() => import('../../pages/dashboard/leaderboard'));
 const NotificationsPage = lazy(() => import('../../pages/dashboard/notifications'));
@@ -81,11 +83,29 @@ const dashboardRoutes: RouteObject[] = [
       },
       {
         path: RoutePaths.LEARNERS,
-        element: <LearnersPage />,
+        children: [
+          {
+            index: true,
+            element: <LearnersPage />,
+          },
+          {
+            path: `${RoutePaths.LEARNERS}/:id`,
+            element: <LearnerDetailsPage />,
+          },
+        ],
       },
       {
         path: RoutePaths.MENTORS,
-        element: <MentorsPage />,
+        children: [
+          {
+            index: true,
+            element: <MentorsPage />,
+          },
+          {
+            path: `${RoutePaths.MENTORS}/:id`,
+            element: <MentorsDetailsPage />,
+          },
+        ],
       },
       {
         path: RoutePaths.PROJECTS,

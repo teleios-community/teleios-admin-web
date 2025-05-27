@@ -57,7 +57,7 @@ const ProfileImageAndUpload = () => {
       <img
         src={user?.profile_picture_url || DefaultImage}
         alt='user'
-        className='w-full h-full object-contain rounded-full'
+        className='w-full h-full object-cover rounded-full'
       />
       <button
         className='bg-[#191A2F] cursor-pointer w-6 h-6 rounded-full absolute bottom-2 -right-1 flex items-center justify-center'
