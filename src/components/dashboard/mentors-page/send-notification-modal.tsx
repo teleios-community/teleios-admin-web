@@ -7,12 +7,12 @@ import CustomModal from '../../../common/custom-modal/CustomModal';
 import LabelInput from '../../../common/label-input/LabelInput';
 import TextArea from '../../../common/text-area/TextArea';
 import { sendCatchFeedback, sendFeedback } from '../../../functions/feedback';
-import { AllLearnersType } from '../../../types/data';
+import { AllMentorsType } from '../../../types/data';
 
 interface Props {
   closeModal: () => void;
   open: boolean;
-  selected: AllLearnersType | undefined;
+  selected: AllMentorsType | undefined;
 }
 
 function SendNotificationModal({ closeModal, selected, open }: Props) {
@@ -35,7 +35,7 @@ function SendNotificationModal({ closeModal, selected, open }: Props) {
   const submitValues = async () => {
     try {
       setLoading(true);
-      await appAxios.put(`/learners/admin/send-notification/${selected?.id}`, {
+      await appAxios.put(`/mentors/admin/send-notification/${selected?.id}`, {
         title: formik.values.title,
         message: formik.values.message,
       });

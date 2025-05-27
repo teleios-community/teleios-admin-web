@@ -22,13 +22,21 @@ export const formatTableValue = ({
   }
 
   // Capitalize Check
-  if (['email', 'userName', 'content'].includes(headerName)) {
+  if (['email', 'userName', 'content', 'message'].includes(headerName)) {
     // should not be capitalized
     return value ?? '-';
   }
 
   // Date check
-  if (['created_at', 'used_at', 'expires_at', 'updated_at'].includes(headerName)) {
+  if (
+    [
+      'created_at',
+      'used_at',
+      'expires_at',
+      'updated_at',
+      'user_last_project_completed_at',
+    ].includes(headerName)
+  ) {
     return value ? new Date(value).toLocaleDateString('en-GB') : '-';
     // return new Date(value).toLocaleDateString('en-GB').split('/').join('-');
   }
@@ -44,13 +52,22 @@ export const formatTableValue = ({
     );
   }
 
+  // Expertise areas
+  if (headerName === 'expertise_areas') {
+    return value
+      ? (value as unknown as { id: string; skill: string }[])
+          .map((item) => item.skill)
+          .join(', ')
+      : '-';
+  }
+
   // Array check
   if (Array.isArray(value)) {
     return value ? <span className='capitalize'>{value.join(', ')}</span> : '-';
   }
 
-  // Object check
   if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
+    // Object check
     return (
       <span className='capitalize'>
         {

@@ -7,33 +7,33 @@ import Table from '../../../common/table';
 import { sendCatchFeedback } from '../../../functions/feedback';
 import { useDebounce } from '../../../hooks/useDebounce';
 import { RoutePaths } from '../../../routes/route-paths';
-import { AllLearnersType } from '../../../types/data';
-import LearnerTotal from './learner-total';
+import { AllMentorsType } from '../../../types/data';
+import MentorTotal from './mentor-total';
+import StatusControl from './status-control';
 
-const LearnerStatusModal = lazy(() => import('./learner-status-modal'));
+const MentorStatusModal = lazy(() => import('./mentor-status-modal'));
 const SendNotificationModal = lazy(() => import('./send-notification-modal'));
-const ResetUserPasswordModal = lazy(() => import('./reset-user-password-modal'));
 
 const tableHeaders = [
-  'email',
   'first_name',
   'last_name',
-  'learning_path',
+  'email',
+  'expertise_areas',
   'status',
   'created_at',
   'tableAction',
 ];
-const AllLearners = () => {
+const AllMentors = () => {
   const navigate = useNavigate();
   const [statusModal, setStatusModal] = useState(false);
-  const [passwordModal, setPasswordModal] = useState(false);
   const [notificationModal, setNotificationModal] = useState(false);
-  const [selected, setSelected] = useState<AllLearnersType | undefined>(undefined);
+  const [selected, setSelected] = useState<AllMentorsType | undefined>(undefined);
   const [allData, setAllData] = useState<[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
+  const [status, setStatus] = useState<'all' | 'active' | 'inactive'>('all');
 
   const debouncedSearchQuery = useDebounce(searchQuery, 1000);
 
@@ -49,8 +49,12 @@ const AllLearners = () => {
         queryParams.search = debouncedSearchQuery.trim();
       }
 
+      if (status !== 'all') {
+        queryParams.status = status;
+      }
+
       const response = await appAxios.get(
-        `/learners/admin/users-list?${new URLSearchParams(queryParams).toString()}`
+        `/mentors/admin/mentors-list?${new URLSearchParams(queryParams).toString()}`
       );
 
       setAllData(response.data.data.items);
@@ -64,16 +68,17 @@ const AllLearners = () => {
   useEffect(() => {
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, debouncedSearchQuery]);
+  }, [page, debouncedSearchQuery, status]);
 
   return (
     <>
-      <LearnerTotal loading={loading} total={totalResults} />
-      <div className='my-5'>
+      <MentorTotal loading={loading} total={totalResults} />
+      <div className='my-5 flex gap-5 w-full justify-between items-center'>
+        <StatusControl status={status} setStatus={setStatus} />
         <SearchInput
           value={searchQuery}
           onChange={(value) => setSearchQuery(value)}
-          placeholder='Search by name, email or learning path'
+          placeholder='Search by name or expertise'
         />
       </div>
       <Table
@@ -83,8 +88,8 @@ const AllLearners = () => {
         menuItems={[
           {
             label: 'View details',
-            onClick: (data: AllLearnersType) => {
-              navigate(`${RoutePaths.LEARNERS}/${data.id}`);
+            onClick: (data: AllMentorsType) => {
+              navigate(`${RoutePaths.MENTORS}/${data.id}`);
             },
           },
           {
@@ -92,13 +97,6 @@ const AllLearners = () => {
             onClick: (data) => {
               setSelected(data);
               setNotificationModal(true);
-            },
-          },
-          {
-            label: 'Reset password',
-            onClick: (data) => {
-              setSelected(data);
-              setPasswordModal(true);
             },
           },
           {
@@ -119,12 +117,8 @@ const AllLearners = () => {
         open={notificationModal}
         selected={selected}
       />
-      <ResetUserPasswordModal
-        closeModal={() => setPasswordModal(false)}
-        open={passwordModal}
-        selected={selected}
-      />
-      <LearnerStatusModal
+
+      <MentorStatusModal
         closeModal={() => setStatusModal(false)}
         open={statusModal}
         reload={getData}
@@ -134,4 +128,4 @@ const AllLearners = () => {
   );
 };
 
-export default AllLearners;
+export default AllMentors;

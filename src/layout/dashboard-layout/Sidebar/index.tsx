@@ -32,7 +32,7 @@ function Sidebar() {
           <img src={Logo} alt='Teleios' />
         </Link>
       </div>
-      <ul className='px-4 py-16 h-[calc(100vh-100px)] overflow-auto lg:overflow-hidden'>
+      <ul className='px-4 pt-8 pb-16 h-[calc(100vh-100px)] overflow-auto lg:overflow-hidden'>
         <div className='flex flex-col gap-4 h-full'>
           {navLinks.map((item: navItemType) => (
             <SidebarLink item={item} key={item.href} />

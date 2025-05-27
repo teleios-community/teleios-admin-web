@@ -81,3 +81,7 @@ textarea::placeholder {
 	scrollbar-width: none;
 	/* Firefox */
 }
+
+.react-datepicker__portal {
+  z-index: 9999 !important;
+}

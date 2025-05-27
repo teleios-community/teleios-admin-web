@@ -3,10 +3,12 @@ import { ReactNode } from 'react';
 const CustomCard = ({
   controls,
   title,
+  disableChildPadding,
   children,
 }: {
-  title: string;
+  title: ReactNode;
   controls?: ReactNode;
+  disableChildPadding?: boolean;
   children: ReactNode;
 }) => {
   return (
@@ -18,7 +20,13 @@ const CustomCard = ({
 
       {/* Body */}
       <div>
-        <div className='py-7 px-5'>{children}</div>
+        <div
+          style={{
+            padding: disableChildPadding ? 0 : '28px 20px',
+          }}
+        >
+          {children}
+        </div>
 
         {controls && controls}
       </div>
