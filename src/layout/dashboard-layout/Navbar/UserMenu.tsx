@@ -50,7 +50,7 @@ function UserMenu() {
                 <img
                   src={user?.profile_picture_url || DefaultImage}
                   alt='user'
-                  className='w-8 h-8 object-contain rounded-full'
+                  className='w-8 h-8 object-cover rounded-full'
                 />
               </div>
             </div>

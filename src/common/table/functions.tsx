@@ -22,13 +22,21 @@ export const formatTableValue = ({
   }
 
   // Capitalize Check
-  if (['email', 'userName', 'content'].includes(headerName)) {
+  if (['email', 'userName', 'content', 'message'].includes(headerName)) {
     // should not be capitalized
     return value ?? '-';
   }
 
   // Date check
-  if (['created_at', 'used_at', 'expires_at', 'updated_at'].includes(headerName)) {
+  if (
+    [
+      'created_at',
+      'used_at',
+      'expires_at',
+      'updated_at',
+      'user_last_project_completed_at',
+    ].includes(headerName)
+  ) {
     return value ? new Date(value).toLocaleDateString('en-GB') : '-';
     // return new Date(value).toLocaleDateString('en-GB').split('/').join('-');
   }
